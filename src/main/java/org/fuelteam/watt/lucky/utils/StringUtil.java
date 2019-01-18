@@ -16,12 +16,12 @@ public class StringUtil extends StringUtils {
 
     // 是否为数字
     public static boolean numeric(final String str) {
-        return match(str, "[-+]?[0-9]?[.]{0,1}[0-9]*");
+        return match(str, "[-+]?[0-9]+[.]{0,1}[0-9]*");
     }
 
     // 是否为负数
     public static boolean negative(final String str) {
-        return match(str, "[-+]?[0-9]?[.]{0,1}[0-9]*") && str.charAt(0) == '-';
+        return match(str, "[-+]?[0-9]+[.]{0,1}[0-9]*") && str.charAt(0) == '-';
     }
 
     // 是否匹配规则
