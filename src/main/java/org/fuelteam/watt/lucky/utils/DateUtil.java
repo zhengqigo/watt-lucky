@@ -9,12 +9,16 @@ import org.joda.time.format.DateTimeFormatter;
 
 public class DateUtil {
 
-    public static Date str2date(String dateStr, String pattern) throws Exception {
+    public static Date str2date(String dateStr, String pattern) {
         DateTimeFormatter dtFormatter = DateTimeFormat.forPattern(pattern);
         return dtFormatter.parseDateTime(dateStr).toDate();
     }
+    
+    public final static String long2str(final long datetime) {
+        return new DateTime(new Date(datetime)).toString("yyyy-MM-dd HH:mm:ss.SSS");
+    }
 
-    public static Date str2date(String dateStr, String pattern, Locale locale) throws Exception {
+    public static Date str2date(String dateStr, String pattern, Locale locale) {
         DateTimeFormatter dtFormatter = DateTimeFormat.forPattern(pattern).withLocale(locale);
         return dtFormatter.parseDateTime(dateStr).toDate();
     }
@@ -33,23 +37,20 @@ public class DateUtil {
         return new DateTime(date).toString(pattern);
     }
 
-    public static String str2str(String dateStr, String patternFrom, String patternTo) throws Exception {
+    public static String str2str(String dateStr, String patternFrom, String patternTo) {
         Date date = str2date(dateStr, patternFrom);
-        if (date == null) {
-            return null;
-        }
+        if (date == null) return null;
         return date2str(date, patternTo);
     }
 
-    public static String str2str(String dateStr, String patternFrom, String patternTo, String symbol, int plus)
-            throws Exception {
+    public static String str2str(String dateStr, String patternFrom, String patternTo, String symbol, int plus) {
         Date date = str2date(dateStr, patternFrom);
         DateTime datetime = new DateTime(date);
         if ("h".equalsIgnoreCase(symbol)) {
-            datetime.plusHours(plus);
+            datetime = datetime.plusHours(plus);
         }
         if ("m".equalsIgnoreCase(symbol)) {
-            datetime.plusMinutes(plus);
+            datetime = datetime.plusMinutes(plus);
         }
         return date2str(datetime.toDate(), patternTo);
     }
