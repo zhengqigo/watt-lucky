@@ -28,8 +28,16 @@ public class RedisConfiguration {
             JedisPoolConfig poolConfig = new JedisPoolConfig();
             poolConfig.setMaxTotal(redisProperties.getMaxTotal());
             poolConfig.setMaxIdle(redisProperties.getMaxIdle());
+            poolConfig.setNumTestsPerEvictionRun(redisProperties.getNumTestsPerEvictionRun());
+            poolConfig.setTimeBetweenEvictionRunsMillis(redisProperties.getTimeBetweenEvictionRunsMillis());
+            poolConfig.setMinEvictableIdleTimeMillis(redisProperties.getMinEvictableIdleTimeMillis());
+            poolConfig.setSoftMinEvictableIdleTimeMillis(redisProperties.getSoftMinEvictableIdleTimeMillis());
             poolConfig.setMaxWaitMillis(redisProperties.getMaxWaitMillis());
             poolConfig.setTestOnBorrow(redisProperties.isTestOnBorrow());
+            poolConfig.setTestOnCreate(redisProperties.isTestOnCreate());
+            poolConfig.setTestOnReturn(redisProperties.isTestOnReturn());
+            poolConfig.setTestWhileIdle(redisProperties.isTestWhileIdle());
+            poolConfig.setBlockWhenExhausted(redisProperties.isBlockWhenExhausted());
             jcf = new JedisConnectionFactory(new RedisClusterConfiguration(redisProperties.getNodes()), poolConfig);
         } else {
             RedisStandaloneConfiguration standalone = new RedisStandaloneConfiguration(redisProperties.getHost(),
