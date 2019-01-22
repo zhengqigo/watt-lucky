@@ -28,6 +28,12 @@ public class RedisProperties {
     private Integer maxWaitMillis;
 
     private boolean testOnBorrow;
+    
+    private boolean testOnCreate;
+    
+    private boolean testOnReturn;
+    
+    private boolean testWhileIdle;
 
     private boolean clusterMode;
 
@@ -115,6 +121,30 @@ public class RedisProperties {
 
     public void setTestOnBorrow(boolean testOnBorrow) {
         this.testOnBorrow = testOnBorrow;
+    }
+
+    public boolean isTestOnCreate() {
+        return testOnCreate;
+    }
+
+    public void setTestOnCreate(boolean testOnCreate) {
+        this.testOnCreate = testOnCreate;
+    }
+
+    public boolean isTestOnReturn() {
+        return testOnReturn;
+    }
+
+    public void setTestOnReturn(boolean testOnReturn) {
+        this.testOnReturn = testOnReturn;
+    }
+
+    public boolean isTestWhileIdle() {
+        return testWhileIdle;
+    }
+
+    public void setTestWhileIdle(boolean testWhileIdle) {
+        this.testWhileIdle = testWhileIdle;
     }
 
     public boolean isClusterMode() {
