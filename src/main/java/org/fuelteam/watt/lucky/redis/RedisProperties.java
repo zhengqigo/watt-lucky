@@ -52,6 +52,8 @@ public class RedisProperties {
     private String host;
 
     private Integer port;
+    
+    private Integer timeout;
 
     public List<String> getNodes() {
         return nodes;
@@ -227,5 +229,13 @@ public class RedisProperties {
 
     public void setPort(Integer port) {
         this.port = port;
+    }
+
+    public Integer getTimeout() {
+        return timeout;
+    }
+
+    public void setTimeout(Integer timeout) {
+        this.timeout = timeout;
     }
 }
