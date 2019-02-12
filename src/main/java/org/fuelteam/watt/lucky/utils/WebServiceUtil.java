@@ -34,7 +34,7 @@ public class WebServiceUtil {
 
     public static String post(String asmxUrl, Map<String, String> headers, String body, int connectionTimeout, int soTimeout) throws Exception {
         String contents = new RequestExecutor<HttpPost>().build(HttpPost.class).on(asmxUrl, null, headers, body)
-                .timeout(connectionTimeout, soTimeout).string(null);
+                .timeout(connectionTimeout, soTimeout).string();
         return contents;
     }
 }
