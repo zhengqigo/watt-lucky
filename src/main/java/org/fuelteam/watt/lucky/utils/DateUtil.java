@@ -10,8 +10,8 @@ import org.joda.time.format.DateTimeFormatter;
 public class DateUtil {
 
     public static Date str2date(String dateStr, String pattern) {
-        DateTimeFormatter dtFormatter = DateTimeFormat.forPattern(pattern);
-        return dtFormatter.parseDateTime(dateStr).toDate();
+        DateTimeFormatter dtf = DateTimeFormat.forPattern(pattern);
+        return dtf.parseDateTime(dateStr).toDate();
     }
     
     public final static String long2str(final long datetime) {
