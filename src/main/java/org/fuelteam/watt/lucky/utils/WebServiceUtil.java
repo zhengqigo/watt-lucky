@@ -1,6 +1,7 @@
 package org.fuelteam.watt.lucky.utils;
 
 import java.io.StringReader;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.bind.JAXBContext;
@@ -32,9 +33,9 @@ public class WebServiceUtil {
         return xmlObject;
     }
 
-    public static String post(String asmxUrl, Map<String, String> headers, String body, int connectionTimeout, int soTimeout) throws Exception {
-        String contents = new RequestExecutor<HttpPost>().build(HttpPost.class).on(asmxUrl, null, headers, body)
+    public static List<Object> post(String asmxUrl, Map<String, String> headers, String body, int connectionTimeout, int soTimeout) throws Exception {
+        List<Object> result = new RequestExecutor<HttpPost>().build(HttpPost.class).on(asmxUrl, null, headers, body)
                 .timeout(connectionTimeout, soTimeout).string();
-        return contents;
+        return result;
     }
 }
