@@ -11,6 +11,11 @@ public class BigDecimalUtil {
     public static BigDecimalWrapper is(double dbl) {
         return is(BigDecimal.valueOf(dbl));
     }
+    
+    public static BigDecimalWrapper is(String str) {
+        if (!StringUtil.numeric(str)) return null;
+        return is(new BigDecimal(str));
+    }
 
     public static <T extends Number> BigDecimal safeDivide(T b1, T b2, int points) {
         return safeDivide(b1, b2, points, BigDecimal.ZERO);

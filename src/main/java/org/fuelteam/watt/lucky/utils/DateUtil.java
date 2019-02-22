@@ -23,7 +23,7 @@ public class DateUtil {
         return dtFormatter.parseDateTime(dateStr).toDate();
     }
 
-    public static Date str2date(String dateStr, String pattern, int hours) throws Exception {
+    public static Date str2date(String dateStr, String pattern, int hours) {
         Date date = str2date(dateStr, pattern);
         if (date == null) return null;
         return new DateTime(date).plusHours(hours).toDate();
