@@ -1,11 +1,15 @@
 package org.fuelteam.watt.lucky.utils;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Lists;
 
 public class StringUtil extends StringUtils {
 
@@ -18,22 +22,22 @@ public class StringUtil extends StringUtils {
     public static String cleanAs(final String clean, final String defVal) {
         return isEmpty(clean) ? clean(defVal) : clean.trim();
     }
-    
+
     public static String cleanEx(String clean) {
         if (clean == null) return null;
         return clean(clean);
     }
-    
+
     public static Double str2dbl(String str, Double defDbl) {
         String cleanedStr = cleanEx(str);
         return StringUtils.isEmpty(cleanedStr) && numeric(cleanedStr) ? defDbl : Double.parseDouble(cleanedStr);
     }
-    
+
     public static BigDecimal str2bd(String str, BigDecimal defBd) {
         String cleanedStr = cleanEx(str);
         return StringUtils.isEmpty(cleanedStr) && numeric(cleanedStr) ? defBd : new BigDecimal(cleanedStr);
     }
-    
+
     public static String clean(JSONArray jsonArray, String defVal, String... fields) {
         if (jsonArray == null || fields == null || fields.length <= 0) return null;
         String result = "";
@@ -47,7 +51,14 @@ public class StringUtil extends StringUtils {
         }
         return cleanAs(result, defVal);
     }
-    
+
+    public static String clean(JSONObject jsonObject, String key) {
+        if (jsonObject == null || key == null) return null;
+        Object object = jsonObject.get(key);
+        if (object == null) return null;
+        return String.valueOf(object).trim();
+    }
+
     public static String byName(JSONArray array, String field, String name, String key) {
         String result = "";
         for (int i = 0; i < array.size(); i++) {
@@ -73,6 +84,17 @@ public class StringUtil extends StringUtils {
     // 是否匹配规则
     public static boolean match(final String str, final String pattern) {
         return str.matches(pattern);
+    }
+
+    public static String[] matchAndGet(final String str, final String pattern) {
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(str);
+        List<String> group = Lists.newArrayList();
+        Integer index = 1;
+        while (m.find()) {
+            group.add(m.group(index++));
+        }
+        return group.toArray(new String[] {});
     }
 
     // 去掉小数点后无效0
