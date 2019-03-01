@@ -1,13 +1,13 @@
 package org.fuelteam.watt.lucky.utils;
 
 import java.io.StringReader;
-import java.util.List;
 import java.util.Map;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.http.client.methods.HttpPost;
 import org.fuelteam.watt.httpclient.RequestExecutor;
 
@@ -33,8 +33,9 @@ public class WebServiceUtil {
         return xmlObject;
     }
 
-    public static List<Object> post(String asmxUrl, Map<String, String> headers, String body, int connectionTimeout, int soTimeout) throws Exception {
-        List<Object> result = new RequestExecutor<HttpPost>().build(HttpPost.class).on(asmxUrl, null, headers, body)
+    public static Pair<Integer, String> post(String asmxUrl, Map<String, String> headers, String body, int connectionTimeout,
+            int soTimeout) throws Exception {
+        Pair<Integer, String> result = new RequestExecutor<HttpPost>().build(HttpPost.class).on(asmxUrl, null, headers, body)
                 .timeout(connectionTimeout, soTimeout).string();
         return result;
     }
