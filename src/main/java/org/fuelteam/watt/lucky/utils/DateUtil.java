@@ -69,7 +69,7 @@ public class DateUtil {
         if ("m".equalsIgnoreCase(symbol)) {
             datetime = datetime.plusMinutes(plus);
         }
-        return date2str(datetime.toDate(), pattern);
+        return datetime.toString(pattern);
     }
 
     public static String str2str(String dateStr, String patternFrom, String patternTo) {
