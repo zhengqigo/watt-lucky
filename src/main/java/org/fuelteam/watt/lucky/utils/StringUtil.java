@@ -18,6 +18,10 @@ public class StringUtil extends StringUtils {
         return isEmpty(str) ? "" : str.trim();
     }
 
+    public static String clean(final Object object) {
+        return (object == null) ? null : String.valueOf(object);
+    }
+
     public static String cleanAs(final String str, final String define) {
         return isEmpty(str) ? clean(define) : str.trim();
     }
