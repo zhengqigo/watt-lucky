@@ -30,26 +30,21 @@ public class DateUtil {
     }
 
     public static Date date2date(Date date, String symbol, int plus) {
-        DateTime datetime = new DateTime(date);
-        if ("h".equalsIgnoreCase(symbol)) {
-            datetime = datetime.plusHours(plus);
-        }
-        if ("m".equalsIgnoreCase(symbol)) {
-            datetime = datetime.plusMinutes(plus);
-        }
+        DateTime datetime = symbol(new DateTime(date), symbol, plus);
         return datetime.toDate();
+    }
+
+    private static DateTime symbol(DateTime datetime, String symbol, int plus) {
+        DateTime dt = datetime;
+        if ("h".equalsIgnoreCase(symbol)) dt = dt.plusHours(plus);
+        if ("m".equalsIgnoreCase(symbol)) dt = dt.plusMinutes(plus);
+        return dt;
     }
 
     public static Date str2date(String dateStr, String pattern, String symbol, int plus) {
         Date date = str2date(dateStr, pattern);
         if (date == null) return null;
-        DateTime datetime = new DateTime(date);
-        if ("h".equalsIgnoreCase(symbol)) {
-            datetime = datetime.plusHours(plus);
-        }
-        if ("m".equalsIgnoreCase(symbol)) {
-            datetime = datetime.plusMinutes(plus);
-        }
+        DateTime datetime = symbol(new DateTime(date), symbol, plus);
         return datetime.toDate();
     }
 
@@ -62,13 +57,7 @@ public class DateUtil {
     }
 
     public static String date2str(Date date, String pattern, String symbol, int plus) {
-        DateTime datetime = new DateTime(date);
-        if ("h".equalsIgnoreCase(symbol)) {
-            datetime = datetime.plusHours(plus);
-        }
-        if ("m".equalsIgnoreCase(symbol)) {
-            datetime = datetime.plusMinutes(plus);
-        }
+        DateTime datetime = symbol(new DateTime(date), symbol, plus);
         return datetime.toString(pattern);
     }
 
@@ -80,13 +69,7 @@ public class DateUtil {
 
     public static String str2str(String dateStr, String patternFrom, String patternTo, String symbol, int plus) {
         Date date = str2date(dateStr, patternFrom);
-        DateTime datetime = new DateTime(date);
-        if ("h".equalsIgnoreCase(symbol)) {
-            datetime = datetime.plusHours(plus);
-        }
-        if ("m".equalsIgnoreCase(symbol)) {
-            datetime = datetime.plusMinutes(plus);
-        }
+        DateTime datetime = symbol(new DateTime(date), symbol, plus);
         return date2str(datetime.toDate(), patternTo);
     }
 
