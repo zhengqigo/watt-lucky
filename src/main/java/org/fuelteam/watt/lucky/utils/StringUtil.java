@@ -109,7 +109,7 @@ public class StringUtil extends StringUtils {
         Pattern p = Pattern.compile(pattern);
         Matcher m = p.matcher(str);
         List<String> group = Lists.newArrayList();
-        Integer index = 1;
+        Integer index = 0;
         while (m.find()) {
             group.add(m.group(index++));
         }
