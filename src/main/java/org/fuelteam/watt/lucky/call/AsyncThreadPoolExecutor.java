@@ -10,7 +10,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.stereotype.Component;
 
-@Component("asyncThreadPoolExecutor")
+@Component
 public class AsyncThreadPoolExecutor implements FactoryBean<ThreadPoolExecutor> {
 
     private final ReentrantLock lock = new ReentrantLock();

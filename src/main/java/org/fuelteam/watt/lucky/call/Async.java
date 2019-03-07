@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Async {
-    
+
     @Autowired
     private AsyncThreadPoolExecutor asyncThreadPoolExecutor;
 
@@ -16,13 +16,9 @@ public class Async {
                 Callback<T> cb = af.getCallback();
                 try {
                     T t = af.execute();
-                    if (cb != null) {
-                        cb.onSuccess(t);
-                    }
+                    if (cb != null) cb.onSuccess(t);
                 } catch (Exception ex) {
-                    if (cb != null) {
-                        cb.onFailure(ex);
-                    }
+                    if (cb != null) cb.onFailure(ex);
                 }
             }
         });
