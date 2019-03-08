@@ -27,7 +27,7 @@ public class StringUtil extends StringUtils {
     }
 
     public static Integer cleanAs(final String str, final Integer define) {
-        return integerAndPositive(str) ? define : Integer.parseInt(str);
+        return integerAndPositive(str) ? Integer.parseInt(str) : define;
     }
 
     public static boolean integer(final String str) {
