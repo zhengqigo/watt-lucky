@@ -23,6 +23,15 @@ public class DateUtil {
     public final static String long2str(final long datetime) {
         return new DateTime(new Date(datetime)).toString("yyyy-MM-dd HH:mm:ss.SSS");
     }
+    
+    public final static Date prev(Date date) {
+        DateTime dt = new DateTime(date);
+        int index = dt.getDayOfWeek();
+        if (index == 6) return dt.minusDays(1).toDate();
+        if (index == 7) return dt.minusDays(2).toDate();
+        if (index == 1) return dt.minusDays(3).toDate();
+        return dt.minusDays(1).toDate();
+    }
 
     public static Date str2date(String dateStr, String pattern, Locale locale) {
         DateTimeFormatter dtFormatter = DateTimeFormat.forPattern(pattern).withLocale(locale);
@@ -36,6 +45,7 @@ public class DateUtil {
 
     private static DateTime symbol(DateTime datetime, String symbol, int plus) {
         DateTime dt = datetime;
+        if ("d".equalsIgnoreCase(symbol)) dt = dt.plusDays(plus);
         if ("h".equalsIgnoreCase(symbol)) dt = dt.plusHours(plus);
         if ("m".equalsIgnoreCase(symbol)) dt = dt.plusMinutes(plus);
         return dt;
