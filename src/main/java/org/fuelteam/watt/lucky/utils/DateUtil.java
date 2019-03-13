@@ -32,6 +32,15 @@ public class DateUtil {
         if (index == 1) return dt.minusDays(3).toDate();
         return dt.minusDays(1).toDate();
     }
+    
+    public final static Date next(Date date) {
+        DateTime dt = new DateTime(date);
+        int index = dt.getDayOfWeek();
+        if (index == 5) return dt.plusDays(3).toDate();
+        if (index == 6) return dt.plusDays(2).toDate();
+        if (index == 7) return dt.plusDays(1).toDate();
+        return dt.plusDays(1).toDate();
+    }
 
     public static Date str2date(String dateStr, String pattern, Locale locale) {
         DateTimeFormatter dtFormatter = DateTimeFormat.forPattern(pattern).withLocale(locale);
