@@ -16,10 +16,19 @@ public class WebServiceUtil {
     private final static String xmlVersion = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
     private final static String soap12Envelope = "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">%s</soap:Envelope>";
     private final static String soapBody = "<soap:Body>%s</soap:Body>";
-    private final static String soapHeader = "<%s xmlns=\"http://tempuri.org/\">%s</%s>";
+    private final static String soapHeader = "<%s %s>%s</%s>";
+    
+    public final static String DEFAULT_NAMESPACE = "xmlns=\"http://tempuri.org/\"";
+    
+    
+    public static String prepare(String method, String namespace, String params) {
+        String header = String.format(soapHeader, method, namespace, params, method);
+        String body = String.format(soapBody, header);
+        return xmlVersion + String.format(soap12Envelope, body);
+    }
 
-    public static String prepare(String namespace, String params) {
-        String header = String.format(soapHeader, namespace, params, namespace);
+    public static String prepare(String method, String params) {
+        String header = String.format(soapHeader, method, DEFAULT_NAMESPACE, params, method);
         String body = String.format(soapBody, header);
         return xmlVersion + String.format(soap12Envelope, body);
     }
