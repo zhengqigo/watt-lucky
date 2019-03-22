@@ -2,15 +2,33 @@ package org.fuelteam.watt.lucky.utils;
 
 import java.util.Date;
 import java.util.Locale;
+import java.util.Map;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import com.google.common.collect.Maps;
+
 public class DateUtil {
 
+    private static volatile Map<String, DateTimeFormatter> map = Maps.newConcurrentMap();
+
+    {
+        map.put("yyyyMMdd", DateTimeFormat.forPattern("yyyyMMdd"));
+        map.put("yyyy-MM-dd", DateTimeFormat.forPattern("yyyy-MM-dd"));
+        map.put("yyyyMMddHHmmss", DateTimeFormat.forPattern("yyyyMMddHHmmss"));
+        map.put("yyyy-MM-dd HH:mm:ss", DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss"));
+        map.put("yyyyMMddHHmmssSSS", DateTimeFormat.forPattern("yyyyMMddHHmmssSSS"));
+        map.put("yyyy-MM-dd HH:mm:ss.SSS", DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS"));
+    }
+
     public static Date str2date(String dateStr, String pattern) {
-        DateTimeFormatter dtf = DateTimeFormat.forPattern(pattern);
+        DateTimeFormatter dtf = map.get(pattern);
+        if (dtf == null) {
+            dtf = DateTimeFormat.forPattern(pattern);
+            map.putIfAbsent(pattern, dtf);
+        }
         return dtf.parseDateTime(dateStr).toDate();
     }
 
@@ -21,9 +39,11 @@ public class DateUtil {
     }
 
     public final static String long2str(final long datetime) {
-        return new DateTime(new Date(datetime)).toString("yyyy-MM-dd HH:mm:ss.SSS");
+        Date date = new Date(datetime);
+        String pattern = "yyyy-MM-dd HH:mm:ss.SSS";
+        return new DateTime(date).toString(map.get(pattern));
     }
-    
+
     public final static Date prev(Date date) {
         DateTime dt = new DateTime(date);
         int index = dt.getDayOfWeek();
@@ -32,7 +52,7 @@ public class DateUtil {
         if (index == 1) return dt.minusDays(3).toDate();
         return dt.minusDays(1).toDate();
     }
-    
+
     public final static Date next(Date date) {
         DateTime dt = new DateTime(date);
         int index = dt.getDayOfWeek();
@@ -90,9 +110,5 @@ public class DateUtil {
         Date date = str2date(dateStr, patternFrom);
         DateTime datetime = symbol(new DateTime(date), symbol, plus);
         return date2str(datetime.toDate(), patternTo);
-    }
-
-    public static String clean(String dateStr) {
-        return dateStr.replaceAll("[-:\\s]", "");
     }
 }
