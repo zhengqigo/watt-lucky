@@ -92,8 +92,8 @@ public class DateUtil {
         return new DateTime().toDate();
     }
 
-    public static Date minute() {
-        return str2date(date2str(new Date(), "yyyyMMddHHmm00"), "yyyyMMddHHmm00");
+    public static Date minute(Date date) {
+        return str2date(date2str(date, "yyyyMMddHHmm00"), "yyyyMMddHHmm00");
     }
 
     public static String date2str(Date date, String pattern) {
