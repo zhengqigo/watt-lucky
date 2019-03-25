@@ -18,6 +18,7 @@ public class DateUtil {
         map.put("yyyyMMdd", DateTimeFormat.forPattern("yyyyMMdd"));
         map.put("yyyy-MM-dd", DateTimeFormat.forPattern("yyyy-MM-dd"));
         map.put("yyyyMMddHHmmss", DateTimeFormat.forPattern("yyyyMMddHHmmss"));
+        map.put("yyyyMMddHHmm00", DateTimeFormat.forPattern("yyyyMMddHHmm00"));
         map.put("yyyy-MM-dd HH:mm:ss", DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss"));
         map.put("yyyyMMddHHmmssSSS", DateTimeFormat.forPattern("yyyyMMddHHmmssSSS"));
         map.put("yyyy-MM-dd HH:mm:ss.SSS", DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS"));
@@ -89,6 +90,10 @@ public class DateUtil {
 
     public static Date now() {
         return new DateTime().toDate();
+    }
+
+    public static Date minute() {
+        return str2date(date2str(new Date(), "yyyyMMddHHmm00"), "yyyyMMddHHmm00");
     }
 
     public static String date2str(Date date, String pattern) {
