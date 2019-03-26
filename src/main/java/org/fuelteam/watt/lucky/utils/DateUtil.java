@@ -53,6 +53,15 @@ public class DateUtil {
         if (index == 1) return dt.minusDays(3).toDate();
         return dt.minusDays(1).toDate();
     }
+    
+    public final static Date currOrPrev(Date date) {
+        DateTime dt = new DateTime(date);
+        int index = dt.getDayOfWeek();
+        if (index == 6) return dt.minusDays(1).toDate();
+        if (index == 7) return dt.minusDays(2).toDate();
+        if (index == 1) return dt.minusDays(3).toDate();
+        return dt.minusDays(1).toDate();
+    }
 
     public final static Date next(Date date) {
         DateTime dt = new DateTime(date);
