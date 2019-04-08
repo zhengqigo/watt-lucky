@@ -29,8 +29,9 @@
 
         <commons-lang3.version>3.8.1</commons-lang3.version>
 
-        <nexus.host>106.14.212.70:8081</nexus.host>
-
+        <nexus.host>172.16.80.40:8081</nexus.host>
+        
+        <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
     </properties>
 
@@ -82,7 +83,7 @@
             <artifactId>protonpack</artifactId>
             <version>1.15</version>
         </dependency>
-        
+
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -138,6 +139,20 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven-source-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 
