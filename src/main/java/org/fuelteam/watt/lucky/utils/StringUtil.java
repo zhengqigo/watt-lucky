@@ -2,6 +2,7 @@ package org.fuelteam.watt.lucky.utils;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,8 +12,11 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 public class StringUtil extends StringUtils {
+
+    private final static Map<String, Pattern> map = Maps.newConcurrentMap();
 
     public static String clean(final String str) {
         return isEmpty(str) ? "" : str.trim();
@@ -101,8 +105,18 @@ public class StringUtil extends StringUtils {
     }
 
     // 是否匹配规则
-    public static boolean match(final String str, final String pattern) {
-        return str.matches(pattern);
+    public static boolean match(final String str, final String regex) {
+        Pattern pattern = map.get(regex);
+        if (pattern == null) {
+            pattern = Pattern.compile(regex);
+            map.putIfAbsent(regex, pattern);
+        }
+        Matcher matcher = pattern.matcher(str);
+        return matcher.matches();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(match("1213", "\\d{4}$"));
     }
 
     public static String[] matchAndGet(final String str, final String pattern) {
