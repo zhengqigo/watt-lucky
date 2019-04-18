@@ -87,6 +87,9 @@ public class DateUtil {
         if ("d".equalsIgnoreCase(symbol)) dt = dt.plusDays(plus);
         if ("h".equalsIgnoreCase(symbol)) dt = dt.plusHours(plus);
         if ("m".equalsIgnoreCase(symbol)) dt = dt.plusMinutes(plus);
+        if ("mm".equalsIgnoreCase(symbol)) dt = dt.plusMonths(plus);
+        if ("y".equalsIgnoreCase(symbol)) dt = dt.plusYears(plus);
+        if ("s".equalsIgnoreCase(symbol)) dt = dt.plusSeconds(plus);
         return dt;
     }
 
