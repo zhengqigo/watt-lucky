@@ -1,12 +1,15 @@
 package org.fuelteam.watt.lucky.tuple;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class DefaultTuple implements Tuple {
+public class DefaultTuple implements Tuple, Serializable {
 
-    private final TupleType type;
+    private static final long serialVersionUID = 4770198448986401164L;
 
-    private final Object[] values;
+    private TupleType type;
+
+    private Object[] values;
 
     public DefaultTuple(TupleType type, Object[] values) {
         this.type = type;
@@ -21,6 +24,12 @@ public class DefaultTuple implements Tuple {
     @Override
     public TupleType getType() {
         return type;
+    }
+    
+    @Override
+    public void clear() {
+        this.values = null;
+        this.type = null;
     }
 
     @Override

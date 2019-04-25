@@ -1,10 +1,14 @@
 package org.fuelteam.watt.lucky.tuple;
 
-public class DefaultTupleType implements TupleType {
+import java.io.Serializable;
 
-    final Class<?>[] types;
+public class DefaultTupleType implements TupleType, Serializable {
 
-    final Integer size;
+    private static final long serialVersionUID = -7139903442004737461L;
+
+    Class<?>[] types;
+
+    Integer size;
 
     public DefaultTupleType(Class<?>[] types) {
         this.types = (types != null ? types : new Class<?>[0]);
@@ -18,6 +22,11 @@ public class DefaultTupleType implements TupleType {
 
     public int size() {
         return types.length;
+    }
+    
+    public void clear() {
+        this.types = null;
+        this.size = 0;
     }
 
     public Class<?> getNthType(int i) {
@@ -45,5 +54,13 @@ public class DefaultTupleType implements TupleType {
             }
         }
         return new DefaultTuple(this, values);
+    }
+
+    public Class<?>[] getTypes() {
+        return types;
+    }
+
+    public Integer getSize() {
+        return size;
     }
 }

@@ -7,6 +7,8 @@ public interface TupleType {
     public Class<?> getNthType(int i);
 
     public Tuple of(Object... values);
+    
+    public void clear();
 
     public class DefaultFactory {
         public static TupleType create(final Class<?>... types) {
