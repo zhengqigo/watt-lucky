@@ -42,6 +42,7 @@ public class DefaultTuple implements Tuple, Serializable {
     public <T> T getNthValue(int i) {
         return (T) values[i];
     }
+    
 
     @Override
     public boolean equals(Object object) {
@@ -76,5 +77,10 @@ public class DefaultTuple implements Tuple, Serializable {
     @Override
     public String toString() {
         return Arrays.toString(values);
+    }
+
+    @Override
+    public <T> void setNthValue(int i, T t) {
+        this.values[i] = t;
     }
 }

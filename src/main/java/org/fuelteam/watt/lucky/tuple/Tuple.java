@@ -9,4 +9,6 @@ public interface Tuple {
     public void clear();
 
     public <T> T getNthValue(int i);
+    
+    public <T> void setNthValue(int i, T t);
 }

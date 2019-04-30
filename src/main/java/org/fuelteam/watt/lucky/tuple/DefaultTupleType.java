@@ -10,6 +10,8 @@ public class DefaultTupleType implements TupleType, Serializable {
 
     Integer size;
 
+    Tuple tuple;
+
     public DefaultTupleType(Class<?>[] types) {
         this.types = (types != null ? types : new Class<?>[0]);
         this.size = this.types.length;
@@ -23,7 +25,7 @@ public class DefaultTupleType implements TupleType, Serializable {
     public int size() {
         return types.length;
     }
-    
+
     public void clear() {
         this.types = null;
         this.size = 0;
@@ -31,6 +33,10 @@ public class DefaultTupleType implements TupleType, Serializable {
 
     public Class<?> getNthType(int i) {
         return types[i];
+    }
+
+    public void setNthValue(int i, Object value) {
+        tuple.setNthValue(i, value);
     }
 
     public Tuple of(Object... values) {
@@ -62,5 +68,9 @@ public class DefaultTupleType implements TupleType, Serializable {
 
     public Integer getSize() {
         return size;
+    }
+
+    public Tuple getTuple() {
+        return tuple;
     }
 }
