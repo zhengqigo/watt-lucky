@@ -113,7 +113,7 @@ class Basic {
                     append(field.getName() + "=>(" + o.getClass().getName() + ")this");
                     continue;
                 }
-                Coll.print(field.getName() + "=>", o, "");
+                Col.print(field.getName() + "=>", o, "");
             } catch (Exception e) {
                 continue;
             }
@@ -293,7 +293,7 @@ class Array extends Basic {
     }
 }
 
-class Coll extends Array {
+class Col extends Array {
 
     public static <T> void print(Collection<T> coll) {
         String type = coll.getClass().getTypeName();
@@ -318,7 +318,7 @@ class Coll extends Array {
                 if (t instanceof Collection) {
                     Basic.append("[" + i + "]=>");
                     Basic.stack.push(1);
-                    Coll.print((Collection<?>) t);
+                    Col.print((Collection<?>) t);
                     Basic.stack.pop();
                     i++;
                     continue;
@@ -326,7 +326,7 @@ class Coll extends Array {
                 if (t instanceof Map) {
                     Basic.append("[" + i + "]=>");
                     Basic.stack.push(1);
-                    Coll.print((Map<?, ?>) t);
+                    Col.print((Map<?, ?>) t);
                     Basic.stack.pop();
                     i++;
                     continue;
@@ -334,7 +334,7 @@ class Coll extends Array {
                 if (t instanceof Enumeration) {
                     Basic.append("[" + i + "]=>");
                     Basic.stack.push(1);
-                    Coll.print((Enumeration<?>) t);
+                    Col.print((Enumeration<?>) t);
                     Basic.stack.pop();
                     i++;
                     continue;
@@ -375,10 +375,10 @@ class Coll extends Array {
                     }
                 }
             }
-            if (!k_b.equals("")) Coll.print("{" + k_b + "=>", value, "}");
-            Coll.print("{", key, "");
+            if (!k_b.equals("")) Col.print("{" + k_b + "=>", value, "}");
+            Col.print("{", key, "");
             append("=>");
-            Coll.print("", value, "}");
+            Col.print("", value, "}");
         }
         printCollAfter();
         show();
@@ -407,19 +407,19 @@ class Coll extends Array {
             if (t instanceof Collection) {
                 Basic.append("[" + i + "]=>");
                 Basic.stack.push(1);
-                Coll.print((Collection<?>) t);
+                Col.print((Collection<?>) t);
                 Basic.stack.pop();
             }
             if (t instanceof Map) {
                 Basic.append("[" + i + "]=>");
                 Basic.stack.push(1);
-                Coll.print((Map<?, ?>) t);
+                Col.print((Map<?, ?>) t);
                 Basic.stack.pop();
             }
             if (t instanceof Enumeration) {
                 Basic.append("[" + i + "]=>");
                 Basic.stack.push(1);
-                Coll.print((Enumeration<?>) t);
+                Col.print((Enumeration<?>) t);
                 Basic.stack.pop();
             } else {
                 String cl = t.getClass().getTypeName();
@@ -466,11 +466,11 @@ class Coll extends Array {
             if (t.getClass().isArray()) {
                 Array.print(t);
             } else if (t instanceof Collection) {
-                Coll.print((Collection<?>) t);
+                Col.print((Collection<?>) t);
             } else if (t instanceof Map) {
-                Coll.print((Map<?, ?>) t);
+                Col.print((Map<?, ?>) t);
             } else if (t instanceof Enumeration) {
-                Coll.print((Enumeration<?>) t);
+                Col.print((Enumeration<?>) t);
             } else {
                 Basic.print(t);
             }
@@ -493,7 +493,7 @@ class Coll extends Array {
 
 }
 
-public class Vardump extends Coll {
+public class Vardump extends Col {
 
     public static void print(HttpServletRequest request) {
         printBefore("request");

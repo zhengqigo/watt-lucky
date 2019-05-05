@@ -17,10 +17,9 @@ public class WebServiceUtil {
     private final static String soap12Envelope = "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">%s</soap:Envelope>";
     private final static String soapBody = "<soap:Body>%s</soap:Body>";
     private final static String soapHeader = "<%s %s>%s</%s>";
-    
+
     public final static String DEFAULT_NAMESPACE = "xmlns=\"http://tempuri.org/\"";
-    
-    
+
     public static String prepare(String method, String namespace, String params) {
         String header = String.format(soapHeader, method, namespace, params, method);
         String body = String.format(soapBody, header);
@@ -44,8 +43,7 @@ public class WebServiceUtil {
 
     public static Pair<Integer, String> post(String asmxUrl, Map<String, String> headers, String body, int connectionTimeout,
             int soTimeout) throws Exception {
-        Pair<Integer, String> result = new RequestExecutor<HttpPost>().build(HttpPost.class).on(asmxUrl, null, headers, body)
+        return new RequestExecutor<HttpPost>().build(HttpPost.class).on(asmxUrl, null, headers, body)
                 .timeout(connectionTimeout, soTimeout).string();
-        return result;
     }
 }

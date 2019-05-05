@@ -1,4 +1,4 @@
-package org.fuelteam.watt.lucky.money;
+package org.fuelteam.watt.lucky.packet;
 
 import com.google.common.collect.Lists;
 
@@ -7,13 +7,14 @@ import java.util.List;
 import java.util.Random;
 
 import org.fuelteam.watt.lucky.utils.BigDecimalUtil;
+import org.fuelteam.watt.lucky.utils.BigDecimalWrapper;
 
 public class RedPacket {
 
     private static final double MAGIC = 4 * Math.exp(-0.5) / Math.sqrt(2.0);
 
-    // 正态分布随机数[截断正态分布] mean 平均数, sgima 标准差
-    private static double normalVariate(double mean, double sgima) {
+    // 正态分布随机数[截断正态分布] mean 平均数, sigma 标准差
+    private static double normalVariate(double mean, double sigma) {
         Random random = new Random();
         double z = 0.0;
         while (true) {
@@ -23,7 +24,7 @@ public class RedPacket {
             double zz = z * z / 4.0;
             if (zz <= -Math.log(u2)) break;
         }
-        return (mean + z * sgima);
+        return (mean + z * sigma);
     }
 
     /**
@@ -45,7 +46,8 @@ public class RedPacket {
         double sum = 0.0;
         while (divided.size() < n) { // 需要分配额度红包 < 预分配红包的总个数
             double random = normalVariate(mean.doubleValue(), sigma.doubleValue());
-            if (BigDecimalUtil.is(random).gte(sigma) && BigDecimalUtil.is(random).lte(2.0 * sigma.doubleValue())) {
+            BigDecimalWrapper wrapper = BigDecimalUtil.get(random);
+            if (wrapper.gte(sigma) && wrapper.lte(2.0 * sigma.doubleValue())) {
                 divided.add(BigDecimal.valueOf(random));
                 sum += random;
             }
@@ -53,7 +55,7 @@ public class RedPacket {
         double curSum = 0.0;
         for (int i = 0; i < n - 1; i++) {
             double cur = Math.round((divided.get(i).doubleValue() * money / sum));
-            if (BigDecimalUtil.is(cur).lt(minMoney)) cur = minMoney;
+            if (BigDecimalUtil.get(cur).lt(minMoney)) cur = minMoney;
             redPackets.add(BigDecimal.valueOf(cur));
             curSum += cur;
         }
@@ -71,22 +73,22 @@ public class RedPacket {
      * 第n个红包 额度 = 总额度 - 前n-1个红包的派发额度 需要指定当前红包的个数、红包的总额度、红包最小额度
      */
     public static double getRandomMoney(LeftPacket leftPacket, int unit) {
-        int leftSize = leftPacket.getRemainSize(); // 剩余红包个数
-        double leftMoney = leftPacket.getRemainMoney(); // 剩余的额度
+        int leftSize = leftPacket.getLeftSize(); // 剩余红包个数
+        double leftMoney = leftPacket.getLeftMoney(); // 剩余的额度
         double minMoney = leftPacket.getMinMoney(); // 最小红包额度
 
         if (leftSize == 1) {
-            leftPacket.setRemainSize(--leftSize);
+            leftPacket.setLeftSize(--leftSize);
             return (double) Math.round(leftMoney * unit) / unit;
         }
         Random random = new Random();
         double max = leftMoney / leftSize * 2;
         double money = random.nextDouble() * max;
 
-        money = BigDecimalUtil.is(money).lte(minMoney) ? minMoney : money;
+        money = BigDecimalUtil.get(money).lte(minMoney) ? minMoney : money;
         money = Math.floor(money * unit) / unit;
-        leftPacket.setRemainSize(--leftSize);
-        leftPacket.setRemainMoney(BigDecimalUtil.safeSubtract(leftMoney, money).doubleValue());
+        leftPacket.setLeftSize(--leftSize);
+        leftPacket.setLeftMoney(BigDecimalUtil.safeSubtract(leftMoney, money).doubleValue());
 
         return money;
     }

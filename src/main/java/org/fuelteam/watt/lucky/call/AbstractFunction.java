@@ -8,7 +8,7 @@ public abstract class AbstractFunction<T> {
         this.callback = callback;
     }
 
-    public AbstractFunction() {/* nothing */}
+    public AbstractFunction() {/* empty */}
 
     public Callback<T> getCallback() {
         return callback;

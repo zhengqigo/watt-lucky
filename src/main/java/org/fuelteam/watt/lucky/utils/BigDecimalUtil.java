@@ -4,12 +4,12 @@ import java.math.BigDecimal;
 
 public class BigDecimalUtil {
 
-    public static BigDecimalWrapper is(BigDecimal decimal) {
+    public static BigDecimalWrapper get(BigDecimal decimal) {
         return new BigDecimalWrapper(decimal);
     }
 
-    public static BigDecimalWrapper is(double dbl) {
-        return is(BigDecimal.valueOf(dbl));
+    public static BigDecimalWrapper get(double dbl) {
+        return get(BigDecimal.valueOf(dbl));
     }
     
     public static <T extends Number> BigDecimal safeDivide(T b1, T b2, int points) {

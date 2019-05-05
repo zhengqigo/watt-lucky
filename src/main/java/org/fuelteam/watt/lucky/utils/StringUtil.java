@@ -115,10 +115,6 @@ public class StringUtil extends StringUtils {
         return matcher.matches();
     }
 
-    public static void main(String[] args) {
-        System.out.println(match("1213", "\\d{4}$"));
-    }
-
     public static String[] matchAndGet(final String str, final String pattern) {
         Pattern p = Pattern.compile(pattern);
         Matcher m = p.matcher(str);

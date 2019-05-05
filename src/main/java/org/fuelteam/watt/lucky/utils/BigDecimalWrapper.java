@@ -8,7 +8,7 @@ public final class BigDecimalWrapper {
 
     private final BigDecimal bigDecimal;
 
-    BigDecimalWrapper(BigDecimal bigDecimal) {
+    public BigDecimalWrapper(BigDecimal bigDecimal) {
         this.bigDecimal = bigDecimal;
     }
 

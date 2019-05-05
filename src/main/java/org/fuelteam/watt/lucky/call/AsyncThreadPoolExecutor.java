@@ -13,33 +13,36 @@ import org.springframework.stereotype.Component;
 @Component
 public class AsyncThreadPoolExecutor implements FactoryBean<ThreadPoolExecutor> {
 
-    private final ReentrantLock lock = new ReentrantLock();
+    private final ReentrantLock reentrantLock = new ReentrantLock();
 
-    private Integer minCores = Runtime.getRuntime().availableProcessors();
+    private Integer corePoolSize = Runtime.getRuntime().availableProcessors();
 
-    private Integer maxCores = 2 * minCores + 1;
+    private Integer maximumPoolSize = 2 * corePoolSize + 1;
 
-    private long aliveTime = 3;
+    private long keepAliveTime = 3;
 
-    private TimeUnit timeUnit = TimeUnit.SECONDS;
+    private TimeUnit unit = TimeUnit.SECONDS;
 
     private ThreadPoolExecutor executor;
 
+    @Override
     public ThreadPoolExecutor getObject() {
-        lock.lock();
+        reentrantLock.lock();
         if (executor == null) {
-            BlockingQueue<Runnable> bq = new LinkedBlockingQueue<Runnable>(minCores);
+            BlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<Runnable>(corePoolSize);
             RejectedExecutionHandler handler = new ThreadPoolExecutor.CallerRunsPolicy();
-            executor = new ThreadPoolExecutor(minCores, maxCores, aliveTime, timeUnit, bq, handler);
+            executor = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue, handler);
         }
-        lock.unlock();
+        reentrantLock.unlock();
         return executor;
     }
 
+    @Override
     public Class<ThreadPoolExecutor> getObjectType() {
         return ThreadPoolExecutor.class;
     }
 
+    @Override
     public boolean isSingleton() {
         return true;
     }
