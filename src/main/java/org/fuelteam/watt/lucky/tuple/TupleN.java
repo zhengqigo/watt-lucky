@@ -16,7 +16,7 @@ public class TupleN implements Serializable {
     public TupleN(Class<?>... clazz) {
         this.clazz = (clazz != null ? clazz : new Class<?>[0]);
         this.size = this.clazz.length;
-        this.values = new Object[values.length];
+        this.values = new Object[size];
         System.arraycopy(values, 0, this.values, 0, size);
     }
 

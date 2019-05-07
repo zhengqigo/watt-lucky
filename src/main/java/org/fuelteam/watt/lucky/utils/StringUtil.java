@@ -10,13 +10,21 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 public class StringUtil extends StringUtils {
 
     private final static Map<String, Pattern> map = Maps.newConcurrentMap();
+
+    private final static Pattern get(String pattern) {
+        Pattern p = map.get(pattern);
+        if (p == null) {
+            p = Pattern.compile(pattern);
+            map.putIfAbsent(pattern, p);
+        }
+        return p;
+    }
 
     public static String clean(final String str) {
         return isEmpty(str) ? "" : str.trim();
@@ -26,20 +34,16 @@ public class StringUtil extends StringUtils {
         return (object == null) ? null : String.valueOf(object);
     }
 
-    public static String cleanAs(final String str, final String define) {
-        return isEmpty(str) ? clean(define) : str.trim();
+    public static String cleanAs(final String str, final String def) {
+        return isEmpty(str) ? clean(def) : str.trim();
     }
 
-    public static Integer cleanAs(final String str, final Integer define) {
-        return integerAndPositive(str) ? Integer.parseInt(str) : define;
+    public static Integer cleanAs(final String str, final Integer def) {
+        return integer(str) ? Integer.parseInt(str) : def;
     }
 
     public static boolean integer(final String str) {
         return match(str, "-?\\d+");
-    }
-
-    public static boolean integerAndPositive(final String str) {
-        return integer(str) && positive(str);
     }
 
     public static String cleanEx(String clean) {
@@ -47,19 +51,17 @@ public class StringUtil extends StringUtils {
         return clean(clean);
     }
 
-    public static Double str2dbl(String str, Double defDbl) {
-        String cleanedStr = cleanEx(str);
-        return StringUtils.isEmpty(cleanedStr) && numeric(cleanedStr) ? defDbl : Double.parseDouble(cleanedStr);
+    public static Double str2dbl(String str, Double def) {
+        String cleaned = clean(str);
+        return isEmpty(cleaned) || !numeric(cleaned) ? def : Double.parseDouble(cleaned);
     }
 
-    public static BigDecimal str2bd(String str, BigDecimal defBd) {
-        String cleanedStr = cleanEx(str);
-        return StringUtils.isEmpty(cleanedStr) && numeric(cleanedStr) ? defBd : new BigDecimal(cleanedStr);
+    public static BigDecimal str2bd(String str, BigDecimal def) {
+        String cleaned = clean(str);
+        return isEmpty(cleaned) || !numeric(cleaned) ? def : new BigDecimal(cleaned);
     }
 
     public static String clean(JSONArray jsonArray, String defVal, String... fields) {
-        Preconditions.checkNotNull(jsonArray, "jsonArray can not be null");
-        Preconditions.checkArgument(fields == null || fields.length <= 0, "fields can not be null or empty");
         String result = "";
         for (String field : fields) {
             if (field == null) continue;
@@ -72,8 +74,6 @@ public class StringUtil extends StringUtils {
     }
 
     public static String clean(JSONObject jsonObject, String key) {
-        Preconditions.checkNotNull(jsonObject, "jsonObject can not be null");
-        Preconditions.checkNotNull(key, "key can not be null");
         Object object = jsonObject.get(key);
         if (object == null) return null;
         return String.valueOf(object).trim();
@@ -97,27 +97,21 @@ public class StringUtil extends StringUtils {
 
     // 是否为负数
     public static boolean negative(final String str) {
-        return str.charAt(0) == '-';
+        return numeric(str) && str.charAt(0) == '-';
     }
 
     public static boolean positive(final String str) {
-        return str.charAt(0) != '-';
+        return numeric(str) && str.charAt(0) != '-';
     }
 
     // 是否匹配规则
-    public static boolean match(final String str, final String regex) {
-        Pattern pattern = map.get(regex);
-        if (pattern == null) {
-            pattern = Pattern.compile(regex);
-            map.putIfAbsent(regex, pattern);
-        }
-        Matcher matcher = pattern.matcher(str);
+    public static boolean match(final String str, final String pattern) {
+        Matcher matcher = get(pattern).matcher(str);
         return matcher.matches();
     }
 
     public static String[] matchAndGet(final String str, final String pattern) {
-        Pattern p = Pattern.compile(pattern);
-        Matcher m = p.matcher(str);
+        Matcher m = get(pattern).matcher(str);
         List<String> group = Lists.newArrayList();
         Integer index = 0;
         while (m.find()) {
@@ -126,11 +120,9 @@ public class StringUtil extends StringUtils {
         return group.toArray(new String[] {});
     }
 
-    // 去掉小数点后无效0
+    // 去掉小数点后无效0: 123.00 -> 123
     public static String trim0(String source) {
-        if (source.indexOf(".") <= 0) return source;
-        source = source.replaceAll("0+?$", "");
-        source = source.replaceAll("[.]$", "");
+        if (numeric(source) && source.indexOf(".") > 0) return source.replaceAll(".0+?$", "");
         return source;
     }
 }

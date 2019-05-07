@@ -25,12 +25,7 @@ public class DateUtil {
     }
 
     public static Date str2date(String dateStr, String pattern) {
-        DateTimeFormatter dtf = map.get(pattern);
-        if (dtf == null) {
-            dtf = DateTimeFormat.forPattern(pattern);
-            map.putIfAbsent(pattern, dtf);
-        }
-        return dtf.parseDateTime(dateStr).toDate();
+        return get(pattern).parseDateTime(dateStr).toDate();
     }
 
     public static boolean check(String dateStr, String pattern) {
@@ -38,11 +33,19 @@ public class DateUtil {
         if (date == null) return false;
         return true;
     }
+    
+    private final static DateTimeFormatter get(String pattern) {
+        DateTimeFormatter dtf = map.get(pattern);
+        if (dtf == null) {
+            dtf = DateTimeFormat.forPattern(pattern);
+            map.putIfAbsent(pattern, dtf);
+        }
+        return dtf;
+    }
 
-    public final static String long2str(final long datetime) {
+    public final static String long2str(long datetime, String pattern) {
         Date date = new Date(datetime);
-        String pattern = "yyyy-MM-dd HH:mm:ss.SSS";
-        return new DateTime(date).toString(map.get(pattern));
+        return new DateTime(date).toString(get(pattern));
     }
 
     public final static Date prev(Date date) {
@@ -54,15 +57,6 @@ public class DateUtil {
         return dt.minusDays(1).toDate();
     }
     
-    public final static Date currOrPrev(Date date) {
-        DateTime dt = new DateTime(date);
-        int index = dt.getDayOfWeek();
-        if (index == 6) return dt.minusDays(1).toDate();
-        if (index == 7) return dt.minusDays(2).toDate();
-        if (index == 1) return dt.minusDays(3).toDate();
-        return dt.minusDays(1).toDate();
-    }
-
     public final static Date next(Date date) {
         DateTime dt = new DateTime(date);
         int index = dt.getDayOfWeek();
