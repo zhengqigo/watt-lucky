@@ -10,13 +10,6 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.stereotype.Component;
 
-/**
- * 类 AsyncThreadPoolExecutor
- *
- * @author Yin weihong (yinwh@gjmetal.com)
- *         <br>
- *         Copyright (c) 国金金属网
- */
 @Component
 public class AsyncThreadPoolExecutor implements FactoryBean<ThreadPoolExecutor> {
 
