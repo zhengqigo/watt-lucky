@@ -1,5 +1,8 @@
-package org.fuelteam.watt.lucky.call;
+package org.fuelteam.watt.lucky.async;
 
+/**
+ * 抽象函数类，需覆盖execute()方法
+ */
 public abstract class AbstractFunction<T> {
 
     private Callback<T> callback;
@@ -8,14 +11,8 @@ public abstract class AbstractFunction<T> {
         this.callback = callback;
     }
 
-    public AbstractFunction() {/* empty */}
-
     public Callback<T> getCallback() {
         return callback;
-    }
-
-    public void setCallback(Callback<T> callback) {
-        this.callback = callback;
     }
 
     public abstract T execute() throws Exception;

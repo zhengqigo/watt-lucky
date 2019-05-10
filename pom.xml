@@ -12,12 +12,13 @@
     <description>${project.artifactId}</description>
 
     <properties>
+        <watt.version>1.0.1-SNAPSHOT</watt.version>
+
         <java.version>1.8</java.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <spring-boot.version>2.1.4.RELEASE</spring-boot.version>
-        <watt.version>1.0.1-SNAPSHOT</watt.version>
 
         <joda-time.version>2.10.1</joda-time.version>
         <joda-convert.version>2.2.0</joda-convert.version>
@@ -30,7 +31,7 @@
         <commons-lang3.version>3.8.1</commons-lang3.version>
 
         <nexus.host>172.16.80.40:8081</nexus.host>
-        
+
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
     </properties>

@@ -44,7 +44,7 @@ public class TupleN implements Serializable {
     public void setNthValue(int i, Object value) {
         values[i] = value;
     }
-    
+
     @SuppressWarnings("unchecked")
     public <T> T getNthValue(int i) {
         return (T) values[i];
@@ -70,7 +70,7 @@ public class TupleN implements Serializable {
                 }
             }
         }
-        
+
         if (values == null || values.length == 0) {
             this.values = new Object[0];
         } else {
@@ -79,7 +79,7 @@ public class TupleN implements Serializable {
         }
         return this;
     }
-    
+
     @Override
     public boolean equals(Object object) {
         if (object == null) return false;
@@ -93,7 +93,7 @@ public class TupleN implements Serializable {
         for (int i = 0; i < size; i++) {
             final Object thisNthValue = getNthValue(i);
             final Object otherNthValue = other.getNthValue(i);
-            
+
             final boolean check1 = (thisNthValue == null && otherNthValue != null);
             final boolean check2 = (thisNthValue != null && !thisNthValue.equals(otherNthValue));
             if (check1 || check2) return false;
@@ -109,7 +109,7 @@ public class TupleN implements Serializable {
         }
         return hash;
     }
-    
+
     @Override
     public String toString() {
         return Arrays.toString(values);
