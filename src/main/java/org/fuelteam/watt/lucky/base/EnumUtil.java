@@ -5,7 +5,7 @@ import java.util.EnumSet;
 import org.apache.commons.lang3.EnumUtils;
 
 /**
- * 枚举工具集 {@code org.apache.commons.lang3.EnumUtils}
+ * 枚举工具集
  * <BR>
  * 1. 将多个枚举值按bit与long的转换
  * <BR>
