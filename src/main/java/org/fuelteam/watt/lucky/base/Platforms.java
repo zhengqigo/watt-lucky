@@ -5,7 +5,7 @@ import java.io.File;
 import org.apache.commons.lang3.SystemUtils;
 
 /**
- * 关于系统设定，平台信息的变量(via Common Lang SystemUtils)
+ * 关于系统设定，平台信息的变量 (via Common Lang SystemUtils)
  */
 public class Platforms {
 

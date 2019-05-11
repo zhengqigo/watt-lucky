@@ -7,7 +7,7 @@ import org.fuelteam.watt.lucky.base.RuntimeUtil;
 import org.fuelteam.watt.lucky.concurrent.threadpool.ThreadPoolBuilder;
 
 /**
- * 异步调用类
+ * 静态异步调用类
  */
 public class Async {
 

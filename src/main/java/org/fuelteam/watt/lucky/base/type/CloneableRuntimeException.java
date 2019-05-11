@@ -3,7 +3,7 @@ package org.fuelteam.watt.lucky.base.type;
 import org.fuelteam.watt.lucky.base.ExceptionUtil;
 
 /**
- * 适用于异常信息需要变更的情况，可通过clone()，不经过构造函数（也就避免了获得StackTrace）地从之前定义的静态异常中克隆，再设定新的异常信息
+ * 适用于异常信息需要变更的情况，可通过clone()，不经过构造函数（也就避免了获得StackTrace）地从之前定义的静态异常中克隆，再设定新的异常信息。
  * 
  * @see CloneableException
  */
