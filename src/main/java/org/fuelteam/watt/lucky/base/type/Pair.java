@@ -5,11 +5,9 @@ import java.io.Serializable;
 import org.fuelteam.watt.lucky.base.annotation.Nullable;
 
 /**
- * 引入一个简单的Pair，用于返回值返回两个元素。
- * <pre>
- * copy from Twitter Common
+ * 从Twitter Common引入的简单的Pair，用于返回值返回两个元素。
  */
-public class Pair<L, R> implements Serializable{
+public class Pair<L, R> implements Serializable {
 
     private static final long serialVersionUID = 988170472238117297L;
 
@@ -45,27 +43,13 @@ public class Pair<L, R> implements Serializable{
     @SuppressWarnings("rawtypes")
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
         Pair other = (Pair) obj;
-        if (left == null) {
-            if (other.left != null) {
-                return false;
-            }
-        } else if (!left.equals(other.left)) {
-            return false;
-        }
-        if (right == null) {
-            if (other.right != null) {
-                return false;
-            }
-        } else if (!right.equals(other.right)) {
-            return false;
-        }
+        if (left == null && other.left != null) return false;
+        if (left != null && !left.equals(other.left)) return false;
+        if (right == null && other.right != null) return false;
+        if (right != null && !right.equals(other.right)) return false;
         return true;
     }
 

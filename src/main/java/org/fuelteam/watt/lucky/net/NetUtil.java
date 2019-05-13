@@ -14,11 +14,11 @@ import javax.net.ServerSocketFactory;
 
 import org.fuelteam.watt.lucky.base.Platforms;
 import org.fuelteam.watt.lucky.base.SystemPropertiesUtil;
-import org.fuelteam.watt.lucky.collection.MapUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.annotations.Beta;
+import com.google.common.collect.Maps;
 
 /**
  * 关于网络的工具类.
@@ -118,7 +118,7 @@ public class NetUtil {
 					"LOCALHOST_DEFAULT_NIC_LIST", "bond0,eth0,em0,br0");
 
 			InetAddress resultAddress = null;
-			Map<String, NetworkInterface> candidateInterfaces = MapUtil.newHashMap();
+			Map<String, NetworkInterface> candidateInterfaces = Maps.newHashMap();
 
 			// 遍历所有网卡，找出所有可用网卡，尝试找出符合prefer前缀的网卡
 			try {

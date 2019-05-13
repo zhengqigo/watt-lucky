@@ -3,7 +3,8 @@ package org.fuelteam.watt.lucky.base;
 import org.apache.commons.lang3.BooleanUtils;
 
 /**
- * 从true/false, yes/no等转换为Boolean或boolean；逻辑运算：取反，多个boolean的and/or计算。
+ * 逻辑运算工具类
+ * @see BooleanUtils
  */
 public class BooleanUtil {
 

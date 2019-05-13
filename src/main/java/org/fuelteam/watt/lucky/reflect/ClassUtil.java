@@ -80,7 +80,7 @@ public class ClassUtil {
 	 * 
 	 * @return <code>true</code> if subclass is a subclass or sub interface of superclass
 	 */
-	public static boolean isSubClassOrInterfaceOf(Class subclass, Class superclass) {
+	public static boolean isSubClassOrInterfaceOf(Class<?> subclass, Class<?> superclass) {
 		return superclass.isAssignableFrom(subclass);
 	}
 
@@ -111,7 +111,8 @@ public class ClassUtil {
 	 * @param clazz The class to introspect
 	 * @return the first generic declaration, or Object.class if cannot be determined
 	 */
-	public static <T> Class<T> getClassGenericType(final Class clazz) {
+	@SuppressWarnings("unchecked")
+    public static <T> Class<T> getClassGenericType(final Class<?> clazz) {
 		return getClassGenericType(clazz, 0);
 	}
 
@@ -128,7 +129,8 @@ public class ClassUtil {
 	 * @param index the Index of the generic declaration, start from 0.
 	 * @return the index generic declaration, or Object.class if cannot be determined
 	 */
-	public static Class getClassGenericType(final Class clazz, final int index) {
+	@SuppressWarnings("rawtypes")
+    public static Class getClassGenericType(final Class<?> clazz, final int index) {
 
 		Type genType = clazz.getGenericSuperclass();
 

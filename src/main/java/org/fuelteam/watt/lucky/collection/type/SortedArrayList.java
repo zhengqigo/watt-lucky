@@ -30,12 +30,10 @@ import java.util.Comparator;
 import java.util.Iterator;
 
 /**
- * 从Jodd整体复制，部分指定了index的操作不支持，如 add(index, element)
- * 
- * 修改包括：改进Comparator泛型定义，findInsertionPoint的位移改进
- * 
+ * 从Jodd整体复制，部分指定了index的操作不支持，如 add(index, element)，修改包括：改进Comparator泛型定义，findInsertionPoint的位移改进
+ * <pre>
  * https://github.com/oblac/jodd/blob/master/jodd-core/src/main/java/jodd/util/collection/SortedArrayList.java
- * 
+ * <pre>
  * An extension of <code>ArrayList</code> that insures that all of the items
  * added are sorted. <b>This breaks original list contract!</b>.
  * A binary search method is used to provide a quick way to
@@ -75,11 +73,11 @@ public final class SortedArrayList<E> extends ArrayList<E> {
 	/**
 	 * Returns comparator assigned to this collection, if such exist.
 	 */
-	public Comparator getComparator() {
+	public Comparator<?> getComparator() {
 		return comparator;
 	}
 
-	// ---------------------------------------------------------------- override
+	// override
 
 	/**
 	 * Adds an Object to sorted list. Object is inserted at correct place, found
@@ -122,7 +120,7 @@ public final class SortedArrayList<E> extends ArrayList<E> {
 		return findInsertionPoint(o, 0, size() - 1);
 	}
 
-	// ---------------------------------------------------------------- unsupported methods
+	// unsupported methods
 
 	/**
 	 * @throws UnsupportedOperationException This method not supported.
@@ -152,13 +150,13 @@ public final class SortedArrayList<E> extends ArrayList<E> {
 	}
 
 
-	// ---------------------------------------------------------------- sorting
+	// sorting
 
 	/**
 	 * Compares two keys using the correct comparison method for this
 	 * collection.
 	 */
-	@SuppressWarnings({ "unchecked" })
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	protected int compare(E k1, E k2) {
 		if (comparator == null) {
 			return ((Comparable) k1).compareTo(k2);
@@ -183,8 +181,6 @@ public final class SortedArrayList<E> extends ArrayList<E> {
 				low = mid + 1;
 			}
 		}
-
 		return low;
 	}
-
 }

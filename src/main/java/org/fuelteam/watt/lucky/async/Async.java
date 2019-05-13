@@ -6,9 +6,6 @@ import java.util.concurrent.ThreadPoolExecutor;
 import org.fuelteam.watt.lucky.base.RuntimeUtil;
 import org.fuelteam.watt.lucky.concurrent.threadpool.ThreadPoolBuilder;
 
-/**
- * 静态异步调用类
- */
 public class Async {
 
     private final static Integer cores = RuntimeUtil.getCores();

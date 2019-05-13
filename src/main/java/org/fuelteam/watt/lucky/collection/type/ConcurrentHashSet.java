@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * JDK并没有提供ConcurrenHashSet，考虑到JDK的HashSet也是基于HashMap实现的，因此ConcurrenHashSet也由ConcurrenHashMap完成。
- * <BR><BR>
+ * <pre>
  * 虽然也可以通过Collections.newSetFromMap(new ConcurrentHashMap())，但声明一个单独的类型，
  * 阅读代码时能更清晰的知道set的并发友好性，代码来自JDK的SetFromMap，去除JDK8接口。
  */
@@ -17,73 +17,73 @@ public class ConcurrentHashSet<E> extends AbstractSet<E> implements Set<E>, java
 
 	private static final long serialVersionUID = -8672117787651310382L;
 
-	private final Map<E, Boolean> m;
+	private final Map<E, Boolean> map;
 
-	private transient Set<E> s; // Its keySet
+	private transient Set<E> set; // Its keySet
 
 	public ConcurrentHashSet() {
-		m = new ConcurrentHashMap<E, Boolean>();
-		s = m.keySet();
+		map = new ConcurrentHashMap<E, Boolean>();
+		set = map.keySet();
 	}
 
 	public void clear() {
-		m.clear();
+		map.clear();
 	}
 
 	public int size() {
-		return m.size();
+		return map.size();
 	}
 
 	public boolean isEmpty() {
-		return m.isEmpty();
+		return map.isEmpty();
 	}
 
 	public boolean contains(Object o) {
-		return m.containsKey(o);
+		return map.containsKey(o);
 	}
 
 	public boolean remove(Object o) {
-		return m.remove(o) != null;
+		return map.remove(o) != null;
 	}
 
 	public boolean add(E e) {
-		return m.put(e, Boolean.TRUE) == null;
+		return map.put(e, Boolean.TRUE) == null;
 	}
 
 	public Iterator<E> iterator() {
-		return s.iterator();
+		return set.iterator();
 	}
 
 	public Object[] toArray() {
-		return s.toArray();
+		return set.toArray();
 	}
 
 	public <T> T[] toArray(T[] a) {
-		return s.toArray(a);
+		return set.toArray(a);
 	}
 
 	@Override
 	public String toString() {
-		return s.toString();
+		return set.toString();
 	}
 
 	public int hashCode() {
-		return s.hashCode();
+		return set.hashCode();
 	}
 
 	public boolean equals(Object o) {
-		return o == this || s.equals(o);
+		return o == this || set.equals(o);
 	}
 
 	public boolean containsAll(Collection<?> c) {
-		return s.containsAll(c);
+		return set.containsAll(c);
 	}
 
 	public boolean removeAll(Collection<?> c) {
-		return s.removeAll(c);
+		return set.removeAll(c);
 	}
 
 	public boolean retainAll(Collection<?> c) {
-		return s.retainAll(c);
+		return set.retainAll(c);
 	}
 }

@@ -5,9 +5,7 @@ import java.io.Serializable;
 import org.fuelteam.watt.lucky.base.annotation.Nullable;
 
 /**
- * 引入一个简简单单的Triple，用于返回值返回三个元素。
- * <pre>
- * copy from Twitter Common
+ * 从Twitter Common引入的简单的Triple，用于返回值返回三个元素。
  */
 public class Triple<L, M, R> implements Serializable {
 
@@ -55,34 +53,15 @@ public class Triple<L, M, R> implements Serializable {
     @SuppressWarnings("rawtypes")
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
         Triple other = (Triple) obj;
-        if (left == null) {
-            if (other.left != null) {
-                return false;
-            }
-        } else if (!left.equals(other.left)) {
-            return false;
-        }
-        if (middle == null) {
-            if (other.middle != null) {
-                return false;
-            }
-        } else if (!middle.equals(other.middle)) {
-            return false;
-        }
-        if (right == null) {
-            if (other.right != null) {
-                return false;
-            }
-        } else if (!right.equals(other.right)) {
-            return false;
-        }
+        if (left == null && other.left != null) return false;
+        if (left != null && !left.equals(other.left)) return false;
+        if (middle == null && other.middle != null) return false;
+        if (middle != null && !middle.equals(other.middle)) return false;
+        if (right == null && other.right != null) return false;
+        if (right != null && !right.equals(other.right)) return false;
         return true;
     }
 

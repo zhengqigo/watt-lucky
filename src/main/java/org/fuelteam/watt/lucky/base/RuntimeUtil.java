@@ -7,17 +7,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * 1. 取得当前进程PID, JVM参数
- * <BR>
- * 2. 注册JVM关闭钩子, 获得CPU核数
- * <BR>
- * 3. 通过StackTrace 获得当前方法的类名方法名，调用者的类名方法名(获取StackTrace有消耗，不要滥用)
+ * 取得当前进程PID、JVM参数；注册JVM关闭钩子、获得CPU核数，通过StackTrace 获得当前方法的类名方法名，调用者的类名方法名(获取StackTrace有消耗，不要滥用)
  */
 public class RuntimeUtil {
 
     private static AtomicInteger shutdownHookThreadIndex = new AtomicInteger(0);
-
-    /////// RuntimeMXBean相关 //////
 
     /**
      * 获得当前进程的PID，当失败时返回-1
@@ -26,10 +20,7 @@ public class RuntimeUtil {
         // format: "pid@hostname"
         String jvmName = ManagementFactory.getRuntimeMXBean().getName();
         String[] split = jvmName.split("@");
-        if (split.length != 2) {
-            return -1;
-        }
-
+        if (split.length != 2) return -1;
         try {
             return Integer.parseInt(split[0]);
         } catch (Exception e) { // NOSONAR
@@ -52,7 +43,6 @@ public class RuntimeUtil {
         return StringUtils.join(vmArguments, " ");
     }
 
-    //////////// Runtime 相关////////////////
     /**
      * 获取CPU核数
      */
@@ -68,7 +58,6 @@ public class RuntimeUtil {
                 .addShutdownHook(new Thread(runnable, "Thread-ShutDownHook-" + shutdownHookThreadIndex.incrementAndGet()));
     }
 
-    //////// 通过StackTrace 获得当前方法的调用者 ////
     /**
      * 通过StackTrace，获得调用者的类名，获取StackTrace有消耗，不要滥用
      */
@@ -87,12 +76,9 @@ public class RuntimeUtil {
      */
     public static String getCallerMethod() {
         StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-        if (stacktrace.length >= 4) {
-            StackTraceElement element = stacktrace[3];
-            return element.getClassName() + '.' + element.getMethodName() + "()";
-        } else {
-            return StringUtils.EMPTY;
-        }
+        if (stacktrace.length < 4) return StringUtils.EMPTY;
+        StackTraceElement element = stacktrace[3];
+        return element.getClassName() + '.' + element.getMethodName() + "()";
     }
 
     /**
@@ -100,12 +86,9 @@ public class RuntimeUtil {
      */
     public static String getCurrentClass() {
         StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-        if (stacktrace.length >= 3) {
-            StackTraceElement element = stacktrace[2];
-            return element.getClassName();
-        } else {
-            return StringUtils.EMPTY;
-        }
+        if (stacktrace.length < 3) return StringUtils.EMPTY;
+        StackTraceElement element = stacktrace[2];
+        return element.getClassName();
     }
 
     /**
@@ -113,11 +96,8 @@ public class RuntimeUtil {
      */
     public static String getCurrentMethod() {
         StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-        if (stacktrace.length >= 3) {
-            StackTraceElement element = stacktrace[2];
-            return element.getClassName() + '.' + element.getMethodName() + "()";
-        } else {
-            return StringUtils.EMPTY;
-        }
+        if (stacktrace.length < 3) return StringUtils.EMPTY;
+        StackTraceElement element = stacktrace[2];
+        return element.getClassName() + '.' + element.getMethodName() + "()";
     }
 }

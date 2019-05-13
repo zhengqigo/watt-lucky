@@ -7,17 +7,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import org.fuelteam.watt.lucky.number.NumberUtil;
 
 /**
- * 1. 统一风格的读取系统变量到各种数据类型，其中Boolean.readBoolean的风格不统一，Double则不支持，都进行了扩展
- * <BR>
- * 2. 简单的合并系统变量(-D)，环境变量 和默认值，以系统变量优先，在未引入Commons Config时使用
- * <BR>
- * 3. Properties 本质上是一个HashTable，每次读写都会加锁，所以不支持频繁的System.getProperty(name)来检查系统内容变化，
- * 因此扩展了一个ListenableProperties，在其所关心的属性变化时进行通知
+ * 系统变量工具类
  */
 public class SystemPropertiesUtil {
 
     /**
-     * 读取Boolean类型的系统变量，为空时返回null，代表未设置，而不是Boolean.getBoolean()的false
+     * 读取Boolean类型的系统变量，为空时返回null代表未设置，而不是Boolean.getBoolean()的false
      */
     public static Boolean getBoolean(String name) {
         String stringResult = System.getProperty(name);
@@ -89,20 +84,15 @@ public class SystemPropertiesUtil {
         return propertyValue != null ? propertyValue : defaultValue;
     }
 
-    /////////// 简单的合并系统变量(-D)，环境变量 和默认值，以系统变量优先 ///////////////
-
     /**
-     * 合并系统变量(-D)，环境变量 和默认值，以系统变量优先
+     * 合并系统变量(-D)，环境变量和默认值，以系统变量优先
      */
     public static String getString(String propertyName, String envName, String defaultValue) {
         checkEnvName(envName);
         String propertyValue = System.getProperty(propertyName);
-        if (propertyValue != null) {
-            return propertyValue;
-        } else {
-            propertyValue = System.getenv(envName);
-            return propertyValue != null ? propertyValue : defaultValue;
-        }
+        if (propertyValue != null) return propertyValue;
+        propertyValue = System.getenv(envName);
+        return propertyValue != null ? propertyValue : defaultValue;
     }
 
     /**
@@ -111,12 +101,9 @@ public class SystemPropertiesUtil {
     public static Integer getInteger(String propertyName, String envName, Integer defaultValue) {
         checkEnvName(envName);
         Integer propertyValue = NumberUtil.toIntObject(System.getProperty(propertyName), null);
-        if (propertyValue != null) {
-            return propertyValue;
-        } else {
-            propertyValue = NumberUtil.toIntObject(System.getenv(envName), null);
-            return propertyValue != null ? propertyValue : defaultValue;
-        }
+        if (propertyValue != null) return propertyValue;
+        propertyValue = NumberUtil.toIntObject(System.getenv(envName), null);
+        return propertyValue != null ? propertyValue : defaultValue;
     }
 
     /**
@@ -125,12 +112,9 @@ public class SystemPropertiesUtil {
     public static Long getLong(String propertyName, String envName, Long defaultValue) {
         checkEnvName(envName);
         Long propertyValue = NumberUtil.toLongObject(System.getProperty(propertyName), null);
-        if (propertyValue != null) {
-            return propertyValue;
-        } else {
-            propertyValue = NumberUtil.toLongObject(System.getenv(envName), null);
-            return propertyValue != null ? propertyValue : defaultValue;
-        }
+        if (propertyValue != null) return propertyValue;
+        propertyValue = NumberUtil.toLongObject(System.getenv(envName), null);
+        return propertyValue != null ? propertyValue : defaultValue;
     }
 
     /**
@@ -139,12 +123,9 @@ public class SystemPropertiesUtil {
     public static Double getDouble(String propertyName, String envName, Double defaultValue) {
         checkEnvName(envName);
         Double propertyValue = NumberUtil.toDoubleObject(System.getProperty(propertyName), null);
-        if (propertyValue != null) {
-            return propertyValue;
-        } else {
-            propertyValue = NumberUtil.toDoubleObject(System.getenv(envName), null);
-            return propertyValue != null ? propertyValue : defaultValue;
-        }
+        if (propertyValue != null) return propertyValue;
+        propertyValue = NumberUtil.toDoubleObject(System.getenv(envName), null);
+        return propertyValue != null ? propertyValue : defaultValue;
     }
 
     /**
@@ -153,12 +134,9 @@ public class SystemPropertiesUtil {
     public static Boolean getBoolean(String propertyName, String envName, Boolean defaultValue) {
         checkEnvName(envName);
         Boolean propertyValue = BooleanUtil.toBooleanObject(System.getProperty(propertyName), null);
-        if (propertyValue != null) {
-            return propertyValue;
-        } else {
-            propertyValue = BooleanUtil.toBooleanObject(System.getenv(envName), null);
-            return propertyValue != null ? propertyValue : defaultValue;
-        }
+        if (propertyValue != null) return propertyValue;
+        propertyValue = BooleanUtil.toBooleanObject(System.getenv(envName), null);
+        return propertyValue != null ? propertyValue : defaultValue;
     }
 
     /**
@@ -170,29 +148,20 @@ public class SystemPropertiesUtil {
         }
     }
 
-    /////////// ListenableProperties /////////////
-    /**
-     * Properties 本质上是一个HashTable，每次读写都会加锁，所以不支持频繁的System.getProperty(name)来检查系统内容变化，
-     * 因此扩展了一个ListenableProperties，在其所关心的属性变化时进行通知
-     * 
-     * @see ListenableProperties
-     */
     public static synchronized void registerSystemPropertiesListener(PropertiesListener listener) {
         Properties currentProperties = System.getProperties();
-
         // 将System的properties实现替换为ListenableProperties
         if (!(currentProperties instanceof ListenableProperties)) {
             ListenableProperties newProperties = new ListenableProperties(currentProperties);
             System.setProperties(newProperties);
             currentProperties = newProperties;
         }
-
         ((ListenableProperties) currentProperties).register(listener);
     }
 
     /**
      * Properties 本质上是一个HashTable，每次读写都会加锁，所以不支持频繁的System.getProperty(name)来检查系统内容变化，
-     * 因此扩展了一个ListenableProperties，在其所关心的属性变化时进行通知
+     * 因此扩展了ListenableProperties，在其所关心的属性变化时进行通知
      * 
      * @see ListenableProperties
      */
@@ -227,7 +196,6 @@ public class SystemPropertiesUtil {
      */
     public abstract static class PropertiesListener {
 
-        // 关心的Property
         protected String propertyName;
 
         public PropertiesListener(String propertyName) {

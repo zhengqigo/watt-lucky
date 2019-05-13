@@ -1,7 +1,7 @@
 package org.fuelteam.watt.lucky.base.type;
 
 /**
- * CheckedException的wrapper，返回Message时，将返回内层Exception的Message。
+ * CheckedException的wrapper，将返回内层Exception的Message。
  */
 public class UncheckedException extends RuntimeException {
 

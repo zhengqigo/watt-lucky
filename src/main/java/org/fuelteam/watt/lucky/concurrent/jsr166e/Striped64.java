@@ -3,19 +3,18 @@
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
  */
-
 package org.fuelteam.watt.lucky.concurrent.jsr166e;
 
 import java.util.Random;
 
 /**
- * 移植
  * http://gee.cs.oswego.edu/cgi-bin/viewcvs.cgi/jsr166/src/jsr166e/Striped64.java Revision 1.10
- * 
+ * <pre>
  * A package-local class holding common representation and mechanics
  * for classes supporting dynamic striping on 64bit values. The class
  * extends Number so that concrete subclasses must publicly do so.
  */
+@SuppressWarnings("restriction")
 public abstract class Striped64 extends Number {
 	/*
 	 * This class maintains a lazily-initialized table of atomically updated variables, plus an extra "base" field. The
@@ -57,7 +56,9 @@ public abstract class Striped64 extends Number {
 	 * cells will eventually be needed again; and for short-lived ones, it does not matter.
 	 */
 
-	/**
+    private static final long serialVersionUID = 305432553211711227L;
+
+    /**
 	 * Padded variant of AtomicLong supporting only raw accesses plus CAS.
 	 * The value field is placed between pads, hoping that the JVM doesn't
 	 * reorder them.
@@ -65,7 +66,7 @@ public abstract class Striped64 extends Number {
 	 * JVM intrinsics note: It would be possible to use a release-only
 	 * form of CAS here, if it were provided.
 	 */
-	static final class Cell {
+    static final class Cell {
 		volatile long p0, p1, p2, p3, p4, p5, p6;
 		volatile long value;
 		volatile long q0, q1, q2, q3, q4, q5, q6;
@@ -74,12 +75,12 @@ public abstract class Striped64 extends Number {
 			value = x;
 		}
 
-		final boolean cas(long cmp, long val) {
+        final boolean cas(long cmp, long val) {
 			return UNSAFE.compareAndSwapLong(this, valueOffset, cmp, val);
 		}
 
 		// Unsafe mechanics
-		private static final sun.misc.Unsafe UNSAFE;
+        private static final sun.misc.Unsafe UNSAFE;
 		private static final long valueOffset;
 		static {
 			try {
@@ -134,14 +135,14 @@ public abstract class Striped64 extends Number {
 	/**
 	 * CASes the base field.
 	 */
-	final boolean casBase(long cmp, long val) {
+    final boolean casBase(long cmp, long val) {
 		return UNSAFE.compareAndSwapLong(this, baseOffset, cmp, val);
 	}
 
 	/**
 	 * CASes the busy field from 0 to 1 to acquire lock.
 	 */
-	final boolean casBusy() {
+    final boolean casBusy() {
 		return UNSAFE.compareAndSwapInt(this, busyOffset, 0, 1);
 	}
 
@@ -262,7 +263,7 @@ public abstract class Striped64 extends Number {
 	}
 
 	// Unsafe mechanics
-	private static final sun.misc.Unsafe UNSAFE;
+    private static final sun.misc.Unsafe UNSAFE;
 	private static final long baseOffset;
 	private static final long busyOffset;
 	static {

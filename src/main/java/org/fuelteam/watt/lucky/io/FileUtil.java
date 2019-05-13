@@ -50,8 +50,6 @@ public class FileUtil {
 		}
 	};
 
-	//////// 文件读写//////
-
 	/**
 	 * 读取文件到byte[].
 	 * 

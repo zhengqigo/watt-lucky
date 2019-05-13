@@ -23,7 +23,7 @@ import java.util.Set;
 
 /**
  * 移植Netty 4.1.9的Key为原子类型的集合类，在数据结构上与HashMap不一样，空间占用与读写性能俱比原来更优。原子类型集合类有多个实现，选择Netty是因为有在实战中使用。
- * <BR><BR>
+ * <pre>
  * A hash map implementation of {@link LongObjectMap} that uses open addressing for keys. To minimize the memory
  * footprint, this class uses open addressing rather than chaining. Collisions are resolved using linear probing.
  * Deletions implement compaction, so cost of remove can approach O(N) for full maps, which makes a small loadFactor

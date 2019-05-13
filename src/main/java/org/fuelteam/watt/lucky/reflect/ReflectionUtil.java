@@ -90,7 +90,7 @@ public class ReflectionUtil {
 	 * 
 	 * 因为getMethod() 不能获取父类的private函数, 因此采用循环向上的getDeclaredMethods()
 	 */
-	public static Method getAccessibleMethodByName(final Class clazz, final String methodName) {
+	public static Method getAccessibleMethodByName(final Class<?> clazz, final String methodName) {
 		Validate.notNull(clazz, "clazz can't be null");
 		Validate.notEmpty(methodName, "methodName can't be blank");
 
@@ -114,7 +114,7 @@ public class ReflectionUtil {
 	 * 
 	 * 因为getFiled()不能获取父类的private属性, 因此采用循环向上的getDeclaredField();
 	 */
-	public static Field getField(final Class clazz, final String fieldName) {
+	public static Field getField(final Class<?> clazz, final String fieldName) {
 		Validate.notNull(clazz, "clazz can't be null");
 		Validate.notEmpty(fieldName, "fieldName can't be blank");
 		for (Class<?> superClass = clazz; superClass != Object.class; superClass = superClass.getSuperclass()) {

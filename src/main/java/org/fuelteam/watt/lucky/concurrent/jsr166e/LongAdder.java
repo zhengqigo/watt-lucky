@@ -3,7 +3,6 @@
  * Expert Group and released to the public domain, as explained at
  * http://creativecommons.org/publicdomain/zero/1.0/
  */
-
 package org.fuelteam.watt.lucky.concurrent.jsr166e;
 
 import java.io.IOException;
@@ -13,9 +12,8 @@ import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * 移植
  * http://gee.cs.oswego.edu/cgi-bin/viewcvs.cgi/jsr166/src/jsr166e/LongAdder.java Revision.1.17
- * 
+ * <pre>
  * One or more variables that together maintain an initially zero
  * {@code long} sum.  When updates (method {@link #add}) are contended
  * across threads, the set of variables may grow dynamically to reduce
@@ -204,5 +202,4 @@ public class LongAdder extends Striped64 implements Serializable {
 		cells = null;
 		base = s.readLong();
 	}
-
 }
