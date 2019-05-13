@@ -15,5 +15,4 @@ public class Charsets {
     public static final String UTF_8_NAME = StandardCharsets.UTF_8.name();
     public static final String ASCII_NAME = StandardCharsets.US_ASCII.name();
     public static final String ISO_8859_1_NAME = StandardCharsets.ISO_8859_1.name();
-
 }

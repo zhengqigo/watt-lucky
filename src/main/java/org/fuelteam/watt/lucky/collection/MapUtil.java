@@ -26,12 +26,6 @@ import com.google.common.collect.MapDifference;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Ordering;
 
-/**
- * 常用函数(如是否为空，两个map的Diff对比，针对value值的排序)；
- * 对于并发Map，增加putIfAbsent(返回最终值版)，createIfAbsent这两个重要函数 (from Common Lang)；
- * 便捷的构造函数 (via guava，Java Collections，并增加了用数组，List等方式初始化Map的函数)；
- * JDK Collections的empty，singleton
- */
 public class MapUtil {
 
     public static final float DEFAULT_LOAD_FACTOR = 0.75f;
@@ -71,9 +65,7 @@ public class MapUtil {
     public static <K, V> V createIfAbsentReturnLast(@NotNull final ConcurrentMap<K, V> map, final K key,
             @NotNull final ValueCreator<? extends V> creator) {
         final V value = map.get(key);
-        if (value == null) {
-            return putIfAbsentReturnLast(map, key, creator.get());
-        }
+        if (value == null) return putIfAbsentReturnLast(map, key, creator.get());
         return value;
     }
 
@@ -88,8 +80,6 @@ public class MapUtil {
          */
         T get();
     }
-
-    ///////////////// from Guava的构造函数///////////////////
 
     /**
      * 根据等号左边的类型，构造类型正确的HashMap
@@ -178,8 +168,6 @@ public class MapUtil {
     public static <K, V> ConcurrentSkipListMap<K, V> newConcurrentSortedMap() {
         return new ConcurrentSkipListMap<K, V>();
     }
-
-    ///////////////// from JDK Collections的常用构造函数 ///////////////////
 
     /**
      * 返回一个空的结构特殊的Map，节约空间，注意返回的Map不可写，写入会抛出UnsupportedOperationException

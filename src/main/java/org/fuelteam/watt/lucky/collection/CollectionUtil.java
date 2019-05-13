@@ -13,10 +13,7 @@ import com.google.common.collect.Iterators;
 import com.google.common.collect.Ordering;
 
 /**
- * 通用Collection的工具集：集合是否为空，取得集合中首个及最后一个元素，判断集合是否完全相等；集合的最大最小值，及Top N、Bottom N；
- * 关于List，Map，Queue，Set的特殊工具集，另见特定的Util；
- * 另JDK中缺少ComparableComparator和NullComparator，直到JDK8才补上。因此平时请使用guava的Ordering.natural()，
- * fluentable的API更好用，可以链式设置nullFirst，nullLast，reverse
+ * 通用Collection的工具集
  * 
  * @see com.google.common.collect.Ordering
  */
@@ -40,12 +37,8 @@ public class CollectionUtil {
      * 取得Collection的第一个元素，如果collection为空返回null
      */
     public static <T> T getFirst(Collection<T> collection) {
-        if (isEmpty(collection)) {
-            return null;
-        }
-        if (collection instanceof List) {
-            return ((List<T>) collection).get(0);
-        }
+        if (isEmpty(collection)) return null;
+        if (collection instanceof List) return ((List<T>) collection).get(0);
         return collection.iterator().next();
     }
 
@@ -53,16 +46,12 @@ public class CollectionUtil {
      * 获取Collection的最后一个元素，如果collection为空返回null
      */
     public static <T> T getLast(Collection<T> collection) {
-        if (isEmpty(collection)) {
-            return null;
-        }
-
+        if (isEmpty(collection)) return null;
         // 当类型List时，直接取得最后一个元素
         if (collection instanceof List) {
             List<T> list = (List<T>) collection;
             return list.get(list.size() - 1);
         }
-
         return Iterators.getLast(collection.iterator());
     }
 
@@ -73,7 +62,6 @@ public class CollectionUtil {
         return Iterables.elementsEqual(iterable1, iterable2);
     }
 
-    ///////////// 求最大最小值，及Top N、Bottom N //////////
     /**
      * 返回无序集合中的最小值，使用元素默认排序
      */
@@ -103,9 +91,7 @@ public class CollectionUtil {
     }
 
     /**
-     * 同时返回无序集合中的最小值和最大值，使用元素默认排序
-     * 
-     * 在返回的Pair中，第一个为最小值，第二个为最大值
+     * 同时返回无序集合中的最小值和最大值，使用元素默认排序，返回的Pair中，第一个为最小值，第二个为最大值
      */
     public static <T extends Object & Comparable<? super T>> Pair<T, T> minAndMax(Collection<? extends T> coll) {
         Iterator<? extends T> i = coll.iterator();
@@ -124,9 +110,7 @@ public class CollectionUtil {
     }
 
     /**
-     * 返回无序集合中的最小值和最大值
-     * 
-     * 在返回的Pair中，第一个为最小值，第二个为最大值
+     * 返回无序集合中的最小值和最大值，返回的Pair中，第一个为最小值，第二个为最大值
      */
     public static <T> Pair<T, T> minAndMax(Collection<? extends T> coll, Comparator<? super T> comp) {
         Iterator<? extends T> i = coll.iterator();

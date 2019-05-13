@@ -13,10 +13,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.google.common.collect.Lists;
 
-/**
- * 常用函数(如是否为空，sort/binarySearch/shuffle/reverse (via JDK Collection)；各种构造函数 (from guava and JDK Collection)；
- * 各种扩展List类型的创建函数；集合运算：交集，并集, 差集, 补集，from Commons Collection，但对其不合理的地方做了修正
- */
 @SuppressWarnings("unchecked")
 public class ListUtil {
 
@@ -38,9 +34,7 @@ public class ListUtil {
      * 获取第一个元素，如果List为空返回null
      */
     public static <T> T getFirst(List<T> list) {
-        if (isEmpty(list)) {
-            return null;
-        }
+        if (isEmpty(list)) return null;
         return list.get(0);
     }
 
@@ -48,13 +42,10 @@ public class ListUtil {
      * 获取最后一个元素，如果List为空返回null
      */
     public static <T> T getLast(List<T> list) {
-        if (isEmpty(list)) {
-            return null;
-        }
+        if (isEmpty(list)) return null;
         return list.get(list.size() - 1);
     }
 
-    ///////////////// from Guava的构造函数///////////////////
     /**
      * 根据等号左边的类型，构造类型正确的ArrayList，并初始化元素
      * 
@@ -98,8 +89,6 @@ public class ListUtil {
         return new CopyOnWriteArrayList<T>(elements);
     }
 
-    ///////////////// from JDK Collections的常用构造函数 ///////////////////
-
     /**
      * 返回一个空的结构特殊的List，节约空间，注意返回的List不可写，写入会抛出UnsupportedOperationException
      * 
@@ -142,8 +131,6 @@ public class ListUtil {
     public static <T> List<T> synchronizedList(List<T> list) {
         return Collections.synchronizedList(list);
     }
-
-    ///////////////// from JDK Collections的常用函数 ///////////////////
 
     /**
      * 升序排序，采用JDK认为最优的排序算法，使用元素自身的compareTo()方法
@@ -229,7 +216,6 @@ public class ListUtil {
     public static <T> List<T> reverse(final List<T> list) {
         return Lists.reverse(list);
     }
-    ///////////////// from guava的函数 ///////////////////
 
     /**
      * List分页函数
@@ -237,8 +223,6 @@ public class ListUtil {
     public static <T> List<List<T>> partition(List<T> list, int size) {
         return Lists.partition(list, size);
     }
-
-    ///////////////// 其他处理函数 ///////////////
 
     /**
      * 清理掉List中的Null对象
@@ -251,16 +235,12 @@ public class ListUtil {
         while (ite.hasNext()) {
             T obj = ite.next();
             // 清理掉null的集合
-            if (null == obj) {
-                ite.remove();
-            }
+            if (null == obj) ite.remove();
         }
     }
 
     public static <T> void uniqueNotNullList(List<T> list) {
-        if (isEmpty(list)) {
-            return;
-        }
+        if (isEmpty(list)) return;
         Iterator<T> ite = list.iterator();
         Set<T> set = new HashSet<>((int) (list.size() / 0.75F + 1.0F));
         while (ite.hasNext()) {
@@ -278,8 +258,6 @@ public class ListUtil {
             set.add(obj);
         }
     }
-
-    ///////////////// 集合运算 ///////////////////
 
     /**
      * list1与list2的并集，产生新List，对比Apache Common Collection4 ListUtils，优化了初始大小
