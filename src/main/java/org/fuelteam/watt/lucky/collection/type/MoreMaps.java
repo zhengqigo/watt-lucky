@@ -16,9 +16,6 @@ import com.google.common.collect.SortedSetMultimap;
 import com.google.common.collect.TreeRangeMap;
 import com.google.common.util.concurrent.AtomicLongMap;
 
-/**
- * 来自Guava、Netty等的特殊Map类型。
- */
 public class MoreMaps {
 
     /**

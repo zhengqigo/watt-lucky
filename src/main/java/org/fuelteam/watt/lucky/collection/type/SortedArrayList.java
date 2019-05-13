@@ -120,38 +120,6 @@ public final class SortedArrayList<E> extends ArrayList<E> {
 		return findInsertionPoint(o, 0, size() - 1);
 	}
 
-	// unsupported methods
-
-	/**
-	 * @throws UnsupportedOperationException This method not supported.
-	 */
-	@Override
-	@Deprecated
-	public void add(int index, E element) {
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * @throws UnsupportedOperationException This method not supported.
-	 */
-	@Override
-	@Deprecated
-	public E set(int index, E element) {
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * @throws UnsupportedOperationException This method not supported.
-	 */
-	@Override
-	@Deprecated
-	public boolean addAll(int index, Collection<? extends E> c) {
-		throw new UnsupportedOperationException();
-	}
-
-
-	// sorting
-
 	/**
 	 * Compares two keys using the correct comparison method for this
 	 * collection.

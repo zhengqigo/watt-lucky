@@ -9,11 +9,9 @@ import org.fuelteam.watt.lucky.collection.QueueUtil;
 import com.google.common.collect.EvictingQueue;
 
 /**
- * 特殊类型Queue：LIFO的Stack，LRU的Queue
+ * LIFO的Stack和LRU的Queue
  */
 public class MoreQueues {
-
-	//////////////// 特殊类型Queue：Stack ///////////
 
 	/**
 	 * 支持后进先出的栈，用ArrayDeque实现，经过Collections#asLifoQueue()转换顺序，需设置初始长度，默认为16，数组满时成倍扩容
@@ -35,8 +33,6 @@ public class MoreQueues {
     public static <E> Queue<E> createConcurrentStack() {
 		return (Queue<E>) Collections.asLifoQueue(QueueUtil.newConcurrentNonBlockingDeque());
 	}
-
-	//////////////// 特殊类型Queue：LRUQueue ///////////
 
 	/**
 	 * LRUQueue, 如果Queue已满，则删除最旧的元素，内部实现是ArrayDeque
