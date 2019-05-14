@@ -9,22 +9,17 @@ import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
- * 各种Queue，Dequeue的创建
+ * Queue和Deque工具类
  */
 public class QueueUtil {
 
     /**
-     * 创建ArrayDeque (JDK无ArrayQueue)
-     * 
-     * 需设置初始长度，默认为16，数组满时成倍扩容
+     * 创建ArrayDeque，需设置初始长度，默认为16，数组满时成倍扩容
      */
     public static <E> ArrayDeque<E> newArrayDeque(int initSize) {
         return new ArrayDeque<E>(initSize);
     }
 
-    /**
-     * 创建LinkedDeque (LinkedList实现了Deque接口)
-     */
     public static <E> LinkedList<E> newLinkedDeque() {
         return new LinkedList<E>();
     }
@@ -44,18 +39,14 @@ public class QueueUtil {
     }
 
     /**
-     * 创建并发阻塞情况下，长度不受限的队列
-     * 
-     * 长度不受限，即生产者不会因为满而阻塞，但消费者会因为空而阻塞
+     * 创建并发阻塞情况下，长度不受限的队列，即生产者不会因为满而阻塞，但消费者会因为空而阻塞
      */
     public static <E> LinkedBlockingQueue<E> newBlockingUnlimitQueue() {
         return new LinkedBlockingQueue<E>();
     }
 
     /**
-     * 创建并发阻塞情况下，长度不受限的双端队列
-     * 
-     * 长度不受限，即生产者不会因为满而阻塞，但消费者会因为空而阻塞
+     * 创建并发阻塞情况下，长度不受限的双端队列，即生产者不会因为满而阻塞，但消费者会因为空而阻塞
      */
     public static <E> LinkedBlockingDeque<E> newBlockingUnlimitDeque() {
         return new LinkedBlockingDeque<E>();

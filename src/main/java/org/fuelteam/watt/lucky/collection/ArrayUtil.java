@@ -24,7 +24,7 @@ public class ArrayUtil {
     }
 
     /**
-     * 从collection转为Array，以 list.toArray(new String[0])最快，不需要创建list.size()的数组
+     * 从Collection转为Array，以list.toArray(new String[0])最快，不需要创建list.size()的数组
      * <pre>
      * https://shipilev.net/blog/2016/arrays-wisdom-ancients/
      */
@@ -88,7 +88,7 @@ public class ArrayUtil {
     }
 
     /**
-     * Arrays.asList()加强版，返回一个底层为原始类型int的List，与保存Integer相比节约空间，同时只在读取数据时AutoBoxing
+     * Arrays.asList()加强版，返回底层为原始类型int的List，与保存Integer相比节约空间，同时只在读取数据时AutoBoxing
      * 
      * @see java.util.Arrays#asList(Object...)
      * @see com.google.common.primitives.Ints#asList(int...)
@@ -99,7 +99,7 @@ public class ArrayUtil {
     }
 
     /**
-     * Arrays.asList()加强版，返回一个底层为原始类型long的List，与保存Long相比节约空间，同时只在读取数据时AutoBoxing
+     * Arrays.asList()加强版，返回底层为原始类型long的List，与保存Long相比节约空间，同时只在读取数据时AutoBoxing
      * 
      * @see java.util.Arrays#asList(Object...)
      * @see com.google.common.primitives.Longs#asList(long...)
@@ -109,7 +109,7 @@ public class ArrayUtil {
     }
 
     /**
-     * Arrays.asList()加强版，返回一个底层为原始类型double的List，与保存Double相比节约空间，同时也避免了AutoBoxing
+     * Arrays.asList()加强版，返回底层为原始类型double的List，与保存Double相比节约空间，同时也避免了AutoBoxing
      * 
      * @see java.util.Arrays#asList(Object...)
      * @see com.google.common.primitives.Doubles#asList(double...)

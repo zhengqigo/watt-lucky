@@ -183,9 +183,7 @@ public class SystemPropertiesUtil {
         public synchronized Object setProperty(String key, String value) {
             Object result = put(key, value);
             for (PropertiesListener listener : listeners) {
-                if (listener.propertyName.equals(key)) {
-                    listener.onChange(key, value);
-                }
+                if (listener.propertyName.equals(key)) listener.onChange(key, value);
             }
             return result;
         }

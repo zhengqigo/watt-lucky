@@ -40,7 +40,8 @@ public class PropertiesUtil {
     }
 
     /**
-     * 从文件路径加载properties，默认使用utf-8编码解析文件；路径支持从外部文件或resources文件加载，"file://"或无前缀代表外部文件，"classpath:"代表resources
+     * 从文件路径加载properties，默认使用utf-8编码解析文件；
+     * 路径支持从外部文件或resources文件加载，"file://"或无前缀代表外部文件，"classpath:"代表resources
      */
     public static Properties loadFromFile(String generalPath) {
         Properties p = new Properties();

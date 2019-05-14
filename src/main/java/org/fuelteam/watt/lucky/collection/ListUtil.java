@@ -13,19 +13,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.google.common.collect.Lists;
 
-@SuppressWarnings("unchecked")
 public class ListUtil {
 
-    /**
-     * 判断是否为空
-     */
     public static boolean isEmpty(List<?> list) {
         return (list == null) || list.isEmpty();
     }
 
-    /**
-     * 判断是否不为空
-     */
     public static boolean isNotEmpty(List<?> list) {
         return (list != null) && !(list.isEmpty());
     }
@@ -47,17 +40,14 @@ public class ListUtil {
     }
 
     /**
-     * 根据等号左边的类型，构造类型正确的ArrayList，并初始化元素
-     * 
      * @see com.google.common.collect.Lists#newArrayList(Object...)
      */
+    @SuppressWarnings("unchecked")
     public static <T> ArrayList<T> newArrayList(T... elements) {
         return Lists.newArrayList(elements);
     }
 
     /**
-     * 根据等号左边的类型，构造类型正确的ArrayList，并初始化元素
-     * 
      * @see com.google.common.collect.Lists#newArrayList(Iterable)
      */
     public static <T> ArrayList<T> newArrayList(Iterable<T> elements) {
@@ -65,8 +55,6 @@ public class ListUtil {
     }
 
     /**
-     * 根据等号左边的类型，构造类型正确的ArrayList，并初始化数组大小
-     * 
      * @see com.google.common.collect.Lists#newArrayListWithCapacity(int)
      */
     public static <T> ArrayList<T> newArrayListWithCapacity(int initSize) {
@@ -74,23 +62,19 @@ public class ListUtil {
     }
 
     /**
-     * 根据等号左边的类型，构造类型正确的LinkedList
-     * 
      * @see com.google.common.collect.Lists#newLinkedList()
      */
     public static <T> LinkedList<T> newLinkedList(Iterable<? extends T> elements) {
         return Lists.newLinkedList(elements);
     }
 
-    /**
-     * 根据等号左边的类型，构造类型转换的CopyOnWriteArrayList，并初始化元素
-     */
+    @SuppressWarnings("unchecked")
     public static <T> CopyOnWriteArrayList<T> newCopyOnWriteArrayList(T... elements) {
         return new CopyOnWriteArrayList<T>(elements);
     }
 
     /**
-     * 返回一个空的结构特殊的List，节约空间，注意返回的List不可写，写入会抛出UnsupportedOperationException
+     * 返回不可修改空List，尝试修改会抛UnsupportedOperationException
      * 
      * @see java.util.Collections#emptyList()
      */
@@ -99,16 +83,17 @@ public class ListUtil {
     }
 
     /**
-     * 如果list为null，转化为一个安全的空List，注意返回的List不可写，写入会抛出UnsupportedOperationException
+     * 返回不可修改List，尝试修改会抛UnsupportedOperationException
      * 
      * @see java.util.Collections#emptyList()
      */
+    @SuppressWarnings("unchecked")
     public static <T> List<T> emptyListIfNull(final List<T> list) {
         return list == null ? (List<T>) Collections.EMPTY_LIST : list;
     }
 
     /**
-     * 返回只含一个元素但结构特殊的List，节约空间，注意返回的List不可写, 写入会抛出UnsupportedOperationException
+     * 返回不可修改List，尝试修改会抛UnsupportedOperationException
      * 
      * @see java.util.Collections#singletonList(Object)
      */
@@ -117,7 +102,7 @@ public class ListUtil {
     }
 
     /**
-     * 返回包装后不可修改的List，如果尝试写入会抛出UnsupportedOperationException
+     * 返回不可修改List，尝试修改会抛UnsupportedOperationException
      * 
      * @see java.util.Collections#unmodifiableList(List)
      */
@@ -126,14 +111,14 @@ public class ListUtil {
     }
 
     /**
-     * 返回包装后同步的List，所有方法都会被synchronized原语同步，用于CopyOnWriteArrayList与ArrayDequeue均不符合的场景
+     * 返回同步的List，所有方法都会被synchronized原语同步，尝试修改会抛UnsupportedOperationException
      */
     public static <T> List<T> synchronizedList(List<T> list) {
         return Collections.synchronizedList(list);
     }
 
     /**
-     * 升序排序，采用JDK认为最优的排序算法，使用元素自身的compareTo()方法
+     * 升序，使用元素自身的compareTo()方法
      * 
      * @see java.util.Collections#sort(List)
      */
@@ -142,7 +127,7 @@ public class ListUtil {
     }
 
     /**
-     * 倒序排序，采用JDK认为最优的排序算法，使用元素自身的compareTo()方法
+     * 倒序，使用元素自身的compareTo()方法
      * 
      * @see java.util.Collections#sort(List)
      */
@@ -151,7 +136,7 @@ public class ListUtil {
     }
 
     /**
-     * 升序排序，采用JDK认为最优的排序算法，使用Comparetor
+     * 升序，使用Comparetor
      * 
      * @see java.util.Collections#sort(List, Comparator)
      */
@@ -160,7 +145,7 @@ public class ListUtil {
     }
 
     /**
-     * 倒序排序，采用JDK认为最优的排序算法，使用Comparator
+     * 倒序，使用Comparator
      * 
      * @see java.util.Collections#sort(List, Comparator)
      */
@@ -169,9 +154,7 @@ public class ListUtil {
     }
 
     /**
-     * 二分法快速查找对象，使用Comparable对象自身的比较
-     * 
-     * list必须已按升序排序，如果不存在，返回一个负数，代表如果要插入这个对象，应该插入的位置
+     * 二分法快速查找Comparable对象，list必须升序，不存在则返回一个负数，代表要插入对象的应该位置
      * 
      * @see java.util.Collections#binarySearch(List, Object)
      */
@@ -180,9 +163,7 @@ public class ListUtil {
     }
 
     /**
-     * 二分法快速查找对象，使用Comparator
-     * 
-     * list必须已按升序排序，如果不存在，返回一个负数，代表如果要插入这个对象，应该插入的位置
+     * 二分法快速查找Comparator对象，list必须升序，不存在则返回一个负数，代表要插入对象的应该位置
      * 
      * @see java.util.Collections#binarySearch(List, Object, Comparator)
      */
@@ -191,7 +172,7 @@ public class ListUtil {
     }
 
     /**
-     * 随机乱序，使用默认的Random
+     * 使用默认的Random随机乱序
      * 
      * @see java.util.Collections#shuffle(List)
      */
@@ -200,7 +181,7 @@ public class ListUtil {
     }
 
     /**
-     * 随机乱序，使用传入的Random
+     * 使用传入的Random随机乱序
      * 
      * @see java.util.Collections#shuffle(List, Random)
      */
@@ -209,7 +190,7 @@ public class ListUtil {
     }
 
     /**
-     * 返回一个倒转顺序访问的List，仅仅是一个倒序的View，不会实际多生成一个List
+     * 返回倒转顺序访问的List的View，不会实际多生成
      * 
      * @see com.google.common.collect.Lists#reverse(List)
      */
@@ -260,7 +241,7 @@ public class ListUtil {
     }
 
     /**
-     * list1与list2的并集，产生新List，对比Apache Common Collection4 ListUtils，优化了初始大小
+     * 返回List1与List2并集，产生新List，对比Collection4 ListUtils优化了初始大小
      */
     public static <E> List<E> union(final List<? extends E> list1, final List<? extends E> list2) {
         final List<E> result = new ArrayList<E>(list1.size() + list2.size());
@@ -270,9 +251,9 @@ public class ListUtil {
     }
 
     /**
-     * list1与list2的交集，产生新List，copy from Apache Common Collection4 ListUtils，但其做了不合理的去重，因此重新改为性能较低但不去重的版本
-     * 
-     * 与List.retainAll()相比，考虑了的List中相同元素出现的次数，如"a"在list1出现两次，而在list2中只出现一次，则交集里会保留一个"a"
+     * 返回List1与List2交集，产生新List。
+     * 对比Collection4 ListUtils改为性能较低但不去重的版本；
+     * 对比List.retainAll()，考虑了List中相同元素出现的次数，如"A"在list1出现两次，而在list2中只出现一次，则交集里会保留一个"A"
      */
     public static <T> List<T> intersection(final List<? extends T> list1, final List<? extends T> list2) {
         List<? extends T> smaller = list1;
@@ -294,9 +275,8 @@ public class ListUtil {
     }
 
     /**
-     * list1与list2的差集（在list1，不在list2中的对象），产生新List
-     * 
-     * 与List.removeAll()相比，会计算元素出现的次数，如"a"在list1出现两次，而在list2中只出现一次，则差集里会保留一个"a"
+     * 返回List1与List2差集，产生新List。
+     * 对比List.removeAll()，会计算元素出现的次数，如"A"在List1出现两次，而在List2中只出现一次，则差集里会保留一个"A"
      */
     public static <T> List<T> difference(final List<? extends T> list1, final List<? extends T> list2) {
         final List<T> result = new ArrayList<T>(list1);
@@ -308,9 +288,8 @@ public class ListUtil {
     }
 
     /**
-     * list1与list2的补集（在list1或list2中，但不在交集中的对象，又叫反交集）产生新List
-     * 
-     * copy from Apache Common Collection4 ListUtils，但其并集－交集时，初始大小没有对交集*2，所以做了修改
+     * 返回List1与List2补集，产生新List。
+     * 对比Collection4 ListUtils，其并集－交集时，初始大小没有对交集*2
      */
     public static <T> List<T> disjoint(final List<? extends T> list1, final List<? extends T> list2) {
         List<T> intersection = intersection(list1, list2);

@@ -3,7 +3,7 @@ package org.fuelteam.watt.lucky.base;
 import org.fuelteam.watt.lucky.base.annotation.Nullable;
 
 /**
- * 参数校验统一使用Apache Common Lang Validate，补充一些缺少。目前主要参考 {@code com.google.common.math.MathPreconditions}，补充数字为正数或非负数的校验。
+ * 参数校验工具类
  */
 public class MoreValidate extends org.apache.commons.lang3.Validate {
 
@@ -101,7 +101,7 @@ public class MoreValidate extends org.apache.commons.lang3.Validate {
      * 校验为非负数则返回该数字，否则抛出异常
      */
     public static double nonNegative(@Nullable String role, double x) {
-        if (!(x >= 0)) { // not x < 0, to work with NaN.
+        if (!(x >= 0)) { // not x < 0, to work with NaN
             throw new IllegalArgumentException(role + " (" + x + ") must be >= 0");
         }
         return x;

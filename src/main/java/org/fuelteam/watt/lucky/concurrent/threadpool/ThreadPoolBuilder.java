@@ -16,8 +16,8 @@ import org.apache.commons.lang3.Validate;
 import org.fuelteam.watt.lucky.concurrent.threadpool.QueuableCachedThreadPool.ControllableQueue;
 
 /**
- * ThreadPool创建的工具类，对比JDK Executors中的newFixedThreadPool()、newCachedThreadPool()、newScheduledThreadPool提供更多有用的配置项。
- * 另包含了移植自Tomcat的QueuableCachedPool，使用示例如下：
+ * ThreadPool工具类，对比JDK Executors的newFixedThreadPool()、newCachedThreadPool()、newScheduledThreadPool提供更多有用的配置项。
+ * 另包含了QueuableCachedPool，举例：
  * <pre>
  * ExecutorService ExecutorService = new FixedThreadPoolBuilder().setPoolSize(10).build();
  * </pre>

@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * 取得当前进程PID、JVM参数；注册JVM关闭钩子、获得CPU核数，通过StackTrace 获得当前方法的类名方法名，调用者的类名方法名(获取StackTrace有消耗，不要滥用)
+ * Runtime工具类
  */
 public class RuntimeUtil {
 
@@ -59,7 +59,7 @@ public class RuntimeUtil {
     }
 
     /**
-     * 通过StackTrace，获得调用者的类名，获取StackTrace有消耗，不要滥用
+     * 通过StackTrace，获得调用者的类名，获取StackTrace有消耗
      */
     public static String getCallerClass() {
         StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
@@ -72,7 +72,7 @@ public class RuntimeUtil {
     }
 
     /**
-     * 通过StackTrace，获得调用者的"类名.方法名()"，获取StackTrace有消耗，不要滥用
+     * 通过StackTrace，获得调用者的"类名.方法名()"，获取StackTrace有消耗
      */
     public static String getCallerMethod() {
         StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
@@ -82,7 +82,7 @@ public class RuntimeUtil {
     }
 
     /**
-     * 通过StackTrace，获得当前方法的类名，获取StackTrace有消耗，不要滥用
+     * 通过StackTrace，获得当前方法的类名，获取StackTrace有消耗
      */
     public static String getCurrentClass() {
         StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
@@ -92,7 +92,7 @@ public class RuntimeUtil {
     }
 
     /**
-     * 通过StackTrace，获得当前方法的"类名.方法名()"，获取StackTrace有消耗，不要滥用
+     * 通过StackTrace，获得当前方法的"类名.方法名()"，获取StackTrace有消耗
      */
     public static String getCurrentMethod() {
         StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();

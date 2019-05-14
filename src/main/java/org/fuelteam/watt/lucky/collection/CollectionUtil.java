@@ -13,22 +13,16 @@ import com.google.common.collect.Iterators;
 import com.google.common.collect.Ordering;
 
 /**
- * 通用Collection的工具集
+ * Collection工具集
  * 
  * @see com.google.common.collect.Ordering
  */
 public class CollectionUtil {
 
-    /**
-     * 判断是否为空
-     */
     public static boolean isEmpty(Collection<?> collection) {
         return (collection == null) || collection.isEmpty();
     }
 
-    /**
-     * 判断是否不为空
-     */
     public static boolean isNotEmpty(Collection<?> collection) {
         return (collection != null) && !(collection.isEmpty());
     }

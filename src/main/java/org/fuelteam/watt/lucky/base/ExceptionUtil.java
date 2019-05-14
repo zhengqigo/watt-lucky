@@ -78,12 +78,10 @@ public class ExceptionUtil {
 
         StringBuilder sb = new StringBuilder(128).append(className).append(": ").append(message);
         if (cause != throwable) {
-            sb.append("; <--").append(toStringWithShortName(cause));
+            sb.append("; ").append(toStringWithShortName(cause));
         }
         return sb.toString();
     }
-
-    ////////// Cause 相关 /////////
 
     /**
      * 获取异常的RootCause，没有则返回自身

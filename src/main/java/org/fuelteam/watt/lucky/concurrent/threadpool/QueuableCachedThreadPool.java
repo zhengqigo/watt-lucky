@@ -8,9 +8,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * From Tomcat 8.5.6，传统的FixedThreadPool有Queue但线程数量不变，而CachedThreadPool线程数可变但没有Queue，
- * Tomcat的线程池，通过控制TaskQueue，线程数，但线程数到达最大时会进入Queue中。代码从Tomcat复制，主要修改包括：
- * 1. 删除定期重启线程避免内存泄漏的功能，2. TaskQueue中可能3次有锁的读取线程数量，改为只读取1次，这把锁也是这个实现里的唯一遗憾了。
+ * 传统的FixedThreadPool有Queue但线程数量不变，而CachedThreadPool线程数可变但没有Queue，
+ * Tomcat的线程池，通过控制TaskQueue，线程数，但线程数到达最大时会进入Queue中。主要修改包括：
+ * 1. 删除定期重启线程避免内存泄漏的功能，2. TaskQueue中可能3次有锁的读取线程数量，改为只读取1次。
  * <pre>
  * https://github.com/apache/tomcat/blob/trunk/java/org/apache/tomcat/util/threads/ThreadPoolExecutor.java
  */
@@ -113,19 +113,12 @@ public final class QueuableCachedThreadPool extends java.util.concurrent.ThreadP
         public boolean offer(Runnable o) {
             // threadPool.getPoolSize() 是个有锁的操作，所以尽量减少
             int currentPoolSize = parent.getPoolSize();
-
             // we are maxed out on threads, simply queue the object
-            if (currentPoolSize >= parent.getMaximumPoolSize()) {
-                return super.offer(o);
-            }
+            if (currentPoolSize >= parent.getMaximumPoolSize()) return super.offer(o);
             // we have idle threads, just add it to the queue
-            if (parent.getSubmittedCount() < currentPoolSize) {
-                return super.offer(o);
-            }
+            if (parent.getSubmittedCount() < currentPoolSize) return super.offer(o);
             // if we have less threads than maximum force creation of a new thread
-            if (currentPoolSize < parent.getMaximumPoolSize()) {
-                return false;
-            }
+            if (currentPoolSize < parent.getMaximumPoolSize()) return false;
             // if we reached here, we need to add it to the queue
             return super.offer(o);
         }

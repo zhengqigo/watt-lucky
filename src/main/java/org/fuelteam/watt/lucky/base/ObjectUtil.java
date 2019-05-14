@@ -42,7 +42,7 @@ public class ObjectUtil {
                 return objectArrayToString(value);
             }
         } else if (value instanceof Iterable) {
-            // 重载处理元素是数组的情况
+            // 元素是数组情况
             return collectionToString(value);
         }
         return value.toString();
