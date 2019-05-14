@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Abort Policy，如果线程池已满，退出申请并打印Thread Dump(会有一定的最少间隔，默认为10分钟）
+ * Abort Policy，如果线程池已满，退出申请并打印Thread Dump(会有一定的最少间隔，默认10分钟）
  */
 public class AbortPolicyWithReport extends ThreadPoolExecutor.AbortPolicy {
 
