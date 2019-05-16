@@ -61,9 +61,7 @@ public class RateLimiterUtil {
                 superClass = superClass.getSuperclass();
             }
         }
-        if (field == null) {
-            return false;
-        }
+        if (field == null) return false;
         field.setAccessible(true);
         try {
             field.set(targetObject, fieldValue);

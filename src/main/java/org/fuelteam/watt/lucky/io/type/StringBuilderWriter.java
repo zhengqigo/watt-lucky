@@ -16,8 +16,8 @@ import java.io.Serializable;
 import java.io.Writer;
 
 /**
- * JDK的java.io.StringWriter使用StringBuffer，移植Commons IO使用StringBuilder的版本.
- * 
+ * JDK的java.io.StringWriter使用StringBuffer，从Commons IO移植使用StringBuilder的版本
+ * <pre>
  * https://github.com/apache/commons-io/blob/master/src/main/java/org/apache/commons/io/output/StringBuilderWriter.java
  * 
  * {@link Writer} implementation that outputs to a {@link StringBuilder}.

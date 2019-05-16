@@ -25,24 +25,15 @@ public class ThreadLocalContext {
         }
     };
 
-    /**
-     * 放入ThreadLocal的上下文信息
-     */
     public static void put(String key, Object value) {
         contextMap.get().put(key, value);
     }
 
-    /**
-     * 取出ThreadLocal的上下文信息
-     */
     @SuppressWarnings("unchecked")
     public static <T> T get(String key) {
         return (T) (contextMap.get().get(key));
     }
 
-    /**
-     * 清理ThreadLocal的Context内容
-     */
     public static void reset() {
         contextMap.get().clear();
     }

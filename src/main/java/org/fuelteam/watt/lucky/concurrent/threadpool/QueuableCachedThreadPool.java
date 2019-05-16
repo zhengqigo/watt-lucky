@@ -8,9 +8,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * 传统的FixedThreadPool有Queue但线程数量不变，而CachedThreadPool线程数可变但没有Queue，
- * Tomcat的线程池，通过控制TaskQueue，线程数，但线程数到达最大时会进入Queue中。主要修改包括：
- * 1. 删除定期重启线程避免内存泄漏的功能，2. TaskQueue中可能3次有锁的读取线程数量，改为只读取1次。
+ * 传统FixedThreadPool有Queue但线程数量不变，而CachedThreadPool线程数可变但没有Queue。
+ * 从Tomcat线程池移植，通过控制TaskQueue和线程数，使得线程数到达最大时会进入Queue中。
+ * 主要修改包括：删除定期重启线程避免内存泄漏的功能、TaskQueue中可能3次有锁的读取线程数量改为只读取1次。
  * <pre>
  * https://github.com/apache/tomcat/blob/trunk/java/org/apache/tomcat/util/threads/ThreadPoolExecutor.java
  */
@@ -80,6 +80,7 @@ public final class QueuableCachedThreadPool extends java.util.concurrent.ThreadP
     }
 
     /**
+     * <pre>
      * https://github.com/apache/tomcat/blob/trunk/java/org/apache/tomcat/util/threads/TaskQueue.java
      */
     protected static class ControllableQueue extends LinkedBlockingQueue<Runnable> {

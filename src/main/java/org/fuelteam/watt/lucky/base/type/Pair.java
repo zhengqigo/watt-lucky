@@ -5,7 +5,7 @@ import java.io.Serializable;
 import org.fuelteam.watt.lucky.base.annotation.Nullable;
 
 /**
- * 从Twitter Common引入的简单的Pair，用于返回值返回两个元素。
+ * 从Twitter Common移植的简单的Pair，用于返回值返回两个元素。
  */
 public class Pair<L, R> implements Serializable {
 

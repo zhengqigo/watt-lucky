@@ -4,7 +4,7 @@ import org.apache.commons.lang3.Validate;
 import org.fuelteam.watt.lucky.number.RandomUtil;
 
 /**
- * 从Twitter Common移植采样器，优化使用ThreadLocalRandom
+ * 从Twitter Common移植的采样器，优化使用ThreadLocalRandom
  * <pre>
  * https://github.com/twitter/commons/blob/master/src/java/com/twitter/common/util/Sampler.java
  */
@@ -18,7 +18,7 @@ public class Sampler {
     protected Sampler() {}
 
     /**
-     * @param selectPercent 采样率，在0-100 之间，可以有小数位
+     * @param selectPercent 采样率，在0-100之间，可以有小数位
      */
     protected Sampler(double selectPercent) {
         Validate.isTrue((selectPercent >= 0) && (selectPercent <= 100), "Invalid selectPercent value: " + selectPercent);

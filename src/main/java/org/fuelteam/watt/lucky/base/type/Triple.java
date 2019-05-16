@@ -5,7 +5,7 @@ import java.io.Serializable;
 import org.fuelteam.watt.lucky.base.annotation.Nullable;
 
 /**
- * 从Twitter Common引入的简单的Triple，用于返回值返回三个元素。
+ * 从Twitter Common移植的简单的Triple，用于返回值返回三个元素。
  */
 public class Triple<L, M, R> implements Serializable {
 

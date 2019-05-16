@@ -28,7 +28,7 @@ public class ExceptionUtil {
     /**
      * 转换为RuntimeException重新抛出，RuntimeException和Error不会被转变。举例:
      * <pre>
-     * try{ ... }catch(Exception e){ throw unchecked(throwable); }
+     * try{ ... }catch(Exception throwable){ throw unchecked(throwable); }
      * </pre>
      * 
      * @see ExceptionUtils#wrapAndThrow(Throwable)

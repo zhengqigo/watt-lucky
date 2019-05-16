@@ -288,8 +288,7 @@ public class ListUtil {
     }
 
     /**
-     * 返回List1与List2补集，产生新List。
-     * 对比Collection4 ListUtils，其并集－交集时，初始大小没有对交集*2
+     * 返回List1与List2补集，产生新List。对比Collection4 ListUtils，其并集－交集时，初始大小没有对交集*2
      */
     public static <T> List<T> disjoint(final List<? extends T> list1, final List<? extends T> list2) {
         List<T> intersection = intersection(list1, list2);

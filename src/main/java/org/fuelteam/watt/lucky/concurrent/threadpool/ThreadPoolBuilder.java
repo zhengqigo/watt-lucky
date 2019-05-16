@@ -56,13 +56,11 @@ public class ThreadPoolBuilder {
     }
 
     /**
-     * 创建FixedThreadPool，建议必须设置queueSize保证有界
+     * 创建FixedThreadPool，建议设置queueSize保证有界
      * 
-     * 1. 任务提交时，如果线程数还没达到poolSize即创建新线程并绑定任务(即poolSize次提交后线程总数必达到poolSize，
-     * 不会重用之前的线程)，poolSize默认为1，即singleThreadPool
+     * 1. 提交任务时，如果线程数还没达到poolSize即创建新线程并绑定任务(即poolSize次提交后线程总数必达到poolSize，不会重用之前的线程)，poolSize默认为1，即singleThreadPool
      * 
-     * 2. 第poolSize次任务提交后，新增任务放入Queue中，Pool中的所有线程从Queue中take任务执行，
-     * Queue默认为无限长的LinkedBlockingQueue，但建议设置queueSize换成有界的队列
+     * 2. 第poolSize次任务提交后，新增任务放入Queue中，Pool中的所有线程从Queue中take任务执行，Queue默认为无限长的LinkedBlockingQueue，但建议设置queueSize换成有界的队列
      * 
      * 如果使用有界队列，当队列满了之后，会调用RejectHandler进行处理，默认为AbortPolicy，抛出RejectedExecutionException异常，
      * 其他可选的Policy包括静默放弃当前任务(Discard)，放弃Queue里最老的任务(DisacardOldest)，或由主线程来直接执行(CallerRuns)
@@ -80,42 +78,27 @@ public class ThreadPoolBuilder {
 
         private RejectedExecutionHandler rejectHandler;
 
-        /**
-         * Pool大小，默认为1，即singleThreadPool
-         */
         public FixedThreadPoolBuilder setPoolSize(int poolSize) {
             Validate.isTrue(poolSize >= 1);
             this.poolSize = poolSize;
             return this;
         }
 
-        /**
-         * 不设置时默认为-1，使用无限长的LinkedBlockingQueue，为正数时使用ArrayBlockingQueue
-         */
         public FixedThreadPoolBuilder setQueueSize(int queueSize) {
             this.queueSize = queueSize;
             return this;
         }
 
-        /**
-         * 与threadNamePrefix互斥，优先使用ThreadFactory
-         */
         public FixedThreadPoolBuilder setThreadFactory(ThreadFactory threadFactory) {
             this.threadFactory = threadFactory;
             return this;
         }
 
-        /**
-         * 与ThreadFactory互斥，优先使用ThreadFactory
-         */
         public FixedThreadPoolBuilder setThreadNamePrefix(String threadNamePrefix) {
             this.threadNamePrefix = threadNamePrefix;
             return this;
         }
 
-        /**
-         * 与threadFactory互斥，优先使用ThreadFactory，默认为NULL，不进行设置，使用JDK的默认值
-         */
         public FixedThreadPoolBuilder setDaemon(Boolean daemon) {
             this.daemon = daemon;
             return this;
@@ -142,13 +125,11 @@ public class ThreadPoolBuilder {
     }
 
     /**
-     * 创建CachedThreadPool，maxSize建议设置
+     * 创建CachedThreadPool，建议设置maxSize
      * 
-     * 1. 任务提交时，如果线程数还没达到minSize即创建新线程并绑定任务(即minSize次提交后线程总数必达到minSize，不会重用之前的线程)，
-     * minSize默认为0，可设置保证有基本的线程处理请求不被回收
+     * 1. 提交任务时，如果线程数还没达到minSize即创建新线程并绑定任务(即minSize次提交后线程总数必达到minSize，不会重用之前的线程)，minSize默认为0，可设置保证有基本的线程处理请求不被回收
      * 
-     * 2. 第minSize次任务提交后，新增任务提交进SynchronousQueue后，如果没有空闲线程立刻处理，则会创建新的线程，
-     * 直到总线程数达到上限，maxSize默认为Integer.Max，可以进行设置
+     * 2. 第minSize次任务提交后，新增任务提交进SynchronousQueue后，如果没有空闲线程立刻处理，则会创建新的线程，直到总线程数达到上限，maxSize默认为Integer.Max，可以进行设置
      * 
      * 如果设置了maxSize，当总线程数达到上限，会调用RejectHandler进行处理，默认为AbortPolicy，抛出RejectedExecutionException异常。
      * 其他可选的Policy包括静默放弃当前任务(Discard)，或由主线程来直接执行(CallerRuns)
@@ -173,41 +154,26 @@ public class ThreadPoolBuilder {
             return this;
         }
 
-        /**
-         * Max默认Integer.MAX_VALUE的，建议设置
-         */
         public CachedThreadPoolBuilder setMaxSize(int maxSize) {
             this.maxSize = maxSize;
             return this;
         }
 
-        /**
-         * JDK默认值60秒太高，如高达1000线程时，要低于16QPS时才会开始回收线程，因此改为默认10秒
-         */
         public CachedThreadPoolBuilder setKeepAliveSecs(int keepAliveSecs) {
             this.keepAliveSecs = keepAliveSecs;
             return this;
         }
 
-        /**
-         * 与threadNamePrefix互斥，优先使用ThreadFactory
-         */
         public CachedThreadPoolBuilder setThreadFactory(ThreadFactory threadFactory) {
             this.threadFactory = threadFactory;
             return this;
         }
 
-        /**
-         * 与threadFactory互斥，优先使用ThreadFactory
-         */
         public CachedThreadPoolBuilder setThreadNamePrefix(String threadNamePrefix) {
             this.threadNamePrefix = threadNamePrefix;
             return this;
         }
 
-        /**
-         * 与threadFactory互斥，优先使用ThreadFactory，默认为NULL，不进行设置，使用JDK的默认值
-         */
         public CachedThreadPoolBuilder setDaemon(Boolean daemon) {
             this.daemon = daemon;
             return this;
@@ -228,26 +194,17 @@ public class ThreadPoolBuilder {
         }
     }
 
-    /**
-     * 创建ScheduledPool
-     */
     public static class ScheduledThreadPoolBuilder {
 
         private int poolSize = 1;
         private ThreadFactory threadFactory;
         private String threadNamePrefix;
 
-        /**
-         * 默认为1
-         */
         public ScheduledThreadPoolBuilder setPoolSize(int poolSize) {
             this.poolSize = poolSize;
             return this;
         }
 
-        /**
-         * 与threadNamePrefix互斥，优先使用ThreadFactory
-         */
         public ScheduledThreadPoolBuilder setThreadFactory(ThreadFactory threadFactory) {
             this.threadFactory = threadFactory;
             return this;
@@ -265,7 +222,7 @@ public class ThreadPoolBuilder {
     }
 
     /**
-     * 从Tomcat移植过来的可扩展可用Queue缓存任务的ThreadPool
+     * 从tomcat移植过来的可扩展可用Queue缓存任务的ThreadPool
      * 
      * @see QueuableCachedThreadPool
      */
@@ -292,9 +249,6 @@ public class ThreadPoolBuilder {
             return this;
         }
 
-        /**
-         * LinkedQueue长度，默认100
-         */
         public QueuableCachedThreadPoolBuilder setQueueSize(int queueSize) {
             this.queueSize = queueSize;
             return this;
@@ -305,25 +259,16 @@ public class ThreadPoolBuilder {
             return this;
         }
 
-        /**
-         * 与threadNamePrefix互斥，优先使用ThreadFactory
-         */
         public QueuableCachedThreadPoolBuilder setThreadFactory(ThreadFactory threadFactory) {
             this.threadFactory = threadFactory;
             return this;
         }
 
-        /**
-         * 与threadFactory互斥，优先使用ThreadFactory
-         */
         public QueuableCachedThreadPoolBuilder setThreadNamePrefix(String threadNamePrefix) {
             this.threadNamePrefix = threadNamePrefix;
             return this;
         }
 
-        /**
-         * 与threadFactory互斥，优先使用ThreadFactory，默认为NULL，不进行设置，使用JDK的默认值
-         */
         public QueuableCachedThreadPoolBuilder setDaemon(Boolean daemon) {
             this.daemon = daemon;
             return this;
@@ -336,28 +281,16 @@ public class ThreadPoolBuilder {
 
         public QueuableCachedThreadPool build() {
             threadFactory = createThreadFactory(threadFactory, threadNamePrefix, daemon);
-            if (rejectHandler == null) {
-                rejectHandler = defaultRejectHandler;
-            }
+            if (rejectHandler == null) rejectHandler = defaultRejectHandler;
             return new QueuableCachedThreadPool(minSize, maxSize, keepAliveSecs, TimeUnit.SECONDS,
                     new ControllableQueue(queueSize), threadFactory, rejectHandler);
         }
     }
 
-    /**
-     * 优先使用threadFactory，否则如果threadNamePrefix不为空则使用自建ThreadFactory，否则使用defaultThreadFactory
-     */
     private static ThreadFactory createThreadFactory(ThreadFactory threadFactory, String threadNamePrefix, Boolean daemon) {
-        if (threadFactory != null) {
-            return threadFactory;
-        }
-        if (threadNamePrefix != null) {
-            if (daemon != null) {
-                return ThreadPoolUtil.buildThreadFactory(threadNamePrefix, daemon);
-            } else {
-                return ThreadPoolUtil.buildThreadFactory(threadNamePrefix);
-            }
-        }
-        return Executors.defaultThreadFactory();
+        if (threadFactory != null) return threadFactory;
+        if (threadNamePrefix == null) return Executors.defaultThreadFactory();
+        if (daemon != null) return ThreadPoolUtil.buildThreadFactory(threadNamePrefix, daemon);
+        return ThreadPoolUtil.buildThreadFactory(threadNamePrefix);
     }
 }

@@ -213,7 +213,7 @@ public class MapUtil {
     }
 
     /**
-     * 对Map按Value进行排序，返回排序LinkedHashMap，最多只返回n条
+     * 对Map按Value进行排序，返回排序LinkedHashMap，最多返回n条
      * @param reverse 按Value的倒序 or 正序排列
      */
     @SuppressWarnings("rawtypes")
@@ -223,7 +223,7 @@ public class MapUtil {
     }
 
     /**
-     * 对Map按Value进行排序，返回排序LinkedHashMap，最多只返回n条
+     * 对Map按Value进行排序，返回排序LinkedHashMap，最多返回n条
      */
     public static <K, V> Map<K, V> topNByValue(Map<K, V> map, final Comparator<? super V> comparator, int n) {
         return topNByValueInternal(map, n, new EntryValueComparator<K, V>(comparator));
