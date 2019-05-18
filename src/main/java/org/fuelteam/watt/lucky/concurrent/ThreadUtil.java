@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 public class ThreadUtil {
 
     /**
-     * sleep单位毫秒，已捕捉并处理InterruptedException
+     * sleep毫秒，已捕捉并处理InterruptedException
      */
     public static void sleep(long durationMillis) {
         try {

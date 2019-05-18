@@ -21,7 +21,7 @@ public class ThreadDumpper {
 
     private static final int DEFAULT_MIN_INTERVAL = 1000 * 60 * 10; // 10分钟
 
-    private int maxStackLevel; // 打印StackTrace的最大深度
+    private int maxStackLevel;
 
     private TimeIntervalLimiter timeIntervalLimiter;
 
