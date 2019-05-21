@@ -39,9 +39,7 @@ public class RateLimiterUtil {
         RateLimiter rateLimiter = (RateLimiter) burstyRateLimiterConstructor.newInstance(stopwatch, maxBurstSeconds);
         rateLimiter.setRate(permitsPerSecond);
 
-        if (filledWithToken) {
-            setField(rateLimiter, "storedPermits", permitsPerSecond * maxBurstSeconds);
-        }
+        if (filledWithToken) setField(rateLimiter, "storedPermits", permitsPerSecond * maxBurstSeconds);
 
         return rateLimiter;
     }

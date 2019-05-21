@@ -1,6 +1,5 @@
 package org.fuelteam.watt.lucky.async;
 
-import org.fuelteam.watt.lucky.utils.Vardump;
 import org.junit.Test;
 
 public class AsyncTest {
@@ -10,12 +9,12 @@ public class AsyncTest {
         Callback<Integer> cb = new Callback<Integer>() {
             @Override
             public void onSuccess(Integer t) {
-                Vardump.print("onSuccess");
+                System.out.println("onSuccess");
             }
 
             @Override
             public void onFailure(Exception ex) {
-                Vardump.print("onFailure");
+                System.out.println("onFailure");
             }
         };
         Async.doAsync(new AbstractFunction<Integer>(cb) {

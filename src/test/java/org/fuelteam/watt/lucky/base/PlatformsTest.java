@@ -9,7 +9,6 @@ public class PlatformsTest {
 
     @Test
     public void PlatformTest() {
-
         if (Platforms.IS_WINDOWS) {
             assertThat(Platforms.FILE_PATH_SEPARATOR).isEqualTo("\\");
             assertThat(Platforms.FILE_PATH_SEPARATOR_CHAR).isEqualTo('\\');
@@ -37,7 +36,5 @@ public class PlatformsTest {
             assertThat(Platforms.IS_ATLEASET_JAVA7).isTrue();
             assertThat(Platforms.IS_ATLEASET_JAVA8).isTrue();
         }
-
     }
-
 }

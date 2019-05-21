@@ -1,13 +1,13 @@
 package org.fuelteam.watt.lucky.io;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
 import java.io.IOException;
 
-import org.fuelteam.watt.lucky.vjkit.io.type.StringBuilderWriter;
-import org.fuelteam.watt.lucky.vjkit.text.Charsets;
+import org.fuelteam.watt.lucky.io.type.StringBuilderWriter;
+import org.fuelteam.watt.lucky.text.Charsets;
 import org.junit.Test;
 
 public class IOUtilTest {

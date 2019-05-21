@@ -11,9 +11,9 @@ import java.io.OutputStream;
 import java.nio.file.Path;
 import java.util.List;
 
-import org.fuelteam.watt.lucky.vjkit.base.Platforms;
-import org.fuelteam.watt.lucky.vjkit.number.RandomUtil;
-import org.fuelteam.watt.lucky.vjkit.text.Charsets;
+import org.fuelteam.watt.lucky.base.Platforms;
+import org.fuelteam.watt.lucky.number.RandomUtil;
+import org.fuelteam.watt.lucky.text.Charsets;
 import org.junit.Test;
 
 import com.google.common.io.Files;

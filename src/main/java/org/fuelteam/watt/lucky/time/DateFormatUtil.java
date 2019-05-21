@@ -78,11 +78,8 @@ public class DateFormatUtil {
 		return FastDateFormat.getInstance(pattern).format(date);
 	}
 
-	/////// 格式化间隔时间/////////
 	/**
-	 * 按HH:mm:ss.SSS格式，格式化时间间隔.
-	 * 
-	 * endDate必须大于startDate，间隔可大于1天，
+	 * 按HH:mm:ss.SSS格式格式化时间间隔
 	 * 
 	 * @see DurationFormatUtils
 	 */
@@ -91,9 +88,7 @@ public class DateFormatUtil {
 	}
 
 	/**
-	 * 按HH:mm:ss.SSS格式，格式化时间间隔
-	 * 
-	 * 单位为毫秒，必须大于0，可大于1天
+	 * 按HH:mm:ss.SSS格式格式化时间间隔
 	 * 
 	 * @see DurationFormatUtils
 	 */
@@ -102,9 +97,7 @@ public class DateFormatUtil {
 	}
 
 	/**
-	 * 按HH:mm:ss格式，格式化时间间隔
-	 * 
-	 * endDate必须大于startDate，间隔可大于1天
+	 * 按HH:mm:ss格式格式化时间间隔
 	 * 
 	 * @see DurationFormatUtils
 	 */
@@ -113,9 +106,7 @@ public class DateFormatUtil {
 	}
 
 	/**
-	 * 按HH:mm:ss格式，格式化时间间隔
-	 * 
-	 * 单位为毫秒，必须大于0，可大于1天
+	 * 按HH:mm:ss格式格式化时间间隔
 	 * 
 	 * @see DurationFormatUtils
 	 */
@@ -123,11 +114,10 @@ public class DateFormatUtil {
 		return DurationFormatUtils.formatDuration(durationMillis, "HH:mm:ss");
 	}
 
-	//////// 打印用于页面显示的用户友好，与当前时间比的时间差
 	/**
 	 * 打印用户友好的，与当前时间相比的时间差，如刚刚，5分钟前，今天XXX，昨天XXX
 	 * 
-	 * copy from AndroidUtilCode
+	 * @see AndroidUtilCode
 	 */
 	public static String formatFriendlyTimeSpanByNow(@NotNull Date date) {
 		return formatFriendlyTimeSpanByNow(date.getTime());
@@ -135,8 +125,7 @@ public class DateFormatUtil {
 
 	/**
 	 * 打印用户友好的，与当前时间相比的时间差，如刚刚，5分钟前，今天XXX，昨天XXX
-	 * 
-	 * copy from AndroidUtilCode
+	 * @see AndroidUtilCode
 	 */
 	public static String formatFriendlyTimeSpanByNow(long timeStampMillis) {
 		long now = ClockUtil.currentTimeMillis();

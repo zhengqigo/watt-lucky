@@ -6,11 +6,8 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import org.fuelteam.watt.lucky.concurrent.Concurrents;
-import org.fuelteam.watt.lucky.concurrent.ThreadDumpper;
-import org.fuelteam.watt.lucky.concurrent.ThreadUtil;
 import org.fuelteam.watt.lucky.concurrent.threadpool.ThreadPoolBuilder;
-import org.fuelteam.watt.lucky.test.log.LogbackListAppender;
+import org.fuelteam.watt.lucky.log.LogbackListAppender;
 import org.junit.Test;
 
 public class ThreadDumpperTest {

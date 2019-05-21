@@ -14,7 +14,7 @@ import com.google.common.util.concurrent.MoreExecutors;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 /**
- * 线程池工具集：优雅关闭线程池(via guava)，创建可自定义线程名的ThreadFactory(via guava)，防止第三方Runnable未捕捉异常导致线程跑飞
+ * 线程池工具集：优雅关闭线程池，创建可自定义线程名的ThreadFactory，防止第三方Runnable未捕捉异常导致线程跑飞
  */
 public class ThreadPoolUtil {
 

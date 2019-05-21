@@ -1,7 +1,6 @@
 package org.fuelteam.watt.lucky.mapper;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
 
@@ -13,7 +12,10 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.fuelteam.watt.lucky.mapper.XmlMapper;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;

@@ -17,7 +17,8 @@ import org.junit.Test;
 
 public class QueueUtilTest {
 
-	@Test
+	@SuppressWarnings("unused")
+    @Test
 	public void guavaBuildSet() {
 		ArrayDeque<String> queue1 = QueueUtil.newArrayDeque(16);
 		LinkedList<String> queue2 = QueueUtil.newLinkedDeque();
@@ -35,21 +36,17 @@ public class QueueUtilTest {
 
 	@Test
 	public void stack() {
-
 		Queue<String> stack = MoreQueues.createStack(10);
 		Queue<String> stack2 = MoreQueues.createConcurrentStack();
 
 		stack.offer("1");
 		stack.offer("2");
-
 		assertThat(stack.poll()).isEqualTo("2");
 		assertThat(stack.poll()).isEqualTo("1");
 
 		stack2.offer("1");
 		stack2.offer("2");
-
 		assertThat(stack2.poll()).isEqualTo("2");
 		assertThat(stack2.poll()).isEqualTo("1");
 	}
-
 }

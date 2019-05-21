@@ -120,7 +120,7 @@ public class ExceptionUtilTest {
 
         RuntimeException runtimeExcetpion = new RuntimeException("my runtimeException", ioexception);
         assertThat(ExceptionUtil.toStringWithRootCause(runtimeExcetpion))
-                .isEqualTo("RuntimeException: my runtimeException; <--IOException: my exception");
+                .isEqualTo("RuntimeException: my runtimeException; IOException: my exception");
 
         assertThat(ExceptionUtil.toStringWithRootCause(null)).isEqualTo("");
         // 无cause
@@ -140,25 +140,24 @@ public class ExceptionUtilTest {
     public void staticException() {
         assertThat(ExceptionUtil.stackTraceText(TIMEOUT_EXCEPTION1)).hasLineCount(2)
                 .contains("java.lang.RuntimeException: Timeout")
-                .contains("at org.fuelteam.watt.lukcy.base.ExceptionUtilTest.hello(Unknown Source)");
+                .contains("at org.fuelteam.watt.lucky.base.ExceptionUtilTest.hello(Unknown Source)");
 
         assertThat(ExceptionUtil.stackTraceText(TIMEOUT_EXCEPTION2)).hasLineCount(2)
-                .contains("org.fuelteam.watt.lukcy.base.type.CloneableException: Timeout")
-                .contains("org.fuelteam.watt.lukcy.base.ExceptionUtilTest.hello(Unknown Source)");
+                .contains("org.fuelteam.watt.lucky.base.type.CloneableException: Timeout")
+                .contains("at org.fuelteam.watt.lucky.base.ExceptionUtilTest.hello(Unknown Source)");
 
         CloneableException timeoutException = TIMEOUT_EXCEPTION2.clone("Timeout for 30ms");
         assertThat(ExceptionUtil.stackTraceText(timeoutException)).hasLineCount(2)
-                .contains("org.fuelteam.watt.lukcy.base.type.CloneableException: Timeout for 30ms")
-                .contains("at org.fuelteam.watt.lukcy.base.ExceptionUtilTest.hello(Unknown Source)");
+                .contains("org.fuelteam.watt.lucky.base.type.CloneableException: Timeout for 30ms")
+                .contains("at org.fuelteam.watt.lucky.base.ExceptionUtilTest.hello(Unknown Source)");
 
         assertThat(ExceptionUtil.stackTraceText(TIMEOUT_EXCEPTION3)).hasLineCount(2)
-                .contains("org.fuelteam.watt.lukcy.base.type.CloneableRuntimeException: Timeout")
-                .contains("at org.fuelteam.watt.lukcy.base.ExceptionUtilTest.hello(Unknown Source)");
+                .contains("org.fuelteam.watt.lucky.base.type.CloneableRuntimeException: Timeout")
+                .contains("at org.fuelteam.watt.lucky.base.ExceptionUtilTest.hello(Unknown Source)");
 
         CloneableRuntimeException timeoutRuntimeException = TIMEOUT_EXCEPTION3.clone("Timeout for 40ms");
         assertThat(ExceptionUtil.stackTraceText(timeoutRuntimeException)).hasLineCount(2)
-                .contains("org.fuelteam.watt.lukcy.base.type.CloneableRuntimeException: Timeout for 40ms")
-                .contains("at org.fuelteam.watt.lukcy.base.ExceptionUtilTest.hello(Unknown Source)");
-
+                .contains("org.fuelteam.watt.lucky.base.type.CloneableRuntimeException: Timeout for 40ms")
+                .contains("at org.fuelteam.watt.lucky.base.ExceptionUtilTest.hello(Unknown Source)");
     }
 }

@@ -29,13 +29,9 @@ public class Sampler {
      * 优化的创建函数，如果为0或100时，返回更直接的采样器
      */
     public static Sampler create(Double selectPercent) {
-        if (selectPercent.equals(ALWAYS)) {
-            return new AlwaysSampler();
-        } else if (selectPercent.equals(NEVER)) {
-            return new NeverSampler();
-        } else {
-            return new Sampler(selectPercent);
-        }
+        if (selectPercent.equals(ALWAYS)) return new AlwaysSampler();
+        if (selectPercent.equals(NEVER)) return new NeverSampler();
+        return new Sampler(selectPercent);
     }
 
     /**
