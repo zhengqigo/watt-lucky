@@ -51,5 +51,4 @@ public class ThreadDumpperTest {
 		assertThat(appender.getAllLogs()).hasSize(3);
 		executor.shutdownNow();
 	}
-
 }

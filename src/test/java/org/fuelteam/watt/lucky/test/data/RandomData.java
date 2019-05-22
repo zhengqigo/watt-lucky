@@ -46,9 +46,7 @@ public class RandomData {
      */
     public static <T> List<T> randomSome(List<T> list) {
         int size = random.nextInt(list.size());
-        if (size == 0) {
-            size = 1;
-        }
+        if (size == 0) size = 1;
         return randomSome(list, size);
     }
 }

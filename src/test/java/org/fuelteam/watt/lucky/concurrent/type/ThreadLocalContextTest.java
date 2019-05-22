@@ -21,7 +21,6 @@ public class ThreadLocalContextTest {
                 try {
                     barrier.await();
                 } catch (Exception e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
                 ThreadLocalContext.put("myname", Thread.currentThread().getName());
@@ -37,7 +36,6 @@ public class ThreadLocalContextTest {
             Thread thread = new Thread(runnable);
             thread.start();
         }
-
         countdown.await();
     }
 }

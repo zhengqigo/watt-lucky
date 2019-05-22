@@ -72,7 +72,6 @@ public class ThreadPoolUtilTest {
 
         final CountDownLatch lock = new CountDownLatch(1);
         Thread thread = new Thread(new Runnable() {
-
             @Override
             public void run() {
                 lock.countDown();
@@ -121,7 +120,6 @@ public class ThreadPoolUtilTest {
             counter.incrementAndGet();
             throw new RuntimeException("fail");
         }
-
     }
 
     static class Task implements Runnable {

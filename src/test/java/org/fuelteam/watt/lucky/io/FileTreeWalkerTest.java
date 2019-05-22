@@ -67,7 +67,5 @@ public class FileTreeWalkerTest {
         FileUtil.deleteDir(tmpDir);
 
         assertThat(FileUtil.isDirExists(tmpDir)).isFalse();
-
     }
-
 }

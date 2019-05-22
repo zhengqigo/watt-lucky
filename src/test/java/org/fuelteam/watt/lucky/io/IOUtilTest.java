@@ -12,24 +12,23 @@ import org.junit.Test;
 
 public class IOUtilTest {
 
-	@Test
-	public void read() throws IOException {
-		assertThat(IOUtil.toString(ResourceUtil.asStream("test.txt"))).isEqualTo("ABCDEFG\nABC");
-		assertThat(IOUtil.toLines(ResourceUtil.asStream("test.txt"))).hasSize(2).containsExactly("ABCDEFG", "ABC");
-	}
+    @Test
+    public void read() throws IOException {
+        assertThat(IOUtil.toString(ResourceUtil.asStream("test.txt"))).isEqualTo("ABCDEFG\nABC");
+        assertThat(IOUtil.toLines(ResourceUtil.asStream("test.txt"))).hasSize(2).containsExactly("ABCDEFG", "ABC");
+    }
 
-	@Test
-	public void write() throws IOException {
-		StringBuilderWriter sw = new StringBuilderWriter();
-		IOUtil.write("hahahaha", sw);
-		assertThat(sw.toString()).isEqualTo("hahahaha");
+    @Test
+    public void write() throws IOException {
+        StringBuilderWriter sw = new StringBuilderWriter();
+        IOUtil.write("hahahaha", sw);
+        assertThat(sw.toString()).isEqualTo("hahahaha");
 
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		IOUtil.write("hahahaha", out);
-		assertThat(new String(out.toByteArray(), Charsets.UTF_8)).isEqualTo("hahahaha");
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        IOUtil.write("hahahaha", out);
+        assertThat(new String(out.toByteArray(), Charsets.UTF_8)).isEqualTo("hahahaha");
 
-		IOUtil.closeQuietly(out);
-		IOUtil.closeQuietly((Closeable) null);
-	}
-
+        IOUtil.closeQuietly(out);
+        IOUtil.closeQuietly((Closeable) null);
+    }
 }

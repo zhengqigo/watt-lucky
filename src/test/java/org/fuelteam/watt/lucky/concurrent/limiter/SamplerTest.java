@@ -15,9 +15,7 @@ public class SamplerTest {
         Sampler sampler = Sampler.create(10.5);
         int hits = 0;
         for (int i = 0; i < 10000; i++) {
-            if (sampler.select()) {
-                hits++;
-            }
+            if (sampler.select()) hits++;
         }
         System.out.println("sample 10.5% in 10000 hits should close to 1050, actual is " + hits);
 
@@ -27,13 +25,10 @@ public class SamplerTest {
 
         hits = 0;
         for (int i = 0; i < 10000; i++) {
-            if (sampler2.select()) {
-                hits++;
-            }
+            if (sampler2.select()) hits++;
         }
         System.out.println("sample 0.5% in 10000 hits should close to 50, actual is " + hits);
         assertThat(hits).isBetween(20, 100);
-
     }
 
     @Test
@@ -49,7 +44,6 @@ public class SamplerTest {
         } catch (Exception e) {
             assertThat(e).isInstanceOf(IllegalArgumentException.class);
         }
-
         try {
             sampler = Sampler.create(-2.2);
             fail("shoud fail before");

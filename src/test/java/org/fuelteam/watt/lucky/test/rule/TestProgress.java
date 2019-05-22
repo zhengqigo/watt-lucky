@@ -17,5 +17,4 @@ public class TestProgress extends TestWatcher {
         System.out.println("\n[Test Case finished] " + description.getTestClass().getSimpleName() + "."
                 + description.getMethodName() + "()\n");
     }
-
 }

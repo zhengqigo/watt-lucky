@@ -6,52 +6,52 @@ import org.fuelteam.watt.lucky.security.CryptoUtil;
 import org.fuelteam.watt.lucky.text.EncodeUtil;
 import org.junit.Test;
 
-
 public class CryptoUtilTest {
-	@Test
-	public void mac() {
-		String input = "foo message";
 
-		// key可为任意字符串
-		// byte[] key = "a foo key".getBytes();
-		byte[] key = CryptoUtil.generateHmacSha1Key();
-		assertThat(key).hasSize(20);
+    @Test
+    public void mac() {
+        String input = "foo message";
 
-		byte[] macResult = CryptoUtil.hmacSha1(input.getBytes(), key);
-		System.out.println("hmac-sha1 key in hex      :" + EncodeUtil.encodeHex(key));
-		System.out.println("hmac-sha1 in hex result   :" + EncodeUtil.encodeHex(macResult));
+        // key可为任意字符串
+        // byte[] key = "a foo key".getBytes();
+        byte[] key = CryptoUtil.generateHmacSha1Key();
+        assertThat(key).hasSize(20);
 
-		assertThat(CryptoUtil.isMacValid(macResult, input.getBytes(), key)).isTrue();
-	}
+        byte[] macResult = CryptoUtil.hmacSha1(input.getBytes(), key);
+        System.out.println("hmac-sha1 key in hex      :" + EncodeUtil.encodeHex(key));
+        System.out.println("hmac-sha1 in hex result   :" + EncodeUtil.encodeHex(macResult));
 
-	@Test
-	public void aes() {
-		byte[] key = CryptoUtil.generateAesKey();
-		assertThat(key).hasSize(16);
-		String input = "foo message";
+        assertThat(CryptoUtil.isMacValid(macResult, input.getBytes(), key)).isTrue();
+    }
 
-		byte[] encryptResult = CryptoUtil.aesEncrypt(input.getBytes(), key);
-		String descryptResult = CryptoUtil.aesDecrypt(encryptResult, key);
+    @Test
+    public void aes() {
+        byte[] key = CryptoUtil.generateAesKey();
+        assertThat(key).hasSize(16);
+        String input = "foo message";
 
-		System.out.println("aes key in hex            :" + EncodeUtil.encodeHex(key));
-		System.out.println("aes encrypt in hex result :" + EncodeUtil.encodeHex(encryptResult));
-		assertThat(descryptResult).isEqualTo(input);
-	}
+        byte[] encryptResult = CryptoUtil.aesEncrypt(input.getBytes(), key);
+        String descryptResult = CryptoUtil.aesDecrypt(encryptResult, key);
 
-	@Test
-	public void aesWithIV() {
-		byte[] key = CryptoUtil.generateAesKey();
-		byte[] iv = CryptoUtil.generateIV();
-		assertThat(key).hasSize(16);
-		assertThat(iv).hasSize(16);
-		String input = "foo message";
+        System.out.println("aes key in hex            :" + EncodeUtil.encodeHex(key));
+        System.out.println("aes encrypt in hex result :" + EncodeUtil.encodeHex(encryptResult));
+        assertThat(descryptResult).isEqualTo(input);
+    }
 
-		byte[] encryptResult = CryptoUtil.aesEncrypt(input.getBytes(), key, iv);
-		String descryptResult = CryptoUtil.aesDecrypt(encryptResult, key, iv);
+    @Test
+    public void aesWithIV() {
+        byte[] key = CryptoUtil.generateAesKey();
+        byte[] iv = CryptoUtil.generateIV();
+        assertThat(key).hasSize(16);
+        assertThat(iv).hasSize(16);
+        String input = "foo message";
 
-		System.out.println("aes key in hex            :" + EncodeUtil.encodeHex(key));
-		System.out.println("iv in hex                 :" + EncodeUtil.encodeHex(iv));
-		System.out.println("aes encrypt in hex result :" + EncodeUtil.encodeHex(encryptResult));
-		assertThat(descryptResult).isEqualTo(input);
-	}
+        byte[] encryptResult = CryptoUtil.aesEncrypt(input.getBytes(), key, iv);
+        String descryptResult = CryptoUtil.aesDecrypt(encryptResult, key, iv);
+
+        System.out.println("aes key in hex            :" + EncodeUtil.encodeHex(key));
+        System.out.println("iv in hex                 :" + EncodeUtil.encodeHex(iv));
+        System.out.println("aes encrypt in hex result :" + EncodeUtil.encodeHex(encryptResult));
+        assertThat(descryptResult).isEqualTo(input);
+    }
 }

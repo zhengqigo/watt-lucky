@@ -20,237 +20,220 @@ import com.google.common.io.Files;
 
 public class FileUtilTest {
 
-	@Test
-	public void readWrite() throws IOException {
-		File file = FileUtil.createTempFile("abc", ".tmp").toFile();
-		try {
-			String content = "haha\nhehe";
-			FileUtil.write(content, file);
+    @Test
+    public void readWrite() throws IOException {
+        File file = FileUtil.createTempFile("abc", ".tmp").toFile();
+        try {
+            String content = "haha\nhehe";
+            FileUtil.write(content, file);
 
-			String result = FileUtil.toString(file);
-			assertThat(result).isEqualTo(content);
-			List<String> lines = FileUtil.toLines(file);
-			assertThat(lines).containsExactly("haha", "hehe");
+            String result = FileUtil.toString(file);
+            assertThat(result).isEqualTo(content);
+            List<String> lines = FileUtil.toLines(file);
+            assertThat(lines).containsExactly("haha", "hehe");
 
-			FileUtil.append("kaka", file);
-			assertThat(new String(FileUtil.toByteArray(file), Charsets.UTF_8)).isEqualTo("haha\nhehekaka");
-		} finally {
-			FileUtil.deleteFile(file);
-		}
-	}
+            FileUtil.append("kaka", file);
+            assertThat(new String(FileUtil.toByteArray(file), Charsets.UTF_8)).isEqualTo("haha\nhehekaka");
+        } finally {
+            FileUtil.deleteFile(file);
+        }
+    }
 
-	@Test
-	public void opFiles() throws IOException {
-		File file = new File(FilePathUtil.concat(Platforms.TMP_DIR, "testFile" + RandomUtil.nextInt()));
-		FileUtil.touch(file);
-		assertThat(FileUtil.isFileExists(file)).isTrue();
-		FileUtil.touch(file);
+    @Test
+    public void opFiles() throws IOException {
+        File file = new File(FilePathUtil.concat(Platforms.TMP_DIR, "testFile" + RandomUtil.nextInt()));
+        FileUtil.touch(file);
+        assertThat(FileUtil.isFileExists(file)).isTrue();
+        FileUtil.touch(file);
 
-		String content = "haha\nhehe";
-		FileUtil.write(content, file);
-		assertThat(FileUtil.toString(file)).isEqualTo(content);
+        String content = "haha\nhehe";
+        FileUtil.write(content, file);
+        assertThat(FileUtil.toString(file)).isEqualTo(content);
 
-		File newFile = new File(FilePathUtil.concat(Platforms.TMP_DIR, "testFile" + RandomUtil.nextInt()));
-		File newFile2 = new File(FilePathUtil.concat(Platforms.TMP_DIR, "testFile" + RandomUtil.nextInt()));
+        File newFile = new File(FilePathUtil.concat(Platforms.TMP_DIR, "testFile" + RandomUtil.nextInt()));
+        File newFile2 = new File(FilePathUtil.concat(Platforms.TMP_DIR, "testFile" + RandomUtil.nextInt()));
 
-		FileUtil.copyFile(file, newFile);
-		assertThat(FileUtil.isFileExists(newFile)).isTrue();
-		assertThat(FileUtil.toString(newFile)).isEqualTo(content);
+        FileUtil.copyFile(file, newFile);
+        assertThat(FileUtil.isFileExists(newFile)).isTrue();
+        assertThat(FileUtil.toString(newFile)).isEqualTo(content);
 
-		FileUtil.moveFile(newFile, newFile2);
-		assertThat(FileUtil.toString(newFile2)).isEqualTo("haha\nhehe");
+        FileUtil.moveFile(newFile, newFile2);
+        assertThat(FileUtil.toString(newFile2)).isEqualTo("haha\nhehe");
+    }
 
+    @Test
+    public void opDir() throws IOException {
+        String fileName = "testFile" + RandomUtil.nextInt();
+        File dir = new File(FilePathUtil.concat(Platforms.TMP_DIR, "testDir"));
 
-	}
+        File file = new File(FilePathUtil.concat(Platforms.TMP_DIR, "testDir", fileName));
+        String content = "haha\nhehe";
+        FileUtil.makesureDirExists(dir);
+        FileUtil.write(content, file);
 
-	@Test
-	public void opDir() throws IOException {
-		String fileName = "testFile" + RandomUtil.nextInt();
-		File dir = new File(FilePathUtil.concat(Platforms.TMP_DIR, "testDir"));
+        File dir2 = new File(FilePathUtil.concat(Platforms.TMP_DIR, "testDir2"));
+        FileUtil.copyDir(dir, dir2);
+        File file2 = new File(FilePathUtil.concat(Platforms.TMP_DIR, "testDir2", fileName));
+        assertThat(FileUtil.toString(file2)).isEqualTo("haha\nhehe");
 
-		File file = new File(FilePathUtil.concat(Platforms.TMP_DIR, "testDir", fileName));
-		String content = "haha\nhehe";
-		FileUtil.makesureDirExists(dir);
-		FileUtil.write(content, file);
+        File dir3 = new File(FilePathUtil.concat(Platforms.TMP_DIR, "testDir3"));
+        FileUtil.moveDir(dir, dir3);
+        File file3 = new File(FilePathUtil.concat(Platforms.TMP_DIR, "testDir3", fileName));
+        assertThat(FileUtil.toString(file3)).isEqualTo("haha\nhehe");
+        assertThat(FileUtil.isDirExists(dir)).isFalse();
+    }
 
-		File dir2 = new File(FilePathUtil.concat(Platforms.TMP_DIR, "testDir2"));
-		FileUtil.copyDir(dir, dir2);
-		File file2 = new File(FilePathUtil.concat(Platforms.TMP_DIR, "testDir2", fileName));
-		assertThat(FileUtil.toString(file2)).isEqualTo("haha\nhehe");
+    @Test
+    public void fileExist() throws IOException {
+        assertThat(FileUtil.isDirExists(Platforms.TMP_DIR)).isTrue();
+        assertThat(FileUtil.isDirExists(Platforms.TMP_DIR + RandomUtil.nextInt())).isFalse();
 
-		File dir3 = new File(FilePathUtil.concat(Platforms.TMP_DIR, "testDir3"));
-		FileUtil.moveDir(dir, dir3);
-		File file3 = new File(FilePathUtil.concat(Platforms.TMP_DIR, "testDir3", fileName));
-		assertThat(FileUtil.toString(file3)).isEqualTo("haha\nhehe");
-		assertThat(FileUtil.isDirExists(dir)).isFalse();
+        File tmpFile = null;
+        try {
+            tmpFile = FileUtil.createTempFile().toFile();
+            assertThat(FileUtil.isFileExists(tmpFile)).isTrue();
+            assertThat(FileUtil.isFileExists(tmpFile.getAbsolutePath() + RandomUtil.nextInt())).isFalse();
+        } finally {
+            FileUtil.deleteFile(tmpFile);
+        }
+    }
 
-	}
+    @Test
+    public void getName() {
+        assertThat(FileUtil.getFileName(FilePathUtil.normalizePath("/a/d/b/abc.txt"))).isEqualTo("abc.txt");
+        assertThat(FileUtil.getFileName("abc.txt")).isEqualTo("abc.txt");
 
-	@Test
-	public void fileExist() throws IOException {
-		assertThat(FileUtil.isDirExists(Platforms.TMP_DIR)).isTrue();
-		assertThat(FileUtil.isDirExists(Platforms.TMP_DIR + RandomUtil.nextInt())).isFalse();
+        assertThat(FileUtil.getFileExtension(FilePathUtil.normalizePath("a/d/b/abc.txt"))).isEqualTo("txt");
+        assertThat(FileUtil.getFileExtension(FilePathUtil.normalizePath("/a/d/b/abc"))).isEqualTo("");
+        assertThat(FileUtil.getFileExtension(FilePathUtil.normalizePath("/a/d/b/abc."))).isEqualTo("");
+    }
 
-		File tmpFile = null;
-		try {
-			tmpFile = FileUtil.createTempFile().toFile();
-			assertThat(FileUtil.isFileExists(tmpFile)).isTrue();
+    @Test
+    public void testAsInputStream() throws Exception {
+        Path tempPath = FileUtil.createTempFile();
+        try (InputStream is = FileUtil.asInputStream(tempPath.toString());) {
+            assertThat(is).isNotNull();
+        }
 
-			assertThat(FileUtil.isFileExists(tmpFile.getAbsolutePath() + RandomUtil.nextInt())).isFalse();
+        try (InputStream is = FileUtil.asInputStream(tempPath);) {
+            assertThat(is).isNotNull();
+        }
 
-		} finally {
-			FileUtil.deleteFile(tmpFile);
-		}
-	}
+        try (InputStream is = FileUtil.asInputStream(tempPath.toFile());) {
+            assertThat(is).isNotNull();
+        }
+    }
 
-	@Test
-	public void getName() {
+    @Test
+    public void testAsOututStream() throws Exception {
+        Path tempPath = FileUtil.createTempFile();
+        try (OutputStream os = FileUtil.asOututStream(tempPath.toString())) {
+            assertThat(os).isNotNull();
+        }
+        try (OutputStream os = FileUtil.asOututStream(tempPath);) {
+            assertThat(os).isNotNull();
+        }
+        try (OutputStream os = FileUtil.asOututStream(tempPath.toFile())) {
+            assertThat(os).isNotNull();
+        }
+    }
 
-		assertThat(FileUtil.getFileName(FilePathUtil.normalizePath("/a/d/b/abc.txt"))).isEqualTo("abc.txt");
-		assertThat(FileUtil.getFileName("abc.txt")).isEqualTo("abc.txt");
+    @Test
+    public void testAsBufferedReader() throws Exception {
+        Path tempPath = FileUtil.createTempFile();
+        try (BufferedReader br = FileUtil.asBufferedReader(tempPath.toString())) {
+            assertThat(br).isNotNull();
+        }
+        try (BufferedReader br = FileUtil.asBufferedReader(tempPath)) {
+            assertThat(br).isNotNull();
+        }
+    }
 
-		assertThat(FileUtil.getFileExtension(FilePathUtil.normalizePath("a/d/b/abc.txt"))).isEqualTo("txt");
-		assertThat(FileUtil.getFileExtension(FilePathUtil.normalizePath("/a/d/b/abc"))).isEqualTo("");
-		assertThat(FileUtil.getFileExtension(FilePathUtil.normalizePath("/a/d/b/abc."))).isEqualTo("");
+    @Test
+    public void testAsBufferedWriter() throws Exception {
+        Path tempPath = FileUtil.createTempFile();
+        try (BufferedWriter bw = FileUtil.asBufferedWriter(tempPath.toString())) {
+            assertThat(bw).isNotNull();
+        }
+        try (BufferedWriter bw = FileUtil.asBufferedWriter(tempPath)) {
+            assertThat(bw).isNotNull();
+        }
+    }
 
-	}
+    @Test
+    public void testCopy() throws Exception {
+        Path dir = FileUtil.createTempDir();
 
-	@Test
-	public void testAsInputStream() throws Exception {
-		Path tempPath = FileUtil.createTempFile();
-		try (InputStream is = FileUtil.asInputStream(tempPath.toString());) {
-			assertThat(is).isNotNull();
-		}
+        assertThat(dir).exists();
 
-		try (InputStream is = FileUtil.asInputStream(tempPath);) {
-			assertThat(is).isNotNull();
-		}
+        String srcFileName = "src";
+        File srcFile = dir.resolve(srcFileName).toFile();
+        FileUtil.touch(srcFile);
 
-		try (InputStream is = FileUtil.asInputStream(tempPath.toFile());) {
-			assertThat(is).isNotNull();
-		}
+        assertThat(srcFile).exists();
 
-	}
+        FileUtil.write("test", srcFile);
 
-	@Test
-	public void testAsOututStream() throws Exception {
+        String destFileName = "dest";
 
-		Path tempPath = FileUtil.createTempFile();
-		try (OutputStream os = FileUtil.asOututStream(tempPath.toString())) {
-			assertThat(os).isNotNull();
-		}
+        File destFile = new File(dir.toFile(), "parent1/parent2/" + destFileName);
+        FileUtil.makesureParentDirExists(destFile);
 
-		try (OutputStream os = FileUtil.asOututStream(tempPath);) {
-			assertThat(os).isNotNull();
-		}
+        FileUtil.copy(srcFile, destFile);
 
-		try (OutputStream os = FileUtil.asOututStream(tempPath.toFile())) {
-			assertThat(os).isNotNull();
-		}
-	}
+        assertThat(Files.asCharSource(destFile, Charsets.UTF_8).readFirstLine()).isEqualTo("test");
+    }
 
-	@Test
-	public void testAsBufferedReader() throws Exception {
+    @Test
+    public void testMakesureDirExists() throws Exception {
+        Path dir = FileUtil.createTempDir();
+        String child1 = "child1";
 
-		Path tempPath = FileUtil.createTempFile();
-		try (BufferedReader br = FileUtil.asBufferedReader(tempPath.toString())) {
-			assertThat(br).isNotNull();
-		}
+        Path child1Dir = dir.resolve(child1);
+        FileUtil.makesureDirExists(child1Dir.toString());
+        assertThat(child1Dir).exists();
 
-		try (BufferedReader br = FileUtil.asBufferedReader(tempPath)) {
-			assertThat(br).isNotNull();
-		}
+        String child2 = "child2";
+        Path child2Dir = dir.resolve(child2);
+        FileUtil.makesureDirExists(child2Dir);
+        assertThat(child2Dir).exists();
 
-	}
+        String child3 = "child3";
+        Path child3Dir = dir.resolve(child3);
+        FileUtil.makesureDirExists(child3Dir.toFile());
+        assertThat(child3Dir).exists();
+    }
 
-	@Test
-	public void testAsBufferedWriter() throws Exception {
+    @Test
+    public void testIsFileExists() throws Exception {
+        assertThat(FileUtil.isFileExists((String) null)).isFalse();
+        assertThat(FileUtil.isFileExists((File) null)).isFalse();
 
-		Path tempPath = FileUtil.createTempFile();
-		try (BufferedWriter bw = FileUtil.asBufferedWriter(tempPath.toString())) {
-			assertThat(bw).isNotNull();
-		}
-		try (BufferedWriter bw = FileUtil.asBufferedWriter(tempPath)) {
-			assertThat(bw).isNotNull();
-		}
-	}
+        Path dir = FileUtil.createTempDir();
+        FileUtil.touch(dir + "/" + "test");
 
-	@Test
-	public void testCopy() throws Exception {
-		Path dir = FileUtil.createTempDir();
+        assertThat(FileUtil.isFileExists(dir + "/" + "test")).isTrue();
+        assertThat(FileUtil.isFileExists(dir.resolve("test").toFile())).isTrue();
+    }
 
-		assertThat(dir).exists();
+    @Test
+    public void testGetFileExtension() throws Exception {
+        Path path = FileUtil.createTempFile("aaa", ".txt");
 
-		String srcFileName = "src";
-		File srcFile = dir.resolve(srcFileName).toFile();
-		FileUtil.touch(srcFile);
+        assertThat(FileUtil.getFileExtension(path.toFile())).isEqualTo("txt");
+        assertThat(FileUtil.getFileExtension(path.toString())).isEqualTo("txt");
+    }
 
-		assertThat(srcFile).exists();
+    @Test
+    public void testIsDirExists() throws Exception {
+        assertThat(FileUtil.isDirExists((String) null)).isFalse();
+        assertThat(FileUtil.isDirExists((File) null)).isFalse();
+        assertThat(FileUtil.isDirExists((Path) null)).isFalse();
 
-		FileUtil.write("test", srcFile);
+        Path dir = FileUtil.createTempDir();
 
-		String destFileName = "dest";
-
-		File destFile = new File(dir.toFile(), "parent1/parent2/" + destFileName);
-		FileUtil.makesureParentDirExists(destFile);
-
-		FileUtil.copy(srcFile, destFile);
-
-		assertThat(Files.readFirstLine(destFile, Charsets.UTF_8)).isEqualTo("test");
-	}
-
-	@Test
-	public void testMakesureDirExists() throws Exception {
-		Path dir = FileUtil.createTempDir();
-		String child1 = "child1";
-
-		Path child1Dir = dir.resolve(child1);
-		FileUtil.makesureDirExists(child1Dir.toString());
-		assertThat(child1Dir).exists();
-
-		String child2 = "child2";
-		Path child2Dir = dir.resolve(child2);
-		FileUtil.makesureDirExists(child2Dir);
-		assertThat(child2Dir).exists();
-
-		String child3 = "child3";
-		Path child3Dir = dir.resolve(child3);
-		FileUtil.makesureDirExists(child3Dir.toFile());
-		assertThat(child3Dir).exists();
-	}
-
-	@Test
-	public void testIsFileExists() throws Exception {
-		assertThat(FileUtil.isFileExists((String) null)).isFalse();
-		assertThat(FileUtil.isFileExists((File) null)).isFalse();
-
-		Path dir = FileUtil.createTempDir();
-		FileUtil.touch(dir + "/" + "test");
-
-		assertThat(FileUtil.isFileExists(dir + "/" + "test")).isTrue();
-
-		assertThat(FileUtil.isFileExists(dir.resolve("test").toFile())).isTrue();
-
-	}
-
-	@Test
-	public void testGetFileExtension() throws Exception {
-		Path path = FileUtil.createTempFile("aaa", ".txt");
-
-		assertThat(FileUtil.getFileExtension(path.toFile())).isEqualTo("txt");
-		assertThat(FileUtil.getFileExtension(path.toString())).isEqualTo("txt");
-	}
-
-	@Test
-	public void testIsDirExists() throws Exception {
-		assertThat(FileUtil.isDirExists((String) null)).isFalse();
-		assertThat(FileUtil.isDirExists((File) null)).isFalse();
-		assertThat(FileUtil.isDirExists((Path) null)).isFalse();
-
-		Path dir = FileUtil.createTempDir();
-
-		assertThat(FileUtil.isDirExists(dir)).isTrue();
-		assertThat(FileUtil.isDirExists(dir.toString())).isTrue();
-		assertThat(FileUtil.isDirExists(dir.toFile())).isTrue();
-	}
+        assertThat(FileUtil.isDirExists(dir)).isTrue();
+        assertThat(FileUtil.isDirExists(dir.toString())).isTrue();
+        assertThat(FileUtil.isDirExists(dir.toFile())).isTrue();
+    }
 }

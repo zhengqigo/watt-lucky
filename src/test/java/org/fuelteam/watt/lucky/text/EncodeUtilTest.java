@@ -51,7 +51,6 @@ public class EncodeUtilTest {
         String input = "haha,i am a very long message";
         String result = EncodeUtil.encodeBase64UrlSafe(input.getBytes());
         assertThat(new String(EncodeUtil.decodeBase64UrlSafe(result), Charsets.UTF_8)).isEqualTo(input);
-
         try {
             assertThat(result).isEqualTo(EncodeUtil.decodeBase64UrlSafe("AQIPE+8="));
             fail("should throw exception before");

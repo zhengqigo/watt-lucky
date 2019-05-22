@@ -40,5 +40,4 @@ public class CsvUtilTest {
 		assertThat(CsvUtil.fromCsvString("1,\"A,\"a\"\"BC\"")).hasSize(2).contains("1").contains("A,\"a\"BC");
 		assertThat(CsvUtil.fromCsvString("1,ABC\"")).hasSize(2).contains("1").contains("ABC\"");
 	}
-
 }

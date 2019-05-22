@@ -10,7 +10,6 @@ public class StringBuilderHolderTest {
 
     @Test
     public void test() throws InterruptedException {
-
         final CountDownLatch countdown = new CountDownLatch(10);
         final CyclicBarrier barrier = new CyclicBarrier(10);
 
@@ -22,7 +21,6 @@ public class StringBuilderHolderTest {
                 try {
                     barrier.await();
                 } catch (Exception e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
                 StringBuilder builder = StringBuilderHolder.getGlobal();
@@ -44,7 +42,6 @@ public class StringBuilderHolderTest {
                 countdown.countDown();
             }
         };
-
         for (int i = 0; i < 10; i++) {
             Thread thread = new Thread(runnable);
             thread.start();
