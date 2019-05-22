@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.fuelteam.watt.lucky.base.annotation.Nullable;
+import org.fuelteam.watt.lucky.annotation.Nullable;
 import org.fuelteam.watt.lucky.collection.ListUtil;
 
 import com.google.common.base.CharMatcher;

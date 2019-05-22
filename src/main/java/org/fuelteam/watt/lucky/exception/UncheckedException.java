@@ -1,4 +1,4 @@
-package org.fuelteam.watt.lucky.base.type;
+package org.fuelteam.watt.lucky.exception;
 
 /**
  * CheckedException的wrapper，将返回内层Exception的Message。

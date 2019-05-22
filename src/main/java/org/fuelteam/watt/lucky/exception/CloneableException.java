@@ -1,12 +1,10 @@
-package org.fuelteam.watt.lucky.base.type;
-
-import org.fuelteam.watt.lucky.base.ExceptionUtil;
+package org.fuelteam.watt.lucky.exception;
 
 /**
  * 避免获得StackTrace的性能损耗：定义静态异常->克隆并设定新的异常信息。举例：
  * <pre>
- * // 定义静态异常TIMEOUT_EXCEPTION RootCause为Timeout My.class类hello方法
- * private static CloneableException TIMEOUT_EXCEPTION = new CloneableException("Timeout").setStackTrace(My.class, "hello");
+ * // 定义静态异常TIMEOUT_EXCEPTION RootCause为Timeout HelloService.class类hello方法
+ * private static CloneableException TIMEOUT_EXCEPTION = new CloneableException("Timeout").setStackTrace(HelloService.class, "hello");
  * 
  * // 抛出异常并设定异常信息为Timeout for 40ms
  * throw TIMEOUT_EXCEPTION.clone("Timeout for 40ms");

@@ -1,10 +1,7 @@
-package org.fuelteam.watt.lucky.base;
+package org.fuelteam.watt.lucky.validate;
 
-import org.fuelteam.watt.lucky.base.annotation.Nullable;
+import org.fuelteam.watt.lucky.annotation.Nullable;
 
-/**
- * 参数校验工具类
- */
 public class MoreValidate extends org.apache.commons.lang3.Validate {
 
     /**

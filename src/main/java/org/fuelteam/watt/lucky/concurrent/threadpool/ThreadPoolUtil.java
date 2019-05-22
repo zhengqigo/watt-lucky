@@ -5,8 +5,8 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.Validate;
-import org.fuelteam.watt.lucky.base.annotation.NotNull;
-import org.fuelteam.watt.lucky.base.annotation.Nullable;
+import org.fuelteam.watt.lucky.annotation.NotNull;
+import org.fuelteam.watt.lucky.annotation.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -4,8 +4,8 @@ import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
-import org.fuelteam.watt.lucky.base.annotation.NotNull;
-import org.fuelteam.watt.lucky.base.annotation.Nullable;
+import org.fuelteam.watt.lucky.annotation.NotNull;
+import org.fuelteam.watt.lucky.annotation.Nullable;
 
 import com.google.common.primitives.Ints;
 import com.google.common.primitives.Longs;

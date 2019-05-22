@@ -1,4 +1,4 @@
-package org.fuelteam.watt.lucky.utils;
+package org.fuelteam.watt.lucky.print;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;

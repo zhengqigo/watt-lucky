@@ -2,8 +2,8 @@ package org.fuelteam.watt.lucky.base;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.fuelteam.watt.lucky.base.ValueValidator;
-import org.fuelteam.watt.lucky.base.ValueValidator.Validator;
+import org.fuelteam.watt.lucky.validate.ValueValidator;
+import org.fuelteam.watt.lucky.validate.ValueValidator.Validator;
 import org.junit.Test;
 
 public class ValueValidatorTest {

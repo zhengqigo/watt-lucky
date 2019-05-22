@@ -1,4 +1,4 @@
-package org.fuelteam.watt.lucky.base.annotation;
+package org.fuelteam.watt.lucky.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;

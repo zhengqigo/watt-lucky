@@ -1,10 +1,7 @@
-package org.fuelteam.watt.lucky.base;
+package org.fuelteam.watt.lucky.validate;
 
 import org.apache.commons.lang3.StringUtils;
 
-/**
- * 数值校验取值器
- */
 public class ValueValidator {
 
 	/**

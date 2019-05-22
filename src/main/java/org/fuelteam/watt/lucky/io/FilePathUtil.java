@@ -1,8 +1,8 @@
 package org.fuelteam.watt.lucky.io;
 
 import org.apache.commons.lang3.StringUtils;
-import org.fuelteam.watt.lucky.base.Platforms;
 import org.fuelteam.watt.lucky.text.MoreStringUtil;
+import org.fuelteam.watt.lucky.utils.Platforms;
 
 import com.google.common.io.Files;
 

@@ -1,4 +1,4 @@
-package org.fuelteam.watt.lucky.base;
+package org.fuelteam.watt.lucky.exception;
 
 import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
@@ -8,19 +8,12 @@ import java.util.concurrent.ExecutionException;
 import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.fuelteam.watt.lucky.base.annotation.NotNull;
-import org.fuelteam.watt.lucky.base.annotation.Nullable;
-import org.fuelteam.watt.lucky.base.type.CloneableException;
-import org.fuelteam.watt.lucky.base.type.UncheckedException;
+import org.fuelteam.watt.lucky.annotation.NotNull;
+import org.fuelteam.watt.lucky.annotation.Nullable;
 import org.fuelteam.watt.lucky.io.type.StringBuilderWriter;
 
 import com.google.common.base.Throwables;
 
-/**
- * 异常工具类
- * @see CloneableException
- * @see ExceptionUtils
- */
 public class ExceptionUtil {
 
     private static final StackTraceElement[] EMPTY_STACK_TRACE = new StackTraceElement[0];
@@ -61,8 +54,6 @@ public class ExceptionUtil {
     }
 
     /**
-     * 与Throwable.toString()相比使用了短类名
-     * 
      * @see ExceptionUtils#getMessage(Throwable)
      */
     public static String toStringWithShortName(@Nullable Throwable throwable) {
@@ -77,24 +68,14 @@ public class ExceptionUtil {
         Throwable cause = getRootCause(throwable);
 
         StringBuilder sb = new StringBuilder(128).append(className).append(": ").append(message);
-        if (cause != throwable) {
-            sb.append("; ").append(toStringWithShortName(cause));
-        }
+        if (cause != throwable) sb.append("; ").append(toStringWithShortName(cause));
         return sb.toString();
     }
 
-    /**
-     * 获取异常的RootCause，没有则返回自身
-     * 
-     * @see Throwables#getRootCause(Throwable)
-     */
     public static Throwable getRootCause(@NotNull Throwable throwable) {
         return Throwables.getRootCause(throwable);
     }
 
-    /**
-     * 获取某种类型的cause，没有则返回空
-     */
     @SuppressWarnings("unchecked")
     public static <T extends Throwable> T findCause(@NotNull Throwable throwable, Class<T> cause) {
         while (throwable != null) {
@@ -104,9 +85,6 @@ public class ExceptionUtil {
         return null;
     }
 
-    /**
-     * 判断异常是否由某些底层的异常引起
-     */
     @SuppressWarnings("unchecked")
     public static boolean isCausedBy(@Nullable Throwable throwable, Class<? extends Exception>... causeExceptionClasses) {
         Throwable cause = throwable;
@@ -120,10 +98,9 @@ public class ExceptionUtil {
     }
 
     /**
-     * 对某些已知且经常抛出的异常，不需要每次创建异常类并很消耗性能的并生成完整的StackTrace，此时可使用静态声明的异常。
-     * 如果异常可能在多个地方抛出，使用本函数设置抛出的类名和方法名。举例：
+     * 对已知且常抛出的异常，不需要每次创建异常类并很消耗性能的生成完整的StackTrace，此时可使用静态声明的异常
      * <pre>
-     * private static RuntimeException TIMEOUT_EXCEPTION = ExceptionUtil.setStackTrace(new RuntimeException("Timeout"), My.class, "method");
+     * private static RuntimeException TIMEOUT_EXCEPTION = ExceptionUtil.setStackTrace(new RuntimeException("Timeout"), Service.class, "method");
      * </pre>
      */
     public static <T extends Throwable> T setStackTrace(@NotNull T throwable, Class<?> throwClass, String throwClazz) {
@@ -131,9 +108,6 @@ public class ExceptionUtil {
         return throwable;
     }
 
-    /**
-     * 暴力清除Cause的StackTrace
-     */
     public static <T extends Throwable> T clearStackTrace(@NotNull T throwable) {
         Throwable cause = throwable;
         while (cause != null) {

@@ -7,7 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.Validate;
-import org.fuelteam.watt.lucky.base.MoreValidate;
+import org.fuelteam.watt.lucky.validate.MoreValidate;
 
 
 /**

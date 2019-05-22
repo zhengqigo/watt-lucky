@@ -3,7 +3,7 @@ package org.fuelteam.watt.lucky.text;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
-import org.fuelteam.watt.lucky.base.annotation.Nullable;
+import org.fuelteam.watt.lucky.annotation.Nullable;
 
 
 /**

@@ -2,7 +2,7 @@ package org.fuelteam.watt.lucky.base;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.fuelteam.watt.lucky.base.RuntimeUtil;
+import org.fuelteam.watt.lucky.utils.RuntimeUtil;
 import org.junit.Test;
 
 public class RuntimeUtilTest {

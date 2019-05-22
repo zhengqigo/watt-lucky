@@ -11,9 +11,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.reflect.ConstructorUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
-import org.fuelteam.watt.lucky.base.ExceptionUtil;
-import org.fuelteam.watt.lucky.base.ObjectUtil;
-import org.fuelteam.watt.lucky.base.type.UncheckedException;
+import org.fuelteam.watt.lucky.exception.ExceptionUtil;
+import org.fuelteam.watt.lucky.exception.UncheckedException;
+import org.fuelteam.watt.lucky.utils.ObjectUtil;
 
 /**
  * 反射工具类.

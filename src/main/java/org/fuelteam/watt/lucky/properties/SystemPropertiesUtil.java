@@ -1,14 +1,12 @@
-package org.fuelteam.watt.lucky.base;
+package org.fuelteam.watt.lucky.properties;
 
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.fuelteam.watt.lucky.number.NumberUtil;
+import org.fuelteam.watt.lucky.utils.BooleanUtil;
 
-/**
- * 系统变量工具类
- */
 public class SystemPropertiesUtil {
 
     /**
@@ -189,9 +187,6 @@ public class SystemPropertiesUtil {
         }
     }
 
-    /**
-     * 获取所关心的Property变更的Listener基类
-     */
     public abstract static class PropertiesListener {
 
         protected String propertyName;

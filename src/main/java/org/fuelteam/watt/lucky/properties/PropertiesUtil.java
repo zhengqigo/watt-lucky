@@ -1,4 +1,4 @@
-package org.fuelteam.watt.lucky.base;
+package org.fuelteam.watt.lucky.properties;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,12 +9,10 @@ import java.util.Properties;
 import org.fuelteam.watt.lucky.io.URLResourceUtil;
 import org.fuelteam.watt.lucky.number.NumberUtil;
 import org.fuelteam.watt.lucky.text.Charsets;
+import org.fuelteam.watt.lucky.utils.BooleanUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * 读取Properties到各种数据类型及从文件或字符串装载Properties
- */
 public class PropertiesUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(PropertiesUtil.class);
@@ -40,8 +38,7 @@ public class PropertiesUtil {
     }
 
     /**
-     * 从文件路径加载properties，默认使用utf-8编码解析文件；
-     * 路径支持从外部文件或resources文件加载，"file://"或无前缀代表外部文件，"classpath:"代表resources
+     * 从文件路径加载properties，默认使用utf-8编码解析文件，"file://"或无前缀代表外部文件，"classpath:"代表resources
      */
     public static Properties loadFromFile(String generalPath) {
         Properties p = new Properties();
@@ -53,9 +50,6 @@ public class PropertiesUtil {
         return p;
     }
 
-    /**
-     * 从字符串内容加载Properties
-     */
     public static Properties loadFromString(String content) {
         Properties p = new Properties();
         try (Reader reader = new StringReader(content)) {

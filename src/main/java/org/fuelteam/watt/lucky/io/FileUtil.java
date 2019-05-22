@@ -18,10 +18,10 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.List;
 
 import org.apache.commons.lang3.Validate;
-import org.fuelteam.watt.lucky.base.Platforms;
-import org.fuelteam.watt.lucky.base.annotation.NotNull;
-import org.fuelteam.watt.lucky.base.annotation.Nullable;
+import org.fuelteam.watt.lucky.annotation.NotNull;
+import org.fuelteam.watt.lucky.annotation.Nullable;
 import org.fuelteam.watt.lucky.text.Charsets;
+import org.fuelteam.watt.lucky.utils.Platforms;
 
 /**
  * 文件及目录操作读写工具类

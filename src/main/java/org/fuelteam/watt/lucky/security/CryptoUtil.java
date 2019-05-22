@@ -11,7 +11,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.fuelteam.watt.lucky.base.ExceptionUtil;
+import org.fuelteam.watt.lucky.exception.ExceptionUtil;
 import org.fuelteam.watt.lucky.number.RandomUtil;
 import org.fuelteam.watt.lucky.text.Charsets;
 

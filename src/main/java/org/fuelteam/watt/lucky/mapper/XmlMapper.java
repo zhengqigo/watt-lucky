@@ -16,7 +16,7 @@ import javax.xml.namespace.QName;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
-import org.fuelteam.watt.lucky.base.ExceptionUtil;
+import org.fuelteam.watt.lucky.exception.ExceptionUtil;
 import org.fuelteam.watt.lucky.reflect.ClassUtil;
 
 /**

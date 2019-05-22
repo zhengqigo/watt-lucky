@@ -1,4 +1,4 @@
-package org.fuelteam.watt.lucky.base;
+package org.fuelteam.watt.lucky.utils;
 
 import java.lang.management.ManagementFactory;
 import java.util.List;
@@ -6,16 +6,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.lang3.StringUtils;
 
-/**
- * Runtime工具类
- */
 public class RuntimeUtil {
 
     private static AtomicInteger shutdownHookThreadIndex = new AtomicInteger(0);
 
-    /**
-     * 获得当前进程的PID，当失败时返回-1
-     */
     public static int getPid() {
         // format: "pid@hostname"
         String jvmName = ManagementFactory.getRuntimeMXBean().getName();
@@ -29,14 +23,14 @@ public class RuntimeUtil {
     }
 
     /**
-     * 返回应用启动到现在的毫秒数
+     * 应用启动到现在的毫秒数
      */
     public static long getUpTime() {
         return ManagementFactory.getRuntimeMXBean().getUptime();
     }
 
     /**
-     * 返回输入的JVM参数列表
+     * 输入的JVM参数列表
      */
     public static String getVmArguments() {
         List<String> vmArguments = ManagementFactory.getRuntimeMXBean().getInputArguments();

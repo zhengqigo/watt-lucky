@@ -3,9 +3,9 @@ package org.fuelteam.watt.lucky.base;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
-import org.fuelteam.watt.lucky.base.SystemPropertiesUtil;
-import org.fuelteam.watt.lucky.base.SystemPropertiesUtil.PropertiesListener;
 import org.fuelteam.watt.lucky.number.RandomUtil;
+import org.fuelteam.watt.lucky.properties.SystemPropertiesUtil;
+import org.fuelteam.watt.lucky.properties.SystemPropertiesUtil.PropertiesListener;
 import org.junit.Test;
 
 public class SystemPropertiesUtilTest {

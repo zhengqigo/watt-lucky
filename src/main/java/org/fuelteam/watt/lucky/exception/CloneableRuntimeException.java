@@ -1,6 +1,4 @@
-package org.fuelteam.watt.lucky.base.type;
-
-import org.fuelteam.watt.lucky.base.ExceptionUtil;
+package org.fuelteam.watt.lucky.exception;
 
 /**
  * @see CloneableException

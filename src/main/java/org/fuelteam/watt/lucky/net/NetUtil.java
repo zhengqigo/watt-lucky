@@ -12,8 +12,8 @@ import java.util.Random;
 
 import javax.net.ServerSocketFactory;
 
-import org.fuelteam.watt.lucky.base.Platforms;
-import org.fuelteam.watt.lucky.base.SystemPropertiesUtil;
+import org.fuelteam.watt.lucky.properties.SystemPropertiesUtil;
+import org.fuelteam.watt.lucky.utils.Platforms;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

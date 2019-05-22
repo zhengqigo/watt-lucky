@@ -1,13 +1,9 @@
-package org.fuelteam.watt.lucky.base;
+package org.fuelteam.watt.lucky.utils;
 
 import java.util.EnumSet;
 
 import org.apache.commons.lang3.EnumUtils;
 
-/**
- * 枚举工具类
- * @see EnumUtils
- */
 public class EnumUtil {
 
 	public static <E extends Enum<E>> long generateBits(final Class<E> enumClass, final Iterable<? extends E> values) {

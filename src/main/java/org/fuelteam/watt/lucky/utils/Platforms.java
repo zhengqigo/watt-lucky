@@ -1,13 +1,9 @@
-package org.fuelteam.watt.lucky.base;
+package org.fuelteam.watt.lucky.utils;
 
 import java.io.File;
 
 import org.apache.commons.lang3.SystemUtils;
 
-/**
- * 系统设定及平台信息的变量
- * @see SystemUtils
- */
 public class Platforms {
 
 	// 文件路径分隔符

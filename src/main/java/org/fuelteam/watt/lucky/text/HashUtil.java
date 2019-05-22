@@ -8,8 +8,8 @@ import java.security.SecureRandom;
 import java.util.zip.CRC32;
 
 import org.apache.commons.lang3.Validate;
-import org.fuelteam.watt.lucky.base.annotation.NotNull;
-import org.fuelteam.watt.lucky.base.annotation.Nullable;
+import org.fuelteam.watt.lucky.annotation.NotNull;
+import org.fuelteam.watt.lucky.annotation.Nullable;
 
 import com.google.common.hash.Hashing;
 

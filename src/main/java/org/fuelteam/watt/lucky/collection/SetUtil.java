@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.fuelteam.watt.lucky.base.annotation.Nullable;
+import org.fuelteam.watt.lucky.annotation.Nullable;
 import org.fuelteam.watt.lucky.collection.type.ConcurrentHashSet;
 
 import com.google.common.collect.Sets;

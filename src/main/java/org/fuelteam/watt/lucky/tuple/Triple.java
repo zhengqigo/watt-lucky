@@ -1,30 +1,39 @@
-package org.fuelteam.watt.lucky.base.type;
+package org.fuelteam.watt.lucky.tuple;
 
 import java.io.Serializable;
 
-import org.fuelteam.watt.lucky.base.annotation.Nullable;
+import org.fuelteam.watt.lucky.annotation.Nullable;
 
 /**
- * 从Twitter Common移植的简单的Pair，用于返回值返回两个元素。
+ * 从Twitter Common移植的简单的Triple，用于返回值返回三个元素。
  */
-public class Pair<L, R> implements Serializable {
+public class Triple<L, M, R> implements Serializable {
 
-    private static final long serialVersionUID = 988170472238117297L;
+    private static final long serialVersionUID = -4187201641839757403L;
 
     @Nullable
     private final L left;
 
     @Nullable
+    private final M middle;
+
+    @Nullable
     private final R right;
 
-    public Pair(@Nullable L left, @Nullable R right) {
+    public Triple(@Nullable L left, @Nullable M middle, @Nullable R right) {
         this.left = left;
+        this.middle = middle;
         this.right = right;
     }
 
     @Nullable
     public L getLeft() {
         return left;
+    }
+
+    @Nullable
+    public M getMiddle() {
+        return middle;
     }
 
     @Nullable
@@ -37,6 +46,7 @@ public class Pair<L, R> implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((left == null) ? 0 : left.hashCode());
+        result = prime * result + ((middle == null) ? 0 : middle.hashCode());
         return prime * result + ((right == null) ? 0 : right.hashCode());
     }
 
@@ -45,9 +55,11 @@ public class Pair<L, R> implements Serializable {
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
-        Pair other = (Pair) obj;
+        Triple other = (Triple) obj;
         if (left == null && other.left != null) return false;
         if (left != null && !left.equals(other.left)) return false;
+        if (middle == null && other.middle != null) return false;
+        if (middle != null && !middle.equals(other.middle)) return false;
         if (right == null && other.right != null) return false;
         if (right != null && !right.equals(other.right)) return false;
         return true;
@@ -55,13 +67,13 @@ public class Pair<L, R> implements Serializable {
 
     @Override
     public String toString() {
-        return "Pair [left=" + left + ", right=" + right + ']';
+        return "Triple [left=" + left + ", middle=" + middle + ", right=" + right + ']';
     }
 
     /**
-     * 根据等号左边的泛型，自动构造合适的Pair
+     * 根据等号左边的泛型，自动构造合适的Triple
      */
-    public static <L, R> Pair<L, R> of(@Nullable L left, @Nullable R right) {
-        return new Pair<L, R>(left, right);
+    public static <L, M, R> Triple<L, M, R> of(@Nullable L left, @Nullable M middle, @Nullable R right) {
+        return new Triple<L, M, R>(left, middle, right);
     }
 }

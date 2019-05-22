@@ -1,14 +1,11 @@
-package org.fuelteam.watt.lucky.base;
+package org.fuelteam.watt.lucky.utils;
 
 import java.util.Arrays;
 
-import org.fuelteam.watt.lucky.base.annotation.Nullable;
+import org.fuelteam.watt.lucky.annotation.Nullable;
 
 import com.google.common.base.Objects;
 
-/**
- * Object打印优化，主要解决数组的打印及多个对象的HashCode串联
- */
 public class ObjectUtil {
 
     private static final String NULL = "null";

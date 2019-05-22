@@ -7,10 +7,10 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.ExecutionException;
 
-import org.fuelteam.watt.lucky.base.ExceptionUtil;
-import org.fuelteam.watt.lucky.base.type.CloneableException;
-import org.fuelteam.watt.lucky.base.type.CloneableRuntimeException;
-import org.fuelteam.watt.lucky.base.type.UncheckedException;
+import org.fuelteam.watt.lucky.exception.CloneableException;
+import org.fuelteam.watt.lucky.exception.CloneableRuntimeException;
+import org.fuelteam.watt.lucky.exception.ExceptionUtil;
+import org.fuelteam.watt.lucky.exception.UncheckedException;
 import org.junit.Test;
 
 public class ExceptionUtilTest {

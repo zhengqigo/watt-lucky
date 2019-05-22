@@ -3,8 +3,8 @@ package org.fuelteam.watt.lucky.async;
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
 
-import org.fuelteam.watt.lucky.base.RuntimeUtil;
 import org.fuelteam.watt.lucky.concurrent.threadpool.ThreadPoolBuilder;
+import org.fuelteam.watt.lucky.utils.RuntimeUtil;
 
 public class Async {
 

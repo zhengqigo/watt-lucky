@@ -2,8 +2,8 @@ package org.fuelteam.watt.lucky.base;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.fuelteam.watt.lucky.base.type.Pair;
-import org.fuelteam.watt.lucky.base.type.Triple;
+import org.fuelteam.watt.lucky.tuple.Pair;
+import org.fuelteam.watt.lucky.tuple.Triple;
 import org.junit.Test;
 
 public class PairTest {

@@ -3,7 +3,7 @@ package org.fuelteam.watt.lucky.base;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
-import org.fuelteam.watt.lucky.base.MoreValidate;
+import org.fuelteam.watt.lucky.validate.MoreValidate;
 import org.junit.Test;
 
 public class MoreValidateTest {

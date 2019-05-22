@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Properties;
 
-import org.fuelteam.watt.lucky.base.PropertiesUtil;
+import org.fuelteam.watt.lucky.properties.PropertiesUtil;
 import org.junit.Test;
 
 public class PropertiesUtilTest {

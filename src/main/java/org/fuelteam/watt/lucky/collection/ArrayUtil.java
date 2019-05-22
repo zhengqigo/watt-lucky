@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
-import org.fuelteam.watt.lucky.base.annotation.Nullable;
+import org.fuelteam.watt.lucky.annotation.Nullable;
 
 import com.google.common.collect.ObjectArrays;
 import com.google.common.primitives.Doubles;

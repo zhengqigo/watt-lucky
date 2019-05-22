@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
-import org.fuelteam.watt.lucky.base.type.Pair;
+import org.fuelteam.watt.lucky.tuple.Pair;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
