@@ -12,9 +12,6 @@ import org.fuelteam.watt.lucky.collection.type.ConcurrentHashSet;
 
 import com.google.common.collect.Sets;
 
-/**
- * Set工具类
- */
 public class SetUtil {
 
     /**

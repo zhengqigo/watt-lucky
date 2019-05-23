@@ -9,9 +9,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.LinkedBlockingQueue;
 
-/**
- * Queue和Deque工具类
- */
 public class QueueUtil {
 
     /**

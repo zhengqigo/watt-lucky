@@ -1,4 +1,4 @@
-package org.fuelteam.watt.lucky.utils;
+package org.fuelteam.watt.lucky.number;
 
 import java.math.BigDecimal;
 

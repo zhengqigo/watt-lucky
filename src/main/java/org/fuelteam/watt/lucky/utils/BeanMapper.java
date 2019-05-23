@@ -13,15 +13,13 @@ import com.google.common.collect.Lists;
 public class BeanMapper {
 
     private static DozerBeanMapper dozer = new DozerBeanMapper();
-    
+
     // 将source对象中的属性映射到Class为destinationClass的对象中
     public static <S, D> D map(S source, Class<D> destinationClass) {
         return dozer.map(source, destinationClass);
     }
 
-    /**
-     * 简单的复制出新对象ArrayList
-     */
+    // 简单的复制出新对象ArrayList
     public static <S, D> List<D> mapList(Iterable<S> sourceList, Class<D> destinationClass) {
         List<D> destinationList = new ArrayList<D>();
         for (S source : sourceList) {
@@ -31,15 +29,12 @@ public class BeanMapper {
         }
         return destinationList;
     }
-    
+
     @SuppressWarnings("unchecked")
     public static <T> T[] newArray(Class<T> type, int length) {
         return (T[]) Array.newInstance(type, length);
     }
 
-    /**
-     * 简单复制出新对象数组
-     */
     public static <S, D> D[] mapArray(final S[] sourceArray, final Class<D> destinationClass) {
         D[] destinationArray = newArray(destinationClass, sourceArray.length);
 

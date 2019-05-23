@@ -6,8 +6,8 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Random;
 
-import org.fuelteam.watt.lucky.utils.BigDecimalUtil;
-import org.fuelteam.watt.lucky.utils.BigDecimalWrapper;
+import org.fuelteam.watt.lucky.number.BigDecimalUtil;
+import org.fuelteam.watt.lucky.number.BigDecimalWrapper;
 
 public class RedPacket {
 

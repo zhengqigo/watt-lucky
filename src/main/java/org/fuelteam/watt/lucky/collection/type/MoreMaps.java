@@ -6,8 +6,8 @@ import java.util.concurrent.ConcurrentMap;
 
 import org.apache.commons.lang3.mutable.MutableInt;
 import org.apache.commons.lang3.mutable.MutableLong;
-import org.fuelteam.watt.lucky.collection.type.primitive.IntObjectHashMap;
-import org.fuelteam.watt.lucky.collection.type.primitive.LongObjectHashMap;
+import org.fuelteam.watt.lucky.collection.primitive.IntObjectHashMap;
+import org.fuelteam.watt.lucky.collection.primitive.LongObjectHashMap;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.MapMaker;
@@ -26,90 +26,40 @@ public class MoreMaps {
         return new MapMaker().weakValues().initialCapacity(initialCapacity).concurrencyLevel(concurrencyLevel).makeMap();
     }
 
-    /**
-     * 创建key为int的优化HashMap
-     * 
-     * @param initialCapacity 默认为8
-     * @param loadFactor 默认为0.5
-     */
     public static <V> IntObjectHashMap<V> createPrimitiveIntKeyMap(int initialCapacity, float loadFactor) {
         return new IntObjectHashMap<V>(initialCapacity, loadFactor);
     }
 
-    /**
-     * 创建key为long的优化HashMap
-     * 
-     * @param initialCapacity 默认为8
-     * @param loadFactor 默认为0.5
-     */
     public static <V> LongObjectHashMap<V> createPrimitiveLongKeyMap(int initialCapacity, float loadFactor) {
         return new LongObjectHashMap<V>(initialCapacity, loadFactor);
     }
 
-    /**
-     * 创建值为可更改的Integer的HashMap，可更改的Integer在更改时不需要重新创建Integer对象
-     * 
-     * @param initialCapacity 建议为16
-     * @param loadFactor 建议为0.5
-     */
     public static <K> HashMap<K, MutableInt> createMutableIntValueMap(int initialCapacity, float loadFactor) {
         return new HashMap<K, MutableInt>(initialCapacity, loadFactor);
     }
 
-    /**
-     * 创建值为可更改的Long的HashMap，可更改的Long在更改时不需要重新创建Long对象
-     * 
-     * @param initialCapacity 建议为16
-     * @param loadFactor 建议为0.5
-     */
     public static <K> HashMap<K, MutableLong> createMutableLongValueMap(int initialCapacity, float loadFactor) {
         return new HashMap<K, MutableLong>(initialCapacity, loadFactor);
     }
 
-    /**
-     * 线程安全的HashMap<E, AtomicLong>结构的Counter
-     * @see AtomicLongMap
-     */
     public static <E> AtomicLongMap<E> createConcurrentCounterMap() {
         return AtomicLongMap.create();
     }
 
-    /**
-     * HashMap<E, List<V>>结构的一个Key对应多个值的map，线程不安全，MultiMap无线程安全的实现，可参考MultimapBuilder其它结构存储values的MultiMap
-     * 
-     * @param expectedKeys 默认为16
-     * @param expectedValuesPerKey 默认为3
-     * 
-     * @See ArrayListMultimap
-     */
     public static <K, V> ArrayListMultimap<K, V> createListMultiValueMap(int expectedKeys, int expectedValuesPerKey) {
         return ArrayListMultimap.create(expectedKeys, expectedValuesPerKey);
     }
 
-    /**
-     * HashMap<E,TreeSet<V>>结构的一个Key对应多个值的map，线程不安全，MultiValueMap无线程安全的实现，可参考MultimapBuilder其它结构存储values的MultiMap
-     * 
-     * @see MultimapBuilder
-     */
     @SuppressWarnings("rawtypes")
     public static <K, V extends Comparable> SortedSetMultimap<K, V> createSortedSetMultiValueMap() {
         return MultimapBuilder.hashKeys().treeSetValues().build();
     }
 
-    /**
-     * HashMap<E,TreeSet<V>>结构的一个Key对应多个值的map，线程不安全，MultiValueMap无线程安全的实现，可参考MultimapBuilder其它结构存储values的MultiMap
-     * 
-     * @see MultimapBuilder
-     */
     @SuppressWarnings("unchecked")
     public static <K, V> SortedSetMultimap<K, V> createSortedSetMultiValueMap(Comparator<V> comparator) {
         return (SortedSetMultimap<K, V>) MultimapBuilder.hashKeys().treeSetValues(comparator);
     }
 
-    /**
-     * 一段范围的Key指向同一个Value的Map
-     * @see TreeRangeMap
-     */
     @SuppressWarnings("rawtypes")
     public static <K extends Comparable, V> TreeRangeMap<K, V> createRangeMap() {
         return TreeRangeMap.create();

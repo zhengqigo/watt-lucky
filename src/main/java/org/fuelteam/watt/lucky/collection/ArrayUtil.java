@@ -15,9 +15,6 @@ import com.google.common.primitives.Longs;
 
 public class ArrayUtil {
 
-    /**
-     * 创建数组，Array.newInstance()的性能并不差
-     */
     @SuppressWarnings("unchecked")
     public static <T> T[] newArray(Class<T> type, int length) {
         return (T[]) Array.newInstance(type, length);
@@ -29,8 +26,8 @@ public class ArrayUtil {
      * https://shipilev.net/blog/2016/arrays-wisdom-ancients/
      */
     @SuppressWarnings("unchecked")
-    public static <T> T[] toArray(Collection<T> col, Class<T> type) {
-        return col.toArray((T[]) Array.newInstance(type, 0));
+    public static <T> T[] toArray(Collection<T> collection, Class<T> clazz) {
+        return collection.toArray((T[]) Array.newInstance(clazz, 0));
     }
 
     private static void swap(Object[] arr, int i, int j) {
@@ -39,9 +36,6 @@ public class ArrayUtil {
         arr[j] = tmp;
     }
 
-    /**
-     * 将传入的数组乱序
-     */
     public static <T> T[] shuffle(T[] array) {
         if (array != null && array.length > 1) {
             Random rand = new Random();
@@ -51,9 +45,6 @@ public class ArrayUtil {
         }
     }
 
-    /**
-     * 将传入的数组乱序
-     */
     public static <T> T[] shuffle(T[] array, Random random) {
         if (array != null && array.length > 1 && random != null) {
             for (int i = array.length; i > 1; i--) {

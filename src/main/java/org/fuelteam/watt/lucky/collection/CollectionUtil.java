@@ -12,11 +12,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Ordering;
 
-/**
- * Collection工具集
- * 
- * @see com.google.common.collect.Ordering
- */
 public class CollectionUtil {
 
     public static boolean isEmpty(Collection<?> collection) {

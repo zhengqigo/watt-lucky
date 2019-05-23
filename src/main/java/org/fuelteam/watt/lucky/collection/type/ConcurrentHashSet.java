@@ -13,7 +13,7 @@ public class ConcurrentHashSet<E> extends AbstractSet<E> implements Set<E>, java
 
 	private final Map<E, Boolean> map;
 
-	private transient Set<E> set; // its keySet
+	private transient Set<E> set;
 
 	public ConcurrentHashSet() {
 		map = new ConcurrentHashMap<E, Boolean>();

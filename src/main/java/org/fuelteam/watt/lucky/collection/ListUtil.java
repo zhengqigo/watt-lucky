@@ -226,12 +226,10 @@ public class ListUtil {
         Set<T> set = new HashSet<>((int) (list.size() / 0.75F + 1.0F));
         while (ite.hasNext()) {
             T obj = ite.next();
-            // 清理掉null的集合
             if (null == obj) {
                 ite.remove();
                 continue;
             }
-            // 清理掉重复的集合
             if (set.contains(obj)) {
                 ite.remove();
                 continue;
