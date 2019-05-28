@@ -1,4 +1,4 @@
-package org.fuelteam.watt.lucky.collection.type;
+package org.fuelteam.watt.lucky.collection;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,17 +17,17 @@ public final class SortedArrayList<E> extends ArrayList<E> {
 
 	protected final Comparator<? super E> comparator;
 
-	public SortedArrayList(Comparator<? super E> c) {
-		comparator = c;
+	public SortedArrayList(Comparator<? super E> comparator) {
+		this.comparator = comparator;
 	}
 
 	public SortedArrayList() {
-		comparator = null;
+		this.comparator = null;
 	}
 
-	public SortedArrayList(Collection<? extends E> c) {
-		comparator = null;
-		addAll(c);
+	public SortedArrayList(Collection<? extends E> collection) {
+	    this.comparator = null;
+		addAll(collection);
 	}
 
 	public Comparator<?> getComparator() {
@@ -35,32 +35,32 @@ public final class SortedArrayList<E> extends ArrayList<E> {
 	}
 
 	@Override
-	public boolean add(E o) {
+	public boolean add(E e) {
 		int idx = 0;
-		if (!isEmpty()) idx = findInsertionPoint(o);
-		super.add(idx, o);
+		if (!isEmpty()) idx = findInsertionPoint(e);
+		super.add(idx, e);
 		return true;
 	}
 
 	@Override
-	public boolean addAll(Collection<? extends E> c) {
-		Iterator<? extends E> i = c.iterator();
+	public boolean addAll(Collection<? extends E> collection) {
+		Iterator<? extends E> it = collection.iterator();
 		boolean changed = false;
-		while (i.hasNext()) {
-			boolean ret = add(i.next());
+		while (it.hasNext()) {
+			boolean ret = add(it.next());
 			if (!changed) changed = ret;
 		}
 		return changed;
 	}
 
-	public int findInsertionPoint(E o) {
-		return findInsertionPoint(o, 0, size() - 1);
+	public int findInsertionPoint(E e) {
+		return findInsertionPoint(e, 0, size() - 1);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	protected int compare(E k1, E k2) {
-		if (comparator == null) return ((Comparable) k1).compareTo(k2);
-		return comparator.compare(k1, k2);
+	protected int compare(E e1, E e2) {
+		if (this.comparator == null) return ((Comparable) e1).compareTo(e2);
+		return this.comparator.compare(e1, e2);
 	}
 
 	protected int findInsertionPoint(E o, int originalLow, int originalHigh) {

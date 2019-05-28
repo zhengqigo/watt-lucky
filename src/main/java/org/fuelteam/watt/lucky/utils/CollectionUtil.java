@@ -1,4 +1,4 @@
-package org.fuelteam.watt.lucky.collection;
+package org.fuelteam.watt.lucky.utils;
 
 import java.util.Collection;
 import java.util.Collections;

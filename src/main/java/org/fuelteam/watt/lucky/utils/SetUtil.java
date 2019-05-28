@@ -1,4 +1,4 @@
-package org.fuelteam.watt.lucky.collection;
+package org.fuelteam.watt.lucky.utils;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.fuelteam.watt.lucky.annotation.Nullable;
-import org.fuelteam.watt.lucky.collection.type.ConcurrentHashSet;
+import org.fuelteam.watt.lucky.collection.ConcurrentHashSet;
 
 import com.google.common.collect.Sets;
 

@@ -7,10 +7,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.fuelteam.watt.lucky.collection.ListUtil;
-import org.fuelteam.watt.lucky.collection.MapUtil;
-import org.fuelteam.watt.lucky.collection.SetUtil;
-import org.fuelteam.watt.lucky.collection.type.ConcurrentHashSet;
+import org.fuelteam.watt.lucky.utils.ListUtil;
+import org.fuelteam.watt.lucky.utils.MapUtil;
+import org.fuelteam.watt.lucky.utils.SetUtil;
 import org.junit.Test;
 
 import com.google.common.collect.Ordering;

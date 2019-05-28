@@ -6,9 +6,8 @@ import static org.assertj.core.api.Assertions.failBecauseExceptionWasNotThrown;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-import org.fuelteam.watt.lucky.collection.ListUtil;
 import org.fuelteam.watt.lucky.exception.UncheckedException;
-import org.fuelteam.watt.lucky.reflect.ReflectionUtil;
+import org.fuelteam.watt.lucky.utils.ListUtil;
 import org.junit.Test;
 
 public class ReflectionUtilTest {

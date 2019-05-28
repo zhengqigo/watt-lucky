@@ -1,10 +1,10 @@
-package org.fuelteam.watt.lucky.collection.type;
+package org.fuelteam.watt.lucky.collection;
 
 import java.util.ArrayDeque;
 import java.util.Collections;
 import java.util.Queue;
 
-import org.fuelteam.watt.lucky.collection.QueueUtil;
+import org.fuelteam.watt.lucky.utils.QueueUtil;
 
 import com.google.common.collect.EvictingQueue;
 

@@ -6,8 +6,8 @@ import static org.assertj.core.api.Assertions.fail;
 import java.util.List;
 import java.util.Random;
 
-import org.fuelteam.watt.lucky.collection.ListUtil;
-import org.fuelteam.watt.lucky.collection.SetUtil;
+import org.fuelteam.watt.lucky.utils.ListUtil;
+import org.fuelteam.watt.lucky.utils.SetUtil;
 import org.junit.Test;
 
 import com.google.common.collect.Ordering;

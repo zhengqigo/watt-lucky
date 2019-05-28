@@ -1,4 +1,4 @@
-package org.fuelteam.watt.lucky.collection.type;
+package org.fuelteam.watt.lucky.collection;
 
 import java.util.AbstractSet;
 import java.util.Collection;
@@ -16,53 +16,53 @@ public class ConcurrentHashSet<E> extends AbstractSet<E> implements Set<E>, java
 	private transient Set<E> set;
 
 	public ConcurrentHashSet() {
-		map = new ConcurrentHashMap<E, Boolean>();
-		set = map.keySet();
+		this.map = new ConcurrentHashMap<E, Boolean>();
+		this.set = map.keySet();
 	}
 
 	public void clear() {
-		map.clear();
+	    this.map.clear();
 	}
 
 	public int size() {
-		return map.size();
+		return this.map.size();
 	}
 
 	public boolean isEmpty() {
-		return map.isEmpty();
+		return this.map.isEmpty();
 	}
 
 	public boolean contains(Object o) {
-		return map.containsKey(o);
+		return this.map.containsKey(o);
 	}
 
 	public boolean remove(Object o) {
-		return map.remove(o) != null;
+		return this.map.remove(o) != null;
 	}
 
 	public boolean add(E e) {
-		return map.put(e, Boolean.TRUE) == null;
+		return this.map.put(e, Boolean.TRUE) == null;
 	}
 
 	public Iterator<E> iterator() {
-		return set.iterator();
+		return this.set.iterator();
 	}
 
 	public Object[] toArray() {
-		return set.toArray();
+		return this.set.toArray();
 	}
 
 	public <T> T[] toArray(T[] a) {
-		return set.toArray(a);
+		return this.set.toArray(a);
 	}
 
 	@Override
 	public String toString() {
-		return set.toString();
+		return this.set.toString();
 	}
 
 	public int hashCode() {
-		return set.hashCode();
+		return this.set.hashCode();
 	}
 
 	public boolean equals(Object o) {

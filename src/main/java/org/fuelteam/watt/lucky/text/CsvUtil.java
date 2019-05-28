@@ -1,33 +1,10 @@
-// Copyright (c) 2003-present, Jodd Team (http://jodd.org)
-// All rights reserved.
-//
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided that the following conditions are met:
-//
-// 1. Redistributions of source code must retain the above copyright notice,
-// this list of conditions and the following disclaimer.
-//
-// 2. Redistributions in binary form must reproduce the above copyright
-// notice, this list of conditions and the following disclaimer in the
-// documentation and/or other materials provided with the distribution.
-//
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
-// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-// POSSIBILITY OF SUCH DAMAGE.
 package org.fuelteam.watt.lucky.text;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.collect.Lists;
 
 /**
  * 从Jodd移植Csv工具类
@@ -48,45 +25,27 @@ public class CsvUtil {
         int last = elements.length - 1;
         for (int i = 0; i < elements.length; i++) {
             if (elements[i] == null) {
-                if (i != last) {
-                    line.append(FIELD_SEPARATOR);
-                }
+                if (i != last) line.append(FIELD_SEPARATOR);
                 continue;
             }
             String field = elements[i].toString();
 
             // check for special cases
             int ndx = field.indexOf(FIELD_SEPARATOR);
-            if (ndx == -1) {
-                ndx = field.indexOf(FIELD_QUOTE);
-            }
-            if (ndx == -1 && (field.startsWith(SPACE) || field.endsWith(SPACE))) {
-                ndx = 1;
-            }
-            if (ndx == -1) {
-                ndx = StringUtils.indexOf(field, SPECIAL_CHARS);
-            }
-
-            // add field
-            if (ndx != -1) {
-                line.append(FIELD_QUOTE);
-            }
+            if (ndx == -1) ndx = field.indexOf(FIELD_QUOTE);
+            if (ndx == -1 && (field.startsWith(SPACE) || field.endsWith(SPACE))) ndx = 1;
+            if (ndx == -1) ndx = StringUtils.indexOf(field, SPECIAL_CHARS);
+            if (ndx != -1) line.append(FIELD_QUOTE);
             field = StringUtils.replace(field, QUOTE, DOUBLE_QUOTE);
             line.append(field);
-            if (ndx != -1) {
-                line.append(FIELD_QUOTE);
-            }
-
-            // last
-            if (i != last) {
-                line.append(FIELD_SEPARATOR);
-            }
+            if (ndx != -1) line.append(FIELD_QUOTE);
+            if (i != last) line.append(FIELD_SEPARATOR);
         }
         return line.toString();
     }
 
     public static String[] fromCsvString(String line) {
-        List<String> row = new ArrayList<String>();
+        List<String> row = Lists.newArrayList();
 
         boolean inQuotedField = false;
         int fieldStart = 0;
@@ -115,17 +74,13 @@ public class CsvUtil {
             }
         }
         // add last field - but only if string was not empty
-        if (len > 0 && fieldStart <= len) {
-            addField(row, line, fieldStart, len, inQuotedField);
-        }
+        if (len > 0 && fieldStart <= len) addField(row, line, fieldStart, len, inQuotedField);
         return row.toArray(new String[row.size()]);
     }
 
     private static void addField(List<String> row, String line, int startIndex, int endIndex, boolean inQuoted) {
         String field = line.substring(startIndex, endIndex);
-        if (inQuoted) {
-            field = StringUtils.replace(field, DOUBLE_QUOTE, "\"");
-        }
+        if (inQuoted) field = StringUtils.replace(field, DOUBLE_QUOTE, "\"");
         row.add(field);
     }
 }

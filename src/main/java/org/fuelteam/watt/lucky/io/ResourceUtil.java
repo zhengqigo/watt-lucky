@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
-import org.fuelteam.watt.lucky.collection.ListUtil;
 import org.fuelteam.watt.lucky.reflect.ClassLoaderUtil;
 import org.fuelteam.watt.lucky.text.Charsets;
+import org.fuelteam.watt.lucky.utils.ListUtil;
 
 import com.google.common.io.Resources;
 

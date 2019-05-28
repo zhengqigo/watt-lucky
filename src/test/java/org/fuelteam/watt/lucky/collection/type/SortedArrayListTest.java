@@ -3,9 +3,9 @@ package org.fuelteam.watt.lucky.collection.type;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
-import org.fuelteam.watt.lucky.collection.ListUtil;
-import org.fuelteam.watt.lucky.collection.type.MoreLists;
-import org.fuelteam.watt.lucky.collection.type.SortedArrayList;
+import org.fuelteam.watt.lucky.collection.MoreLists;
+import org.fuelteam.watt.lucky.collection.SortedArrayList;
+import org.fuelteam.watt.lucky.utils.ListUtil;
 import org.junit.Test;
 
 import com.google.common.collect.Ordering;

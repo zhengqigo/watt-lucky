@@ -1,8 +1,5 @@
 package org.fuelteam.watt.lucky.exception;
 
-/**
- * @see CloneableException
- */
 public class CloneableRuntimeException extends RuntimeException implements Cloneable {
 
     private static final long serialVersionUID = 3984796576627959400L;

@@ -7,8 +7,8 @@ import static org.junit.Assert.assertFalse;
 import java.util.Arrays;
 import java.util.List;
 
-import org.fuelteam.watt.lucky.collection.ArrayUtil;
 import org.fuelteam.watt.lucky.number.RandomUtil;
+import org.fuelteam.watt.lucky.utils.ArrayUtil;
 import org.junit.Test;
 
 public class ArrayUtilTest {

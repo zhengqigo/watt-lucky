@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 /**
- * 从Netty4.1.9移植的Key为原子类型的集合类，数据结构上与HashMap不一样，空间占用与读写性能俱优，原子类型集合类有多个实现。
+ * 从Netty4.1.9移植的Key为原子类型的集合类，数据结构上与HashMap不一样，空间占用与读写性能俱优。
  * <pre>
  * https://github.com/netty/netty/blob/4.1/common/src/main/templates/io/netty/util/collection/KObjectHashMap.template
  * <pre>
@@ -70,7 +70,7 @@ public class IntObjectHashMap<V> implements IntObjectMap<V> {
         V[] temp = (V[]) new Object[capacity];
         values = temp;
 
-        // Initialize the maximum size value.
+        // Initialize the maximum size value
         maxSize = calcMaxSize(capacity);
     }
 
@@ -97,20 +97,20 @@ public class IntObjectHashMap<V> implements IntObjectMap<V> {
 
         for (;;) {
             if (values[index] == null) {
-                // Found empty slot, use it.
+                // Found empty slot and use it
                 keys[index] = key;
                 values[index] = toInternal(value);
                 growSize();
                 return null;
             }
             if (keys[index] == key) {
-                // Found existing entry with this key, just replace the value.
+                // Found existing entry with this key, just replace the value
                 V previousValue = values[index];
                 values[index] = toInternal(value);
                 return toExternal(previousValue);
             }
 
-            // Can only happen if the map was full at MAX_ARRAY_SIZE and couldn't grow.
+            // Can only happen if the map was full at MAX_ARRAY_SIZE and couldn't grow
             if ((index = probeNext(index)) == startIndex) throw new IllegalStateException("Unable to insert");
         }
     }
@@ -118,7 +118,7 @@ public class IntObjectHashMap<V> implements IntObjectMap<V> {
     @Override
     public void putAll(Map<? extends Integer, ? extends V> sourceMap) {
         if (sourceMap instanceof IntObjectHashMap) {
-            // Optimization - iterate through the arrays.
+            // Optimization - iterate through the arrays
             @SuppressWarnings("unchecked")
             IntObjectHashMap<V> source = (IntObjectHashMap<V>) sourceMap;
             for (int i = 0; i < source.values.length; ++i) {
@@ -128,7 +128,7 @@ public class IntObjectHashMap<V> implements IntObjectMap<V> {
             return;
         }
 
-        // Otherwise, just add each entry.
+        // Otherwise just add each entry
         for (Entry<? extends Integer, ? extends V> entry : sourceMap.entrySet()) {
             put(entry.getKey(), entry.getValue());
         }
@@ -171,7 +171,6 @@ public class IntObjectHashMap<V> implements IntObjectMap<V> {
         @SuppressWarnings("unchecked")
         V v1 = toInternal((V) value);
         for (V v2 : values) {
-            // The map supports null values; this will be matched as NULL_VALUE.equals(NULL_VALUE).
             if (v2 != null && v2.equals(v1)) return true;
         }
         return false;
@@ -279,12 +278,7 @@ public class IntObjectHashMap<V> implements IntObjectMap<V> {
         return ((Integer) key).intValue();
     }
 
-    /**
-     * Locates the index for the given key. This method probes using double hashing.
-     *
-     * @param key the key for an entry in the map.
-     * @return the index where the key was found, or {@code -1} if no entry is found for that key.
-     */
+    // Locates the index for the given key, probes using double hashing
     private int indexOf(int key) {
         int startIndex = hashIndex(key);
         int index = startIndex;
@@ -295,32 +289,24 @@ public class IntObjectHashMap<V> implements IntObjectMap<V> {
         }
     }
 
-    /**
-     * Returns the hashed index for the given key.
-     */
+    // Returns the hashed index for the given key
     private int hashIndex(int key) {
-        // The array lengths are always a power of two, so we can use a bitmask to stay inside the array bounds.
+        // The array lengths are always a power of two, so we can use a bitmask to stay inside the array bounds
         return hashCode(key) & mask;
     }
 
-    /**
-     * Returns the hash code for the key.
-     */
+    // Returns the hash code for the key
     private static int hashCode(int key) {
         return key;
     }
 
-    /**
-     * Get the next sequential index after {@code index} and wraps if necessary.
-     */
+    // Get the next sequential index after {@code index} and wraps if necessary
     private int probeNext(int index) {
-        // The array lengths are always a power of two, so we can use a bitmask to stay inside the array bounds.
+        // The array lengths are always a power of two, so we can use a bitmask to stay inside the array bounds
         return (index + 1) & mask;
     }
 
-    /**
-     * Grows the map size after an insertion. If necessary, performs a rehash of the map.
-     */
+    // Grows the map size after an insertion, If necessary performs a rehash of the map
     private void growSize() {
         size++;
         if (size > maxSize) {
@@ -340,7 +326,7 @@ public class IntObjectHashMap<V> implements IntObjectMap<V> {
             int key = keys[i];
             int bucket = hashIndex(key);
             if (i < bucket && (bucket <= nextFree || nextFree <= i) || bucket <= nextFree && nextFree <= i) {
-                // Move the displaced entry "back" to the first available position.
+                // Move the displaced entry "back" to the first available position
                 keys[nextFree] = key;
                 values[nextFree] = value;
                 // Put the first entry after the displaced entry
@@ -352,19 +338,13 @@ public class IntObjectHashMap<V> implements IntObjectMap<V> {
         return nextFree != index;
     }
 
-    /**
-     * Calculates the maximum size allowed before rehashing.
-     */
+    // Calculates the maximum size allowed before rehashing
     private int calcMaxSize(int capacity) {
         int upperBound = capacity - 1;
         return Math.min(upperBound, (int) (capacity * loadFactor));
     }
 
-    /**
-     * Rehashes the map for the given capacity.
-     *
-     * @param newCapacity the new capacity for the map.
-     */
+    // Rehashes the map for the given capacity
     private void rehash(int newCapacity) {
         int[] oldKeys = keys;
         V[] oldVals = values;
@@ -554,7 +534,6 @@ public class IntObjectHashMap<V> implements IntObjectMap<V> {
     }
 
     final class MapEntry implements Entry<Integer, V> {
-
         private final int entryIndex;
 
         MapEntry(int entryIndex) {

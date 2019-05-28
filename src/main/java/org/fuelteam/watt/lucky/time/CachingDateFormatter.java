@@ -8,6 +8,7 @@ import org.apache.commons.lang3.time.FastDateFormat;
  * @see https://github.com/apache/logging-log4j2/blob/master/log4j-core/src/main/java/org/apache/logging/log4j/core/pattern/DatePatternConverter.java#L272
  */
 public class CachingDateFormatter {
+    
     private FastDateFormat fastDateFormat;
     private AtomicReference<CachedTime> cachedTime;
     private boolean onSecond;
@@ -35,6 +36,7 @@ public class CachingDateFormatter {
     }
 
     static final class CachedTime {
+        
         public long timestamp;
         public String formatted;
 

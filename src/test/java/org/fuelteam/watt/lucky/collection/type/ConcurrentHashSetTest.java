@@ -2,8 +2,8 @@ package org.fuelteam.watt.lucky.collection.type;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.fuelteam.watt.lucky.collection.SetUtil;
-import org.fuelteam.watt.lucky.collection.type.ConcurrentHashSet;
+import org.fuelteam.watt.lucky.collection.ConcurrentHashSet;
+import org.fuelteam.watt.lucky.utils.SetUtil;
 import org.junit.Test;
 
 public class ConcurrentHashSetTest {

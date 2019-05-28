@@ -2,8 +2,8 @@ package org.fuelteam.watt.lucky.base;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.fuelteam.watt.lucky.collection.ListUtil;
 import org.fuelteam.watt.lucky.utils.EnumUtil;
+import org.fuelteam.watt.lucky.utils.ListUtil;
 import org.junit.Test;
 
 public class EnumUtilTest {

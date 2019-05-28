@@ -11,8 +11,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import org.fuelteam.watt.lucky.collection.QueueUtil;
-import org.fuelteam.watt.lucky.collection.type.MoreQueues;
+import org.fuelteam.watt.lucky.utils.QueueUtil;
 import org.junit.Test;
 
 public class QueueUtilTest {

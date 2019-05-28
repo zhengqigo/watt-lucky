@@ -11,10 +11,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentSkipListMap;
 
-import org.fuelteam.watt.lucky.collection.ArrayUtil;
-import org.fuelteam.watt.lucky.collection.MapUtil;
-import org.fuelteam.watt.lucky.collection.MapUtil.ValueCreator;
-import org.fuelteam.watt.lucky.collection.type.MoreMaps;
+import org.fuelteam.watt.lucky.utils.ArrayUtil;
+import org.fuelteam.watt.lucky.utils.MapUtil;
+import org.fuelteam.watt.lucky.utils.MapUtil.ValueCreator;
 import org.junit.Test;
 
 import com.google.common.collect.Maps;

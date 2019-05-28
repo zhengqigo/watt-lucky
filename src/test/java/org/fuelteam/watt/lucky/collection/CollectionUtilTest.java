@@ -5,10 +5,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
 import java.util.Set;
 
-import org.fuelteam.watt.lucky.collection.ArrayUtil;
-import org.fuelteam.watt.lucky.collection.CollectionUtil;
-import org.fuelteam.watt.lucky.collection.ListUtil;
-import org.fuelteam.watt.lucky.collection.SetUtil;
+import org.fuelteam.watt.lucky.utils.ArrayUtil;
+import org.fuelteam.watt.lucky.utils.CollectionUtil;
+import org.fuelteam.watt.lucky.utils.ListUtil;
+import org.fuelteam.watt.lucky.utils.SetUtil;
 import org.junit.Test;
 
 import com.google.common.collect.Ordering;

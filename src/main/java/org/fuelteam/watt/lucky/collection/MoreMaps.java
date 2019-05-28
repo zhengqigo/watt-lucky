@@ -1,4 +1,4 @@
-package org.fuelteam.watt.lucky.collection.type;
+package org.fuelteam.watt.lucky.collection;
 
 import java.util.Comparator;
 import java.util.HashMap;

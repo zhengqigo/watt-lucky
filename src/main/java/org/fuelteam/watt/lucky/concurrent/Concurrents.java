@@ -12,9 +12,6 @@ import org.fuelteam.watt.lucky.concurrent.limiter.TimeIntervalLimiter;
 
 import com.google.common.util.concurrent.RateLimiter;
 
-/**
- * 并发常用工具类
- */
 public class Concurrents {
 
     /**

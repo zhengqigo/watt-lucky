@@ -18,7 +18,7 @@
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <spring-boot.version>2.1.4.RELEASE</spring-boot.version>
+        <spring-boot.version>2.1.5.RELEASE</spring-boot.version>
         <disruptor.version>3.4.2</disruptor.version>
 
         <joda-time.version>2.10.1</joda-time.version>
@@ -28,14 +28,11 @@
         <dozer.version>5.5.1</dozer.version>
         <redisson.version>3.10.3</redisson.version>
         <lz4-java.version>1.5.1</lz4-java.version>
+        <protonpack.version>1.15</protonpack.version>
+        <commons-text.version>1.6</commons-text.version>
 
-        <commons-lang3.version>3.8.1</commons-lang3.version>
-
-        <nexus.host>172.16.80.40:8081</nexus.host>
-
-        <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
-        <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
-
+        <maven-source-plugin.version>3.1.0</maven-source-plugin.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -84,7 +81,7 @@
         <dependency>
             <groupId>com.codepoetics</groupId>
             <artifactId>protonpack</artifactId>
-            <version>1.15</version>
+            <version>${protonpack.version}</version>
         </dependency>
 
         <dependency>
@@ -115,7 +112,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
-            <version>1.6</version>
+            <version>${commons-text.version}</version>
         </dependency>
         <dependency>
             <groupId>net.sf.dozer</groupId>
@@ -186,9 +183,33 @@
                     </execution>
                 </executions>
             </plugin>
-
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <nexus.host>172.16.80.40:8081</nexus.host>
+                <maven.test.skip>true</maven.test.skip>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <nexus.host>106.14.212.70:8081</nexus.host>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <nexus.host>106.14.212.70:8081</nexus.host>
+            </properties>
+        </profile>
+    </profiles>
 
     <repositories>
         <repository>

@@ -5,8 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
 import java.util.Map;
 
-import org.fuelteam.watt.lucky.collection.ListUtil;
-import org.fuelteam.watt.lucky.mapper.BeanMapper;
+import org.fuelteam.watt.lucky.utils.ListUtil;
 import org.junit.Test;
 
 public class BeanMapperTest {
