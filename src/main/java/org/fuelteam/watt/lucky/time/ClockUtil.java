@@ -6,9 +6,6 @@ public class ClockUtil {
 
     private static Clock instance = new DefaultClock();
 
-    /**
-     * 计算流逝的时间
-     */
     public static long elapsedTime(long beginTime) {
         return currentTimeMillis() - beginTime;
     }
@@ -44,16 +41,10 @@ public class ClockUtil {
         instance = new DefaultClock();
     }
 
-    /**
-     * 系统当前时间
-     */
     public static Date currentDate() {
         return instance.currentDate();
     }
 
-    /**
-     * 系统当前时间戳
-     */
     public static long currentTimeMillis() {
         return instance.currentTimeMillis();
     }

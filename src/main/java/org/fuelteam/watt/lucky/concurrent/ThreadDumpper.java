@@ -8,11 +8,6 @@ import org.fuelteam.watt.lucky.concurrent.limiter.TimeIntervalLimiter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * 打印程序触发的ThreadDump到日志中，因为ThreadDump本身会造成JVM停顿，所以加上了开关和最少间隔时间的选项(默认不限制)
- * 
- * 因为ThreadInfo的toString()最多只打印8层StackTrace，加上了最大打印层数的选项
- */
 public class ThreadDumpper {
 
     private static final Logger logger = LoggerFactory.getLogger(ThreadDumpper.class);

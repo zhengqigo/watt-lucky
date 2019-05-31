@@ -2,13 +2,10 @@ package org.fuelteam.watt.lucky.concurrent;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * 线程相关工具类
- */
 public class ThreadUtil {
 
     /**
-     * sleep毫秒，已捕捉并处理InterruptedException
+     * sleep毫秒，已处理InterruptedException
      */
     public static void sleep(long durationMillis) {
         try {
@@ -19,7 +16,7 @@ public class ThreadUtil {
     }
 
     /**
-     * sleep，已捕捉并处理InterruptedException
+     * sleep，已处理InterruptedException
      */
     public static void sleep(long duration, TimeUnit unit) {
         try {
