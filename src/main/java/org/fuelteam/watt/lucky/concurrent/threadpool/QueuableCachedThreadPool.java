@@ -80,7 +80,6 @@ public final class QueuableCachedThreadPool extends java.util.concurrent.ThreadP
     }
 
     /**
-     * <pre>
      * https://github.com/apache/tomcat/blob/trunk/java/org/apache/tomcat/util/threads/TaskQueue.java
      */
     protected static class ControllableQueue extends LinkedBlockingQueue<Runnable> {
@@ -112,7 +111,6 @@ public final class QueuableCachedThreadPool extends java.util.concurrent.ThreadP
 
         @Override
         public boolean offer(Runnable o) {
-            // threadPool.getPoolSize() 是个有锁的操作，所以尽量减少
             int currentPoolSize = parent.getPoolSize();
             // we are maxed out on threads, simply queue the object
             if (currentPoolSize >= parent.getMaximumPoolSize()) return super.offer(o);

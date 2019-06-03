@@ -1,10 +1,12 @@
 package org.fuelteam.watt.lucky.async;
 
+import org.fuelteam.watt.lucky.annotation.NotNull;
+
 public abstract class AbstractFunction<T> {
 
     private Callback<T> callback;
 
-    public AbstractFunction(Callback<T> callback) {
+    public AbstractFunction(@NotNull Callback<T> callback) {
         this.callback = callback;
     }
 

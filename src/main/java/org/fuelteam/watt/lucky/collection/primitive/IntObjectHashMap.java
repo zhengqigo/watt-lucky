@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 /**
- * 从Netty4.1.9移植的Key为原子类型的集合类，数据结构上与HashMap不一样，空间占用与读写性能俱优。
+ * 从Netty4.1.9移植的Key为原子类型的集合类, 数据结构上与HashMap不一样, 空间占用与读写性能俱优
  * <pre>
  * https://github.com/netty/netty/blob/4.1/common/src/main/templates/io/netty/util/collection/KObjectHashMap.template
  * <pre>

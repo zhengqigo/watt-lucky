@@ -19,7 +19,7 @@ public class ExceptionUtil {
     private static final StackTraceElement[] EMPTY_STACK_TRACE = new StackTraceElement[0];
 
     /**
-     * 转换为RuntimeException重新抛出，RuntimeException和Error不会被转变。举例:
+     * 转换为RuntimeException重新抛出, RuntimeException和Error不会被转变, 举例:
      * <pre>
      * try{ ... }catch(Exception throwable){ throw unchecked(throwable); }
      * </pre>

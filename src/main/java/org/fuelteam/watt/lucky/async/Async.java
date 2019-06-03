@@ -3,6 +3,7 @@ package org.fuelteam.watt.lucky.async;
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
 
+import org.fuelteam.watt.lucky.annotation.NotNull;
 import org.fuelteam.watt.lucky.concurrent.threadpool.ThreadPoolBuilder;
 import org.fuelteam.watt.lucky.utils.RuntimeUtil;
 
@@ -15,16 +16,16 @@ public class Async {
     private final static ThreadPoolExecutor threadPoolExecutor = ThreadPoolBuilder.cachedPool().setMaxSize(2 * cores + 1)
             .setMinSize(cores).setKeepAliveSecs(10).setRejectHanlder(executionHandler).build();
 
-    public static <T> void doAsync(final AbstractFunction<T> af) {
+    public static <T> void doAsync(@NotNull final AbstractFunction<T> af) {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
                 Callback<T> cb = af.getCallback();
                 try {
                     T t = af.execute();
-                    if (cb != null) cb.onSuccess(t);
+                    cb.onSuccess(t);
                 } catch (Exception ex) {
-                    if (cb != null) cb.onFailure(ex);
+                    cb.onFailure(ex);
                 }
             }
         };
