@@ -10,9 +10,7 @@ public class ObjectUtil {
 
     private static final String NULL = "null";
 
-    /**
-     * 引入Null安全的equals
-     */
+    // Null安全的equals
     public static boolean equals(@Nullable Object a, @Nullable Object b) {
         return Objects.equal(a, b);
     }

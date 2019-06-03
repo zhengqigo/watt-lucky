@@ -19,7 +19,7 @@ public class WebServiceUtil {
     private final static String soapHeader = "<%s %s>%s</%s>";
 
     public final static String DEFAULT_NAMESPACE = "xmlns=\"http://tempuri.org/\"";
-
+    
     public static String prepare(String method, String namespace, String params) {
         String header = String.format(soapHeader, method, namespace, params, method);
         String body = String.format(soapBody, header);
@@ -32,13 +32,11 @@ public class WebServiceUtil {
         return xmlVersion + String.format(soap12Envelope, body);
     }
 
-    public static Object xmlToObject(Class<?> clazz, String xmlStr) throws JAXBException {
+    public static Object xmlToObject(Class<?> clazz, String xml) throws JAXBException {
         JAXBContext context = JAXBContext.newInstance(clazz);
-        // 进行将Xml转成对象的核心接口
         Unmarshaller unmarshaller = context.createUnmarshaller();
-        StringReader sr = new StringReader(xmlStr);
-        Object xmlObject = unmarshaller.unmarshal(sr);
-        return xmlObject;
+        StringReader reader = new StringReader(xml);
+        return unmarshaller.unmarshal(reader);
     }
 
     public static Pair<Integer, String> post(String asmxUrl, Map<String, String> headers, String body, int connectionTimeout,

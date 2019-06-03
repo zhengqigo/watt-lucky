@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 public class AbortPolicyWithReport extends ThreadPoolExecutor.AbortPolicy {
 
-    protected static final Logger logger = LoggerFactory.getLogger(AbortPolicyWithReport.class);
+    private static final Logger logger = LoggerFactory.getLogger(AbortPolicyWithReport.class);
 
     private final String threadName;
 
