@@ -6,16 +6,9 @@ import org.fuelteam.watt.lucky.utils.Platforms;
 
 import com.google.common.io.Files;
 
-/**
- * 文件路径工具类，如果是File或Path对象的路径处理可用Path类
- * 
- * @see {@link java.nio.file.Path}
- */
 public class FilePathUtil {
 
-    /**
-     * 兼容Windows上的路径分割符，将 '/' 转回 '\'
-     */
+    // 兼容Windows上的路径分割符，将 '/' 转回 '\'
     public static String normalizePath(String path) {
         if (Platforms.FILE_PATH_SEPARATOR_CHAR == Platforms.WINDOWS_FILE_PATH_SEPARATOR_CHAR
                 && StringUtils.indexOf(path, Platforms.LINUX_FILE_PATH_SEPARATOR_CHAR) != -1) {
@@ -23,19 +16,14 @@ public class FilePathUtil {
                     Platforms.WINDOWS_FILE_PATH_SEPARATOR_CHAR);
         }
         return path;
-
     }
 
-    /**
-     * 将路径整理，如将"a/../b"整理成 "b"
-     */
+    // 将路径整理，如将"a/../b"整理成 "b"
     public static String simplifyPath(String path) {
         return Files.simplifyPath(path);
     }
 
-    /**
-     * 拼接路径名
-     */
+    // 拼接路径名
     public static String concat(String baseName, String... appendName) {
         if (appendName.length == 0) return baseName;
         StringBuilder concatName = new StringBuilder();
@@ -52,9 +40,7 @@ public class FilePathUtil {
         return concatName.toString();
     }
 
-    /**
-     * 获得上层目录的路径
-     */
+    // 获得上层目录的路径
     public static String getParentPath(String path) {
         String parentPath = path;
         if (Platforms.FILE_PATH_SEPARATOR.equals(parentPath)) return parentPath;
@@ -68,9 +54,7 @@ public class FilePathUtil {
         return parentPath;
     }
 
-    /**
-     * 获得参数clazz所在的Jar文件的绝对路径
-     */
+    // 获得参数clazz所在的Jar文件的绝对路径
     public static String getJarPath(Class<?> clazz) {
         return clazz.getProtectionDomain().getCodeSource().getLocation().getFile();
     }

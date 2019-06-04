@@ -6,8 +6,8 @@ import java.util.concurrent.ConcurrentMap;
 
 import org.apache.commons.lang3.mutable.MutableInt;
 import org.apache.commons.lang3.mutable.MutableLong;
-import org.fuelteam.watt.lucky.collection.primitive.IntObjectHashMap;
-import org.fuelteam.watt.lucky.collection.primitive.LongObjectHashMap;
+import org.fuelteam.watt.lucky.primitive.IntObjectHashMap;
+import org.fuelteam.watt.lucky.primitive.LongObjectHashMap;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.MapMaker;

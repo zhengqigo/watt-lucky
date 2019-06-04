@@ -8,61 +8,59 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ConcurrentHashSet<E> extends AbstractSet<E> implements Set<E>, java.io.Serializable {
-
 	private static final long serialVersionUID = -8672117787651310382L;
 
 	private final Map<E, Boolean> map;
-
 	private transient Set<E> set;
 
 	public ConcurrentHashSet() {
-		this.map = new ConcurrentHashMap<E, Boolean>();
-		this.set = map.keySet();
+		map = new ConcurrentHashMap<E, Boolean>();
+		set = map.keySet();
 	}
 
 	public void clear() {
-	    this.map.clear();
+	    map.clear();
 	}
 
 	public int size() {
-		return this.map.size();
+		return map.size();
 	}
 
 	public boolean isEmpty() {
-		return this.map.isEmpty();
+		return map.isEmpty();
 	}
 
 	public boolean contains(Object o) {
-		return this.map.containsKey(o);
+		return map.containsKey(o);
 	}
 
 	public boolean remove(Object o) {
-		return this.map.remove(o) != null;
+		return map.remove(o) != null;
 	}
 
 	public boolean add(E e) {
-		return this.map.put(e, Boolean.TRUE) == null;
+		return map.put(e, Boolean.TRUE) == null;
 	}
 
 	public Iterator<E> iterator() {
-		return this.set.iterator();
+		return set.iterator();
 	}
 
 	public Object[] toArray() {
-		return this.set.toArray();
+		return set.toArray();
 	}
 
 	public <T> T[] toArray(T[] a) {
-		return this.set.toArray(a);
+		return set.toArray(a);
 	}
 
 	@Override
 	public String toString() {
-		return this.set.toString();
+		return set.toString();
 	}
 
 	public int hashCode() {
-		return this.set.hashCode();
+		return set.hashCode();
 	}
 
 	public boolean equals(Object o) {

@@ -23,13 +23,9 @@ import org.fuelteam.watt.lucky.annotation.Nullable;
 import org.fuelteam.watt.lucky.text.Charsets;
 import org.fuelteam.watt.lucky.utils.Platforms;
 
-/**
- * 文件及目录操作读写工具类
- */
 public class FileUtil {
 
     private static FileVisitor<Path> deleteFileVisitor = new SimpleFileVisitor<Path>() {
-
         @Override
         public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
             Files.delete(file);
@@ -43,34 +39,22 @@ public class FileUtil {
         }
     };
 
-    /**
-     * 读取文件到byte[]
-     * 
-     * @see {@link Files#readAllBytes}
-     */
+    // 读取文件到byte[]
     public static byte[] toByteArray(final File file) throws IOException {
         return Files.readAllBytes(file.toPath());
     }
 
-    /**
-     * 读取文件到String
-     */
+    // 读取文件到String
     public static String toString(final File file) throws IOException {
         return com.google.common.io.Files.asCharSource(file, Charsets.UTF_8).toString();
     }
 
-    /**
-     * 读取文件的每行内容到List<String>
-     * 
-     * @see {@link Files#readAllLines}
-     */
+    // 读取文件的每行内容到List<String>
     public static List<String> toLines(final File file) throws IOException {
         return Files.readAllLines(file.toPath(), Charsets.UTF_8);
     }
 
-    /**
-     * 简单写入String到File
-     */
+    // 简单写入String到File
     public static void write(final CharSequence data, final File file) throws IOException {
         Validate.notNull(file);
         Validate.notNull(data);
@@ -79,9 +63,7 @@ public class FileUtil {
         }
     }
 
-    /**
-     * 追加String到File
-     */
+    // 追加String到File
     public static void append(final CharSequence data, final File file) throws IOException {
         Validate.notNull(file);
         Validate.notNull(data);
@@ -90,69 +72,41 @@ public class FileUtil {
         }
     }
 
-    /**
-     * 打开文件为InputStream
-     * 
-     * @see {@link Files#newInputStream}
-     */
+    // 打开文件为InputStream
     public static InputStream asInputStream(String fileName) throws IOException {
         return asInputStream(getPath(fileName));
     }
 
-    /**
-     * 打开文件为InputStream
-     * 
-     * @see {@link Files#newInputStream}
-     */
+    // 打开文件为InputStream
     public static InputStream asInputStream(File file) throws IOException {
         Validate.notNull(file, "file is null");
         return asInputStream(file.toPath());
     }
 
-    /**
-     * 打开文件为InputStream
-     * 
-     * @see {@link Files#newInputStream}
-     */
+    // 打开文件为InputStream
     public static InputStream asInputStream(Path path) throws IOException {
         Validate.notNull(path, "path is null");
         return Files.newInputStream(path);
     }
 
-    /**
-     * 打开文件为OutputStream
-     * 
-     * @see {@link Files#newOutputStream}
-     */
+    // 打开文件为OutputStream
     public static OutputStream asOututStream(String fileName) throws IOException {
         return asOututStream(getPath(fileName));
     }
 
-    /**
-     * 打开文件为OutputStream
-     * 
-     * @see {@link Files#newOutputStream}
-     */
+    // 打开文件为OutputStream
     public static OutputStream asOututStream(File file) throws IOException {
         Validate.notNull(file, "file is null");
         return asOututStream(file.toPath());
     }
 
-    /**
-     * 打开文件为OutputStream
-     * 
-     * @see {@link Files#newOutputStream}
-     */
+    // 打开文件为OutputStream
     public static OutputStream asOututStream(Path path) throws IOException {
         Validate.notNull(path, "path is null");
         return Files.newOutputStream(path);
     }
 
-    /**
-     * 获取File的BufferedReader
-     *
-     * @see {@link Files#newBufferedReader}
-     */
+    // 获取File的BufferedReader
     public static BufferedReader asBufferedReader(String fileName) throws IOException {
         Validate.notBlank(fileName, "filename is blank");
         return asBufferedReader(getPath(fileName));
@@ -163,44 +117,26 @@ public class FileUtil {
         return Files.newBufferedReader(path, Charsets.UTF_8);
     }
 
-    /**
-     * 获取File的BufferedWriter
-     * 
-     * @see {@link Files#newBufferedWriter}
-     */
+    // 获取File的BufferedWriter
     public static BufferedWriter asBufferedWriter(String fileName) throws IOException {
         Validate.notBlank(fileName, "filename is blank");
         return Files.newBufferedWriter(getPath(fileName), Charsets.UTF_8);
     }
 
-    /**
-     * 获取File的BufferedWriter
-     * 
-     * @see {@link Files#newBufferedWriter}
-     */
+    // 获取File的BufferedWriter
     public static BufferedWriter asBufferedWriter(Path path) throws IOException {
         Validate.notNull(path, "path is null");
         return Files.newBufferedWriter(path, Charsets.UTF_8);
     }
 
-    /**
-     * 复制文件或目录
-     * 
-     * @param from 如果为null，或者是不存在的文件或目录，抛出异常.
-     * @param to 如果为null，或者from是目录而to是已存在文件，或相反
-     */
+    // 复制文件或目录
     public static void copy(@NotNull File from, @NotNull File to) throws IOException {
         Validate.notNull(from);
         Validate.notNull(to);
         copy(from.toPath(), to.toPath());
     }
 
-    /**
-     * 复制文件或目录
-     * 
-     * @param from 如果为null，或者是不存在的文件或目录，抛出异常
-     * @param to 如果为null，或者from是目录而to是已存在文件，或相反
-     */
+    // 复制文件或目录
     public static void copy(@NotNull Path from, @NotNull Path to) throws IOException {
         Validate.notNull(from);
         Validate.notNull(to);
@@ -208,26 +144,14 @@ public class FileUtil {
         if (!Files.isDirectory(from)) copyFile(from, to);
     }
 
-    /**
-     * 文件复制
-     * @see {@link Files#copy}
-     * 
-     * @param from 如果为null，或文件不存在或者是目录，，抛出异常
-     * @param to 如果to为null，或文件存在但是一个目录，抛出异常
-     */
+    // 文件复制
     public static void copyFile(@NotNull File from, @NotNull File to) throws IOException {
         Validate.notNull(from);
         Validate.notNull(to);
         copyFile(from.toPath(), to.toPath());
     }
 
-    /**
-     * 文件复制
-     * @see {@link Files#copy}
-     * 
-     * @param from 如果为null，或文件不存在或者是目录，抛出异常
-     * @param to 如果为null，或文件存在但是一个目录，抛出异常
-     */
+    // 文件复制
     public static void copyFile(@NotNull Path from, @NotNull Path to) throws IOException {
         Validate.isTrue(Files.exists(from), "%s is not exist or not a file", from);
         Validate.notNull(to);
@@ -235,18 +159,14 @@ public class FileUtil {
         Files.copy(from, to);
     }
 
-    /**
-     * 复制目录
-     */
+    // 复制目录
     public static void copyDir(@NotNull File from, @NotNull File to) throws IOException {
         Validate.isTrue(isDirExists(from), "%s is not exist or not a dir", from);
         Validate.notNull(to);
         copyDir(from.toPath(), to.toPath());
     }
 
-    /**
-     * 复制目录
-     */
+    // 复制目录
     public static void copyDir(@NotNull Path from, @NotNull Path to) throws IOException {
         Validate.isTrue(isDirExists(from), "%s is not exist or not a dir", from);
         Validate.notNull(to);
@@ -428,40 +348,23 @@ public class FileUtil {
         return isFileExists(file.toPath());
     }
 
-    /**
-     * 判断文件是否存在
-     * 
-     * @see {@link Files#exists}
-     * @see {@link Files#isRegularFile}
-     */
+    // 判断文件是否存在
     public static boolean isFileExists(Path path) {
         if (path == null) return false;
         return Files.exists(path) && Files.isRegularFile(path);
     }
 
-    /**
-     * 在临时目录创建临时目录，命名为${毫秒级时间戳}-${同一毫秒内的随机数}.
-     *
-     * @see {@link Files#createTempDirectory}
-     */
+    // 在临时目录创建临时目录，命名为${毫秒级时间戳}-${同一毫秒内的随机数}.
     public static Path createTempDir() throws IOException {
         return Files.createTempDirectory(System.currentTimeMillis() + "-");
     }
 
-    /**
-     * 在临时目录创建临时文件，命名为tmp-${random.nextLong()}.tmp
-     * 
-     * @see {@link Files#createTempFile}
-     */
+    // 在临时目录创建临时文件，命名为tmp-${random.nextLong()}.tmp
     public static Path createTempFile() throws IOException {
         return Files.createTempFile("tmp-", ".tmp");
     }
 
-    /**
-     * 在临时目录创建临时文件，命名为${prefix}${random.nextLong()}${suffix}
-     * 
-     * @see {@link Files#createTempFile}
-     */
+    // 在临时目录创建临时文件，命名为${prefix}${random.nextLong()}${suffix}
     public static Path createTempFile(String prefix, String suffix) throws IOException {
         return Files.createTempFile(prefix, suffix);
     }
@@ -470,29 +373,19 @@ public class FileUtil {
         return Paths.get(filePath);
     }
 
-    /**
-     * 获取文件名(不包含路径)
-     */
+    // 获取文件名(不包含路径)
     public static String getFileName(@NotNull String fullName) {
         Validate.notEmpty(fullName);
         int last = fullName.lastIndexOf(Platforms.FILE_PATH_SEPARATOR_CHAR);
         return fullName.substring(last + 1);
     }
 
-    /**
-     * 获取文件名的扩展名部分
-     * 
-     * @see {@link com.google.common.io.Files#getFileExtension}
-     */
+    // 获取文件名的扩展名部分
     public static String getFileExtension(File file) {
         return com.google.common.io.Files.getFileExtension(file.getName());
     }
 
-    /**
-     * 获取文件名的扩展名部分
-     * 
-     * @see {@link com.google.common.io.Files#getFileExtension}
-     */
+    // 获取文件名的扩展名部分
     public static String getFileExtension(String fullName) {
         return com.google.common.io.Files.getFileExtension(fullName);
     }

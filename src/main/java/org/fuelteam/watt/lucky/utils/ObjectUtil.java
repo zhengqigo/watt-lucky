@@ -15,9 +15,7 @@ public class ObjectUtil {
         return Objects.equal(a, b);
     }
 
-    /**
-     * 多个对象的HashCode串联，组成新的HashCode
-     */
+    // 多个对象的HashCode串联, 组成新的HashCode
     public static int hashCode(Object... objects) {
         return Arrays.hashCode(objects);
     }

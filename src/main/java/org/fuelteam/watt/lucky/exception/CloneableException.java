@@ -10,7 +10,6 @@ package org.fuelteam.watt.lucky.exception;
  * throw TIMEOUT_EXCEPTION.clone("Timeout for 40ms");
  */
 public class CloneableException extends Exception implements Cloneable {
-
     private static final long serialVersionUID = -6270471689928560417L;
 
     protected String message; // NOSONAR
