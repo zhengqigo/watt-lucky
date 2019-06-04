@@ -10,33 +10,25 @@ public class ClockUtil {
         return currentTimeMillis() - beginTime;
     }
 
-    /**
-     * 切换为DummyClock，使用系统时间为初始时间，单个测试完成后需要调用useDefaultClock()切换回去
-     */
+    // 切换为DummyClock, 使用系统时间为初始时间, 单个测试完成后需要调用useDefaultClock()切换回去
     public static synchronized DummyClock useDummyClock() {
         instance = new DummyClock();
         return (DummyClock) instance;
     }
 
-    /**
-     * 切换为DummyClock，单个测试完成后需要调用useDefaultClock()切换回去
-     */
+    // 切换为DummyClock, 单个测试完成后需要调用useDefaultClock()切换回去
     public static synchronized DummyClock useDummyClock(long timeStampMills) {
         instance = new DummyClock(timeStampMills);
         return (DummyClock) instance;
     }
 
-    /**
-     * 切换为DummyClock，单个测试完成后需要调用useDefaultClock()切换回去
-     */
+    // 切换为DummyClock, 单个测试完成后需要调用useDefaultClock()切换回去
     public static synchronized DummyClock useDummyClock(Date date) {
         instance = new DummyClock(date);
         return (DummyClock) instance;
     }
 
-    /**
-     * 重置为默认Clock
-     */
+    // 重置为默认Clock
     public static synchronized void useDefaultClock() {
         instance = new DefaultClock();
     }
@@ -49,34 +41,21 @@ public class ClockUtil {
         return instance.currentTimeMillis();
     }
 
-    /**
-     * 操作系统启动到现在的纳秒数，与系统时间是完全独立的两个时间体系
-     */
+    // 操作系统启动到现在的纳秒数, 与系统时间是完全独立的两个时间体系
     public static long nanoTime() {
         return instance.nanoTime();
     }
 
     public interface Clock {
 
-        /**
-         * 系统当前时间
-         */
         Date currentDate();
 
-        /**
-         * 系统当前时间戳
-         */
         long currentTimeMillis();
 
-        /**
-         * 操作系统启动到现在的纳秒数，与系统时间是完全独立的两个时间体系
-         */
+        // 操作系统启动到现在的纳秒数
         long nanoTime();
     }
 
-    /**
-     * 默认时间提供者，线程安全
-     */
     public static class DefaultClock implements Clock {
 
         @Override
@@ -95,9 +74,6 @@ public class ClockUtil {
         }
     }
 
-    /**
-     * 可用于测试的可配置的时间提供者
-     */
     public static class DummyClock implements Clock {
 
         private long time;

@@ -6,7 +6,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
 import java.io.IOException;
 
-import org.fuelteam.watt.lucky.io.type.StringBuilderWriter;
 import org.fuelteam.watt.lucky.text.Charsets;
 import org.junit.Test;
 

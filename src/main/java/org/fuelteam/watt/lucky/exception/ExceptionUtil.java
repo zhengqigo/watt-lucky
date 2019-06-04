@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.fuelteam.watt.lucky.annotation.NotNull;
 import org.fuelteam.watt.lucky.annotation.Nullable;
-import org.fuelteam.watt.lucky.io.type.StringBuilderWriter;
+import org.fuelteam.watt.lucky.io.StringBuilderWriter;
 
 import com.google.common.base.Throwables;
 

@@ -10,10 +10,8 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 /**
- * 从Netty4.1.9移植的Key为原子类型的集合类, 数据结构上与HashMap不一样, 空间占用与读写性能俱优
- * <pre>
- * https://github.com/netty/netty/blob/4.1/common/src/main/templates/io/netty/util/collection/KObjectHashMap.template
- * <pre>
+ * 从Netty4.1.9移植的Key为原子类型的集合类
+ * @see https://github.com/netty/netty/blob/4.1/common/src/main/templates/io/netty/util/collection/KObjectHashMap.template
  *
  * @param <V> The value type stored in the map
  */
@@ -118,7 +116,6 @@ public class IntObjectHashMap<V> implements IntObjectMap<V> {
     @Override
     public void putAll(Map<? extends Integer, ? extends V> sourceMap) {
         if (sourceMap instanceof IntObjectHashMap) {
-            // Optimization - iterate through the arrays
             @SuppressWarnings("unchecked")
             IntObjectHashMap<V> source = (IntObjectHashMap<V>) sourceMap;
             for (int i = 0; i < source.values.length; ++i) {

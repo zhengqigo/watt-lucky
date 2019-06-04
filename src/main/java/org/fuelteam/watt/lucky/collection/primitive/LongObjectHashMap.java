@@ -118,7 +118,6 @@ public class LongObjectHashMap<V> implements LongObjectMap<V> {
     @Override
     public void putAll(Map<? extends Long, ? extends V> sourceMap) {
         if (sourceMap instanceof LongObjectHashMap) {
-            // Optimization - iterate through the arrays
             @SuppressWarnings("unchecked")
             LongObjectHashMap<V> source = (LongObjectHashMap<V>) sourceMap;
             for (int i = 0; i < source.values.length; ++i) {

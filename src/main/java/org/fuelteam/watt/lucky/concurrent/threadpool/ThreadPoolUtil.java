@@ -69,7 +69,7 @@ public class ThreadPoolUtil {
      */
     private static class SafeRunnable implements Runnable {
 
-        private static Logger logger = LoggerFactory.getLogger(SafeRunnable.class);
+        private static final Logger logger = LoggerFactory.getLogger(SafeRunnable.class);
 
         private Runnable runnable;
 

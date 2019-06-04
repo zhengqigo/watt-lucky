@@ -10,12 +10,9 @@ public abstract class Striped64 extends Number {
     private static final long serialVersionUID = 305432553211711227L;
 
     /**
-	 * Padded variant of AtomicLong supporting only raw accesses plus CAS.
-	 * The value field is placed between pads, hoping that the JVM doesn't
-	 * reorder them.
-	 *
-	 * JVM intrinsics note: It would be possible to use a release-only
-	 * form of CAS here, if it were provided.
+	 * Padded variant of AtomicLong supporting only raw accesses plus CAS, the value field is placed between pads, 
+	 * hoping that the JVM doesn't reorder them. JVM intrinsics note: It would be possible to use a release-only
+	 * form of CAS here, if it were provided
 	 */
     static final class Cell {
 		volatile long p0, p1, p2, p3, p4, p5, p6;
@@ -46,10 +43,9 @@ public abstract class Striped64 extends Number {
 	}
 
 	/**
-	 * ThreadLocal holding a single-slot int array holding hash code.
-	 * Unlike the JDK8 version of this class, we use a suboptimal
-	 * int[] representation to avoid introducing a new type that can
-	 * impede class-unloading when ThreadLocals are not removed.
+	 * ThreadLocal holding a single-slot int array holding hash code. Unlike the JDK8 version of this class, 
+	 * we use a suboptimal int[] representation to avoid introducing a new type that can impede class-unloading 
+	 * when ThreadLocals are not removed.
 	 */
 	static final ThreadLocal<int[]> threadHashCode = new ThreadLocal<int[]>();
 
@@ -62,18 +58,17 @@ public abstract class Striped64 extends Number {
 	static final int NCPU = Runtime.getRuntime().availableProcessors();
 
 	/**
-	 * Table of cells. When non-null, size is a power of 2.
+	 * Table of cells. When non-null, size is a power of 2
 	 */
 	transient volatile Cell[] cells;
 
 	/**
-	 * Base value, used mainly when there is no contention, but also as
-	 * a fallback during table initialization races. Updated via CAS.
+	 * Base value, used mainly when there is no contention, but also as a fallback during table initialization races, updated via CAS
 	 */
 	transient volatile long base;
 
 	/**
-	 * Spinlock (locked via CAS) used when resizing and/or creating Cells.
+	 * Spinlock (locked via CAS) used when resizing and/or creating Cells
 	 */
 	transient volatile int busy;
 
@@ -84,23 +79,22 @@ public abstract class Striped64 extends Number {
 	}
 
 	/**
-	 * CASes the base field.
+	 * CASes the base field
 	 */
     final boolean casBase(long cmp, long val) {
 		return UNSAFE.compareAndSwapLong(this, baseOffset, cmp, val);
 	}
 
 	/**
-	 * CASes the busy field from 0 to 1 to acquire lock.
+	 * CASes the busy field from 0 to 1 to acquire lock
 	 */
     final boolean casBusy() {
 		return UNSAFE.compareAndSwapInt(this, busyOffset, 0, 1);
 	}
 
 	/**
-	 * Computes the function of current and new value. Subclasses
-	 * should open-code this update function for most uses, but the
-	 * virtualized form is needed within retryUpdate.
+	 * Computes the function of current and new value, subclasses should open-code this update function for most uses, 
+	 * but the virtualized form is needed within retryUpdate
 	 *
 	 * @param currentValue the current value (of either base or a cell)
 	 * @param newValue the argument from a user update call
@@ -109,11 +103,9 @@ public abstract class Striped64 extends Number {
 	abstract long fn(long currentValue, long newValue);
 
 	/**
-	 * Handles cases of updates involving initialization, resizing,
-	 * creating new Cells, and/or contention. See above for
-	 * explanation. This method suffers the usual non-modularity
-	 * problems of optimistic retry code, relying on rechecked sets of
-	 * reads.
+	 * Handles cases of updates involving initialization, resizing, creating new Cells, and/or contention. 
+	 * See above for explanation. This method suffers the usual non-modularity problems of optimistic retry code, 
+	 * relying on rechecked sets of reads.
 	 *
 	 * @param x the value
 	 * @param hc the hash code holder
@@ -199,7 +191,7 @@ public abstract class Striped64 extends Number {
 
 
 	/**
-	 * Sets base and all cells to the given value.
+	 * Sets base and all cells to the given value
 	 */
 	final void internalReset(long initialValue) {
 		Cell[] as = cells;
@@ -229,9 +221,8 @@ public abstract class Striped64 extends Number {
 	}
 
 	/**
-	 * Returns a sun.misc.Unsafe.  Suitable for use in a 3rd party package.
-	 * Replace with a simple call to Unsafe.getUnsafe when integrating
-	 * into a jdk.
+	 * Returns a sun.misc.Unsafe. Suitable for use in a 3rd party package.
+	 * Replace with a simple call to Unsafe.getUnsafe when integrating into a jdk.
 	 *
 	 * @return a sun.misc.Unsafe
 	 */

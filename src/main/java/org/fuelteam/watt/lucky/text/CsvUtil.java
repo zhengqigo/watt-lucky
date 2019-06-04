@@ -8,8 +8,7 @@ import com.google.common.collect.Lists;
 
 /**
  * 从Jodd移植Csv工具类
- * <pre>
- * https://github.com/oblac/jodd/blob/master/jodd-core/src/main/java/jodd/util/CsvUtil.java
+ * @see https://github.com/oblac/jodd/blob/master/jodd-core/src/main/java/jodd/util/CsvUtil.java
  */
 public class CsvUtil {
 

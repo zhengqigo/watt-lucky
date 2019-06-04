@@ -59,9 +59,7 @@ public class ThreadDumpper {
         logger.info(sb.toString());
     }
 
-    /**
-     * 打印全部的stack，重新实现threadInfo的toString()函数，因为默认最多只打印8层的stack，同时不再打印lockedMonitors和lockedSynchronizers
-     */
+    // 打印全部的stack，重新实现threadInfo的toString()函数，因为默认最多只打印8层的stack，同时不再打印lockedMonitors和lockedSynchronizers
     private String dumpThreadInfo(Thread thread, StackTraceElement[] stackTrace, StringBuilder sb) {
         sb.append('\"').append(thread.getName()).append("\" Id=").append(thread.getId()).append(' ').append(thread.getState()).append('\n');
         int i = 0;
