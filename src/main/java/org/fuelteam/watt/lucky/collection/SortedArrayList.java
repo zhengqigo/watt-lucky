@@ -55,8 +55,8 @@ public final class SortedArrayList<E> extends ArrayList<E> {
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
     protected int compare(E e1, E e2) {
-        if (this.comparator == null) return ((Comparable) e1).compareTo(e2);
-        return this.comparator.compare(e1, e2);
+        if (comparator == null) return ((Comparable) e1).compareTo(e2);
+        return comparator.compare(e1, e2);
     }
 
     protected int findInsertionPoint(E o, int originalLow, int originalHigh) {

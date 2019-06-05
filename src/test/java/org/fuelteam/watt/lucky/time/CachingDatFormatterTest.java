@@ -6,14 +6,14 @@ import java.util.Date;
 
 import org.fuelteam.watt.lucky.time.CachingDateFormatter;
 import org.fuelteam.watt.lucky.time.DateFormatUtil;
-import org.fuelteam.watt.lucky.utils.DateUtil;
+import org.fuelteam.watt.lucky.utils.MoreDateUtil;
 import org.junit.Test;
 
 public class CachingDatFormatterTest {
 
     @Test
     public void test() {
-        Date date = DateUtil.str2date("2016-11-01 12:23:44.000", "yyyy-MM-dd HH:mm:ss.SSS");
+        Date date = MoreDateUtil.str2date("2016-11-01 12:23:44.000", "yyyy-MM-dd HH:mm:ss.SSS");
 
         CachingDateFormatter formatter = new CachingDateFormatter(DateFormatUtil.PATTERN_DEFAULT);
         assertThat(formatter.format(date.getTime())).isEqualTo("2016-11-01 12:23:44.000");

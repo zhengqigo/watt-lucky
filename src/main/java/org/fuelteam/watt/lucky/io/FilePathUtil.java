@@ -8,7 +8,7 @@ import com.google.common.io.Files;
 
 public class FilePathUtil {
 
-    // 兼容Windows上的路径分割符，将 '/' 转回 '\'
+    // 兼容Windows上的路径分割符, 将'/'统一为'\'
     public static String normalizePath(String path) {
         if (Platforms.FILE_PATH_SEPARATOR_CHAR == Platforms.WINDOWS_FILE_PATH_SEPARATOR_CHAR
                 && StringUtils.indexOf(path, Platforms.LINUX_FILE_PATH_SEPARATOR_CHAR) != -1) {
@@ -18,7 +18,7 @@ public class FilePathUtil {
         return path;
     }
 
-    // 将路径整理，如将"a/../b"整理成 "b"
+    // 整理路径, 如将"a/../b"整理成"b"
     public static String simplifyPath(String path) {
         return Files.simplifyPath(path);
     }

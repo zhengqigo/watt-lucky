@@ -7,7 +7,6 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.collect.Lists;
 
 /**
- * 从Jodd移植Csv工具类
  * @see https://github.com/oblac/jodd/blob/master/jodd-core/src/main/java/jodd/util/CsvUtil.java
  */
 public class CsvUtil {

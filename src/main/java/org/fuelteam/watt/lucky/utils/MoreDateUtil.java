@@ -10,7 +10,7 @@ import org.joda.time.format.DateTimeFormatter;
 
 import com.google.common.collect.Maps;
 
-public class DateUtil {
+public class MoreDateUtil {
 
     private static volatile Map<String, DateTimeFormatter> map = Maps.newConcurrentMap();
 

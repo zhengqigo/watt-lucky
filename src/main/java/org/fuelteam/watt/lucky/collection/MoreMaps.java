@@ -50,8 +50,7 @@ public class MoreMaps {
         return ArrayListMultimap.create(expectedKeys, expectedValuesPerKey);
     }
 
-    @SuppressWarnings("rawtypes")
-    public static <K, V extends Comparable> SortedSetMultimap<K, V> createSortedSetMultiValueMap() {
+    public static <K, V extends Comparable<?>> SortedSetMultimap<K, V> createSortedSetMultiValueMap() {
         return MultimapBuilder.hashKeys().treeSetValues().build();
     }
 
@@ -60,8 +59,7 @@ public class MoreMaps {
         return (SortedSetMultimap<K, V>) MultimapBuilder.hashKeys().treeSetValues(comparator);
     }
 
-    @SuppressWarnings("rawtypes")
-    public static <K extends Comparable, V> TreeRangeMap<K, V> createRangeMap() {
+    public static <K extends Comparable<?>, V> TreeRangeMap<K, V> createRangeMap() {
         return TreeRangeMap.create();
     }
 }

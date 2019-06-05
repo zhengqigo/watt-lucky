@@ -45,7 +45,6 @@ public class FileTreeWalker {
     }
 
     /**
-     * Guava的TreeTraverser, 获得更大的灵活度: 加入各类filter, 前序/后序的选择, 一边遍历一边操作等
      * @see FileUtil.fileTreeTraverser().preOrderTraversal(root).iterator();
      */
     public static TreeTraverser<File> fileTreeTraverser() {
@@ -53,7 +52,7 @@ public class FileTreeWalker {
     }
 
     /**
-     * 以文件名正则表达式为filter，配合fileTreeTraverser使用
+     * 以文件名正则表达式为filter配合fileTreeTraverser使用
      */
     public static final class RegexFileNameFilter implements Predicate<File> {
         private final Pattern pattern;
@@ -71,7 +70,7 @@ public class FileTreeWalker {
     /**
      * 以文件名通配符为filter，配合fileTreeTraverser使用
      * 
-     * @param pattern 支持*与?的通配符，如hello*.txt 匹配 helloworld.txt
+     * @param pattern 支持通配符*和?, 如"hello*.txt"匹配"helloworld.txt"
      */
     public static final class WildcardFileNameFilter implements Predicate<File> {
         private final String pattern;
@@ -86,9 +85,6 @@ public class FileTreeWalker {
         }
     }
 
-    /**
-     * 以文件名后缀做filter，配合fileTreeTraverser使用
-     */
     public static final class FileExtensionFilter implements Predicate<File> {
         private final String extension;
 
@@ -103,9 +99,9 @@ public class FileTreeWalker {
     }
 
     /**
-     * 以ant风格的path为filter，配合fileTreeTraverser使用
+     * 以ant风格的path为filter配合fileTreeTraverser使用
      * 
-     * @param pattern 支持ant风格的通配符，如/var/?/a?.txt 匹配 /var/b/ab.txt, 其他通配符包括**,*
+     * @param pattern 支持ant风格的通配符, 如"/var/?/a?.txt"匹配"/var/b/ab.txt", 其它还有**和*
      */
     public static final class AntPathFilter implements Predicate<File> {
         private final String pattern;

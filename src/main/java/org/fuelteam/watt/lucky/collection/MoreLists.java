@@ -4,8 +4,7 @@ import java.util.Comparator;
 
 public class MoreLists {
 
-    @SuppressWarnings("rawtypes")
-    public static <T extends Comparable> SortedArrayList<T> createSortedArrayList() {
+    public static <T extends Comparable<?>> SortedArrayList<T> createSortedArrayList() {
         return new SortedArrayList<T>();
     }
 

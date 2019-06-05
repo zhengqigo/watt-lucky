@@ -11,7 +11,7 @@ import com.google.common.collect.EvictingQueue;
 public class MoreQueues {
 
 	/**
-	 * ArrayDeque实现的后进先出栈, 经过Collections#asLifoQueue()转换顺序, 需设置初始长度(默认16), 数组满时成倍扩容
+	 * 基于ArrayDeque的Stack, 初始默认16满时成倍扩容
 	 * 
 	 * @see Collections#asLifoQueue()
 	 */
@@ -20,8 +20,7 @@ public class MoreQueues {
 	}
 
 	/**
-	 * ConcurrentLinkedDeque实现的后进先出的无阻塞并发栈, 经过Collections#asLifoQueue()转换顺序, 对于BlockingQueue接口, 
-	 * JDK无LIFO倒转实现, 只能直接使用未调转顺序的LinkedBlockingDeque
+	 * 基于ConcurrentLinkedDeque的无阻塞并发Stack 
 	 * 
 	 * @see Collections#asLifoQueue()
 	 */
@@ -31,7 +30,7 @@ public class MoreQueues {
 	}
 
 	/**
-	 * LRUQueue, 如果Queue已满则删除最旧的元素, 内部实现是ArrayDeque
+	 * 基于ArrayDeque的LRUQueue, 若Queue已满则删除最旧的元素
 	 */
 	public static <E> EvictingQueue<E> createLRUQueue(int maxSize) {
 		return EvictingQueue.create(maxSize);

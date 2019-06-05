@@ -4,8 +4,7 @@ import org.apache.commons.lang3.Validate;
 import org.fuelteam.watt.lucky.number.RandomUtil;
 
 /**
- * 从Twitter Common移植的采样器，优化使用ThreadLocalRandom
- * <pre>
+ * 从Twitter Common移植的采样器, 优化使用ThreadLocalRandom
  * https://github.com/twitter/commons/blob/master/src/java/com/twitter/common/util/Sampler.java
  */
 public class Sampler {

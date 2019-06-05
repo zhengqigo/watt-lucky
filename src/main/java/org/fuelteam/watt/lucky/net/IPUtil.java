@@ -10,7 +10,7 @@ import org.fuelteam.watt.lucky.text.MoreStringUtil;
 
 import com.google.common.net.InetAddresses;
 
-// InetAddress与String的转换消耗较大，建议进行缓存
+// InetAddress与String的转换消耗较大
 public class IPUtil {
 
     /**

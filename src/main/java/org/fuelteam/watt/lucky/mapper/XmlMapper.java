@@ -15,36 +15,24 @@ import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.namespace.QName;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
+import org.fuelteam.watt.lucky.annotation.NotNull;
 import org.fuelteam.watt.lucky.exception.ExceptionUtil;
 import org.fuelteam.watt.lucky.reflect.ClassUtil;
 
-/**
- * 使用Jaxb2.0实现XML<->Java Object的Mapper
- */
 public class XmlMapper {
 
     private static ConcurrentMap<Class<?>, JAXBContext> jaxbContexts = new ConcurrentHashMap<Class<?>, JAXBContext>();
 
-    /**
-     * Java Object->Xml without encoding
-     */
     public static String toXml(Object root) {
         Class<?> clazz = ClassUtil.unwrapCglib(root);
         return toXml(root, clazz, null);
     }
 
-    /**
-     * Java Object->Xml with encoding
-     */
     public static String toXml(Object root, String encoding) {
         Class<?> clazz = ClassUtil.unwrapCglib(root);
         return toXml(root, clazz, encoding);
     }
 
-    /**
-     * Java Object->Xml with encoding
-     */
     public static String toXml(Object root, Class<?> clazz, String encoding) {
         try {
             StringWriter writer = new StringWriter();
@@ -55,16 +43,10 @@ public class XmlMapper {
         }
     }
 
-    /**
-     * Java Collection->Xml without encoding，特别支持Root Element是Collection的情形
-     */
     public static String toXml(Collection<?> root, String rootName, Class<?> clazz) {
         return toXml(root, rootName, clazz, null);
     }
 
-    /**
-     * Java Collection->Xml with encoding，特别支持Root Element是Collection的情形
-     */
     public static String toXml(Collection<?> root, String rootName, Class<?> clazz, String encoding) {
         try {
             CollectionWrapper wrapper = new CollectionWrapper();
@@ -79,9 +61,6 @@ public class XmlMapper {
         }
     }
 
-    /**
-     * Xml->Java Object
-     */
     @SuppressWarnings("unchecked")
     public static <T> T fromXml(String xml, Class<T> clazz) {
         try {
@@ -92,9 +71,6 @@ public class XmlMapper {
         }
     }
 
-    /**
-     * 创建Marshaller并设定encoding，线程不安全，每次需要创建或池化
-     */
     public static Marshaller createMarshaller(Class<?> clazz, String encoding) {
         try {
             JAXBContext jaxbContext = getJaxbContext(clazz);
@@ -107,9 +83,6 @@ public class XmlMapper {
         }
     }
 
-    /**
-     * 创建UnMarshaller，线程不安全，每次需要创建或池化
-     */
     public static Unmarshaller createUnmarshaller(Class<?> clazz) {
         try {
             JAXBContext jaxbContext = getJaxbContext(clazz);
@@ -119,23 +92,20 @@ public class XmlMapper {
         }
     }
 
-    protected static JAXBContext getJaxbContext(Class<?> clazz) {
-        Validate.notNull(clazz, "'clazz' must not be null");
+    protected static JAXBContext getJaxbContext(@NotNull Class<?> clazz) {
         JAXBContext jaxbContext = jaxbContexts.get(clazz);
         if (jaxbContext == null) {
             try {
                 jaxbContext = JAXBContext.newInstance(clazz, CollectionWrapper.class);
                 jaxbContexts.putIfAbsent(clazz, jaxbContext);
             } catch (JAXBException ex) {
-                throw new RuntimeException("Could not instantiate JAXBContext for class [" + clazz + "]: " + ex.getMessage(), ex);
+                String message = "Could not instantiate JAXBContext for class %s";
+                throw new RuntimeException(String.format(message, clazz), ex);
             }
         }
         return jaxbContext;
     }
 
-    /**
-     * 封装Root Element是Collection的情况
-     */
     public static class CollectionWrapper {
         @XmlAnyElement
         protected Collection<?> collection;
