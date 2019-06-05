@@ -1,4 +1,4 @@
-package org.fuelteam.watt.lucky.utils;
+package org.fuelteam.watt.lucky.time;
 
 import java.util.Date;
 import java.util.Locale;
