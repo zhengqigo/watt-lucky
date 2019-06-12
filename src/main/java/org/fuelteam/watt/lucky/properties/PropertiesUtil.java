@@ -37,7 +37,7 @@ public class PropertiesUtil {
         return p.getProperty(name, defaultValue);
     }
 
-    // 从文件路径加载properties，默认utf-8编码，支持"file://"和"classpath:"
+    // 从文件路径加载properties, 默认utf-8编码, 支持"file://"和"classpath:"
     public static Properties loadFromFile(String generalPath) {
         Properties p = new Properties();
         try (Reader reader = new InputStreamReader(URLResourceUtil.asStream(generalPath), Charsets.UTF_8)) {

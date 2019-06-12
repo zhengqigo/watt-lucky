@@ -5,11 +5,10 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 import org.fuelteam.watt.lucky.annotation.NotNull;
 import org.fuelteam.watt.lucky.thread.ThreadPoolBuilder;
-import org.fuelteam.watt.lucky.utils.RuntimeUtil;
 
 public class Async {
 
-    private final static Integer cores = RuntimeUtil.getCores();
+    private final static Integer cores = Runtime.getRuntime().availableProcessors();
     private final static RejectedExecutionHandler executionHandler = new ThreadPoolExecutor.CallerRunsPolicy();
     private final static ThreadPoolExecutor threadPoolExecutor = ThreadPoolBuilder.cachedPool().setMaxSize(2 * cores + 1)
             .setMinSize(cores).setKeepAliveSecs(10).setRejectHanlder(executionHandler).build();

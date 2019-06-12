@@ -5,6 +5,7 @@ import java.util.Random;
 /**
  * @see http://gee.cs.oswego.edu/cgi-bin/viewcvs.cgi/jsr166/src/jsr166e/Striped64.java Revision 1.10
  */
+@SuppressWarnings("restriction")
 public abstract class Striped64 extends Number {
     private static final long serialVersionUID = 305432553211711227L;
 

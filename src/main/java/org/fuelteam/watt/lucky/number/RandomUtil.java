@@ -16,7 +16,7 @@ public class RandomUtil {
     }
 
     /**
-     * @see SecureRandom的江湖偏方与真实效果http://calvin1978.blogcn.com/articles/securerandom.html
+     * @see SecureRandom的江湖偏方与真实效果 http://calvin1978.blogcn.com/articles/securerandom.html
      */
     public static SecureRandom secureRandom() {
         try {

@@ -69,11 +69,11 @@ public class NetUtil {
             } catch (Exception ignored) { // NOSONAR
             }
 
-            // 结果为空或是loopback地址(127.0.0.1)或是ipv6地址，再遍历网卡尝试获取
+            // 结果为空或是loopback地址(127.0.0.1)或是ipv6地址, 再遍历网卡尝试获取
             if (localInetAddress == null || ni == null || localInetAddress.isLoopbackAddress()
                     || localInetAddress instanceof Inet6Address) {
                 InetAddress lookedUpAddr = findLocalAddressViaNetworkInterface();
-                // 仍不符合要求，只好使用127.0.0.1
+                // 仍不符合要求, 只好使用127.0.0.1
                 try {
                     localInetAddress = lookedUpAddr != null ? lookedUpAddr : InetAddress.getByName("127.0.0.1");
                 } catch (UnknownHostException ignored) {// NOSONAR
@@ -95,7 +95,7 @@ public class NetUtil {
             InetAddress resultAddress = null;
             Map<String, NetworkInterface> candidateInterfaces = Maps.newHashMap();
 
-            // 遍历找出所有可用网卡，尝试找出符合prefer前缀的网卡
+            // 遍历找出所有可用网卡, 尝试找出符合prefer前缀的网卡
             try {
                 for (Enumeration<NetworkInterface> allInterfaces = NetworkInterface.getNetworkInterfaces(); allInterfaces
                         .hasMoreElements();) {
