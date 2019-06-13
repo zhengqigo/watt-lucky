@@ -33,18 +33,12 @@ public class ThreadDumpper {
         tryThreadDump(null);
     }
 
-    /**
-     * 符合条件则打印线程栈
-     * 
-     * @param reason 发生ThreadDump的原因
-     */
+    // 符合条件则打印线程栈
     public void tryThreadDump(String reason) {
         if (timeIntervalLimiter.tryAcquire()) threadDump(reason);
     }
 
-    /**
-     * 强行打印ThreadDump，使用最轻量的采集方式，不打印锁信息
-     */
+    // 强行打印ThreadDump, 使用最轻量的采集方式, 不打印锁信息
     public void threadDump(String reason) {
         logger.info("Thread dump by ThreadDumpper" + (reason != null ? (" for " + reason) : ""));
 

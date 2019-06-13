@@ -21,7 +21,7 @@ import org.fuelteam.watt.lucky.thread.QueuableCachedThreadPool.ControllableQueue
  * <pre>
  * ExecutorService ExecutorService = new FixedThreadPoolBuilder().setPoolSize(10).build();
  * </pre>
- * 参考<Java ThreadPool的正确打开方式> http://calvin1978.blogcn.com/articles/java-threadpool.html
+ * Java ThreadPool的正确打开方式 http://calvin1978.blogcn.com/articles/java-threadpool.html
  */
 public class ThreadPoolBuilder {
 
